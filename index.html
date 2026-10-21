@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#123b70">
+<title>Calculadora ADT | RC Red de Servicios</title>
+<style>
+:root{--blue:#123b70;--blue2:#1769aa;--pale:#eaf4ff;--bg:#f3f6fb;--ink:#172b43;--muted:#68788b;--line:#dce5ef;--orange:#f28c28}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+main{max-width:800px;margin:auto;padding:22px 14px 42px}
+header{background:linear-gradient(135deg,#102e55,#1769aa);color:white;border-radius:20px;padding:24px;margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:13px;margin-bottom:20px}
+.logo{background:white;color:var(--blue);border-radius:12px;width:66px;height:66px;display:grid;place-items:center;font-size:28px;font-weight:900;position:relative}
+.logo:after{content:"";position:absolute;right:5px;top:16px;width:24px;height:5px;background:var(--orange);transform:rotate(-35deg);border-radius:3px}
+.brand small{display:block;margin-top:5px;opacity:.85}
+h1{font-size:27px;margin:0 0 8px}
+header p{line-height:1.5;margin:0}
+.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:21px;margin:14px 0;box-shadow:0 4px 15px #1430500a}
+h2{font-size:20px;margin:0 0 7px}
+.desc{font-size:14px;line-height:1.5;color:var(--muted);margin:0 0 16px}
+label{font-weight:700;font-size:14px;display:block;margin-bottom:8px}
+select{width:100%;padding:13px;border:1px solid #cbd7e5;border-radius:10px;background:white;font-size:15px;margin-bottom:18px;color:var(--ink)}
+.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:17px}
+.choice{padding:14px;text-align:left;border:1px solid var(--line);border-radius:12px;background:white;color:var(--ink);cursor:pointer;line-height:1.5}
+.choice strong{display:block;margin-bottom:4px}
+.choice.selected{border:2px solid var(--blue2);padding:13px;background:var(--pale)}
+#kitPrice{background:#f5f8fc;border-radius:10px;padding:12px;margin:0}
+.good{color:#16834a;font-weight:bold}
+.bad{color:#9d2020;font-weight:bold}
+.extra{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);margin:0;cursor:pointer}
+.extra:last-child{border:0}
+.extra input{width:19px;height:19px;accent-color:var(--blue2)}
+.extra span{flex:1}
+.extra small{display:block;color:var(--muted);font-weight:normal;margin-top:4px}
+.row{display:flex;justify-content:space-between;gap:15px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+.row span{color:var(--muted)}
+.row strong{text-align:right;overflow-wrap:anywhere}
+.total{display:flex;justify-content:space-between;gap:10px;padding-top:18px;font-weight:bold}
+.total strong{color:var(--blue2);font-size:25px;text-align:right}
+.buttons{display:flex;gap:10px;margin-top:18px}
+.btn{border:0;border-radius:10px;padding:13px 16px;font-size:15px;font-weight:bold;cursor:pointer}
+.primary{background:var(--blue2);color:white;flex:1}
+.secondary{background:#edf2f8;color:var(--ink)}
+.note{font-size:12px;color:var(--muted);line-height:1.5;margin-top:15px}
+.warning{background:#fff5df;color:#754d00;border-radius:9px;padding:12px;font-size:12px;line-height:1.5;margin-top:12px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:8px}
+@media(max-width:520px){
+main{padding:12px 9px 28px}
+header,.panel{padding:17px}
+h1{font-size:24px}
+.choices{grid-template-columns:1fr}
+.brand strong{font-size:14px}
+.logo{width:58px;height:58px;flex:0 0 58px}
+.buttons{flex-wrap:wrap}
+.total strong{font-size:22px}
+}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="brand">
+    <div class="logo">RC</div>
+    <div>
+      <strong>RC RED DE SERVICIOS</strong>
+      <small>Representantes comerciales ADT</small>
+    </div>
+  </div>
+  <h1>Calculadora de Kits ADT</h1>
+  <p>Configurá tu propuesta comercial según región, score, promoción y adicionales.</p>
+</header>
+
+<section class="panel">
+  <h2>1. Región</h2>
+  <p class="desc">Seleccioná dónde se realizará la instalación.</p>
+  <label for="region">Región de instalación</label>
+  <select id="region">
+    <option value="cordoba">Córdoba</option>
+    <option value="resto">Resto del país</option>
+  </select>
+</section>
+
+<section class="panel">
+  <h2>2. Kit, score y promoción</h2>
+  <p class="desc">Elegí el kit, el score y la promoción correspondiente.</p>
+  <label for="kit">Kit de alarma</label>
+  <select id="kit"><option value="">Seleccioná un kit</option></select>
+
+  <label>Score del cliente</label>
+  <div class="choices">
+    <button class="choice" id="green" type="button" onclick="setScore('verde')">
+      <strong>🟢 Score verde</strong>830 a 999
+    </button>
+    <button class="choice" id="yellow" type="button" onclick="setScore('amarillo')">
+      <strong>🟡 Score amarillo</strong>470 a 829
+    </button>
+  </div>
+
+  <label>Promoción</label>
+  <div class="choices">
+    <button class="choice" id="p3" type="button" onclick="setPromo(3)">
+      <strong>3 meses</strong>30% de descuento
+    </button>
+    <button class="choice" id="p6" type="button" onclick="setPromo(6)">
+      <strong>6 meses</strong>30% de descuento
+    </button>
+  </div>
+  <p id="kitPrice" class="desc">Seleccioná kit, score y promoción para ver el precio.</p>
+</section>
+
+<section class="panel">
+  <h2>3. Adicionales</h2>
+  <p class="desc">Podés seleccionar más de un adicional.</p>
+  <div id="extras"></div>
+  <div class="buttons">
+    <button class="btn secondary" type="button" onclick="clearExtras()">Quitar adicionales</button>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>4. Resumen de la propuesta</h2>
+  <div id="summary"><p class="desc">Completá los datos anteriores para generar el resumen.</p></div>
+  <div class="buttons">
+    <button class="btn secondary" type="button" onclick="resetAll()">Reiniciar</button>
+    <button class="btn primary" type="button" onclick="copySummary()">Copiar resumen</button>
+  </div>
+  <p class="note">Los precios están incorporados en precios.js. Actualizá ese archivo cuando cambien los valores.</p>
+  <div class="warning">Si una combinación no tiene precio informado, se marcará como no disponible y no se calculará un total.</div>
+</section>
+<footer>RC Red de Servicios · Calculadora comercial ADT</footer>
+</main>
+
+<script src="./precios.js"></script>
+<script>
+let data=window.PRECIOS_ADT,score="",months=0;
+
+const money=n=>new Intl.NumberFormat("es-AR",{
+  style:"currency",currency:"ARS",maximumFractionDigits:0
+}).format(n);
+
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+}[c]));
+
+function kitNow(){
+  if(!data)return null;
+  let list=data.regiones[document.getElementById("region").value].kits;
+  return list.find(k=>k.id===document.getElementById("kit").value)||null;
+}
+
+function renderKits(){
+  let selector=document.getElementById("kit");
+  let old=selector.value;
+  let list=data.regiones[document.getElementById("region").value].kits;
+  selector.innerHTML='<option value="">Seleccioná un kit</option>';
+  list.forEach(k=>{
+    let o=document.createElement("option");
+    o.value=k.id;
+    o.textContent=k.nombre;
+    selector.appendChild(o);
+  });
+  if(list.some(k=>k.id===old))selector.value=old;
+  refresh();
+}
+
+function mark(id,on){
+  document.getElementById(id).classList.toggle("selected",on);
+}
+
+function setScore(s){
+  score=s;
+  mark("green",s==="verde");
+  mark("yellow",s==="amarillo");
+  refresh();
+}
+
+function setPromo(m){
+  months=m;
+  mark("p3",m===3);
+  mark("p6",m===6);
+  refresh();
+}
+
+function priceNow(){
+  let k=kitNow();
+  return k&&score&&months?k[score][months]:null;
+}
+
+function renderExtras(){
+  let container=document.getElementById("extras");
+  container.innerHTML="";
+  data.adicionales.forEach(a=>{
+    let l=document.createElement("label");
+    l.className="extra";
+    let c=document.createElement("input");
+    c.type="checkbox";
+    c.value=a.id;
+    c.addEventListener("change",refresh);
+    let s=document.createElement("span");
+    s.innerHTML="<strong>"+esc(a.nombre)+"</strong><small>"+money(a.precio)+"</small>";
+    l.append(c,s);
+    container.appendChild(l);
+  });
+}
+
+function selectedExtras(){
+  let ids=[...document.querySelectorAll("#extras input:checked")].map(c=>c.value);
+  return data.adicionales.filter(a=>ids.includes(a.id));
+}
+
+function row(a,b){
+  return '<div class="row"><span>'+esc(a)+'</span><strong>'+esc(b)+'</strong></div>';
+}
+
+function refresh(){
+  if(!data)return;
+  let k=kitNow(),p=priceNow();
+  let priceBox=document.getElementById("kitPrice");
+
+  if(!k)priceBox.textContent="Seleccioná un kit para continuar.";
+  else if(!score)priceBox.textContent="Seleccioná el score del cliente.";
+  else if(!months)priceBox.textContent="Seleccioná una promoción.";
+  else if(p==null)priceBox.innerHTML='<span class="bad">No hay precio disponible para esta combinación.</span>';
+  else priceBox.innerHTML='<span class="good">Precio del kit: '+esc(money(p))+'</span>';
+
+  let summary=document.getElementById("summary");
+  if(!k||!score||!months||p==null){
+    summary.innerHTML='<p class="desc">Completá una combinación con precio disponible para ver el resumen.</p>';
+    return;
+  }
+
+  let ex=selectedExtras();
+  let sum=ex.reduce((n,a)=>n+a.precio,0);
+  let total=p+sum;
+
+  let h=row("Región",data.regiones[document.getElementById("region").value].nombre)
+    +row("Kit",k.nombre)
+    +row("Score",score==="verde"?"Verde (830–999)":"Amarillo (470–829)")
+    +row("Promoción",months+" meses al 30% de descuento")
+    +row("Precio del kit",money(p));
+
+  if(ex.length){
+    h+='<p><strong>Adicionales</strong></p>';
+    ex.forEach(a=>h+=row(a.nombre,money(a.precio)));
+  }else{
+    h+=row("Adicionales","Ninguno");
+  }
+
+  summary.innerHTML=h+'<div class="total"><span>TOTAL</span><strong>'+esc(money(total))+'</strong></div>';
+}
+
+function clearExtras(){
+  document.querySelectorAll("#extras input").forEach(c=>c.checked=false);
+  refresh();
+}
+
+function resetAll(){
+  document.getElementById("region").value="cordoba";
+  score="";
+  months=0;
+  mark("green",false);
+  mark("yellow",false);
+  mark("p3",false);
+  mark("p6",false);
+  clearExtras();
+  renderKits();
+}
+
+function copySummary(){
+  let t=document.getElementById("summary").innerText;
+  if(!t||t.includes("Completá una combinación")){
+    alert("Completá una combinación válida antes de copiar.");
+    return;
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(t)
+      .then(()=>alert("Resumen copiado."))
+      .catch(()=>fallbackCopy(t));
+  }else fallbackCopy(t);
+}
+
+function fallbackCopy(t){
+  let a=document.createElement("textarea");
+  a.value=t;
+  document.body.appendChild(a);
+  a.select();
+  try{
+    document.execCommand("copy");
+    alert("Resumen copiado.");
+  }catch(e){
+    alert("Seleccioná y copiá el resumen manualmente.");
+  }
+  a.remove();
+}
+
+document.getElementById("region").addEventListener("change",renderKits);
+document.getElementById("kit").addEventListener("change",refresh);
+
+if(data&&data.regiones&&data.adicionales){
+  renderExtras();
+  renderKits();
+}else{
+  document.getElementById("kitPrice").textContent="No se pudo cargar precios.js. Debe estar junto a index.html.";
+}
+</script>
+</body>
+</html>
