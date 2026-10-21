@@ -4,295 +4,102 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#123b70">
-<meta name="description" content="Calculadora comercial de kits ADT de RC Red de Servicios.">
+<meta name="description" content="Calculadora comercial ADT de RC Red de Servicios">
 <title>Calculadora ADT | RC Red de Servicios</title>
-
 <style>
-:root{
-  --navy:#102b4e;
-  --blue:#155da8;
-  --blue2:#2479c8;
-  --sky:#eaf4ff;
-  --orange:#f28c28;
-  --bg:#f3f6fb;
-  --paper:#fff;
-  --ink:#182b42;
-  --muted:#6a7b90;
-  --line:#dce5ef;
-  --green:#15804a;
-  --red:#b42318;
-  --shadow:0 12px 34px rgba(16,43,78,.07)
-}
-
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--ink);
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,
-  BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
-}
-
-button,select,input{font:inherit}
-
-main{
-  max-width:1050px;
-  margin:0 auto;
-  padding:24px 18px 48px
-}
-
-.hero{
-  position:relative;
-  overflow:hidden;
-  color:white;
-  background:linear-gradient(125deg,#0c2340 0%,#123f76 55%,#2079ba 100%);
-  border-radius:26px;
-  padding:28px 30px;
-  margin-bottom:20px;
-  box-shadow:0 18px 44px #102b4e20
-}
-
-.hero:after{
-  content:"";
-  position:absolute;
-  width:330px;
-  height:330px;
-  border:1px solid #ffffff16;
-  border-radius:50%;
-  right:-90px;
-  top:-160px;
-  box-shadow:0 0 0 32px #ffffff08,0 0 0 66px #ffffff06;
-  pointer-events:none
-}
-
-.topline{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-  position:relative;
-  z-index:1
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  min-width:0
-}
-
-.brand-logo{
-  width:94px;
-  height:72px;
-  object-fit:contain;
-  background:#fff;
-  border-radius:14px;
-  padding:6px;
-  flex:0 0 auto
-}
-
-.brand-text{
-  font-size:12px;
-  letter-spacing:1.7px;
-  font-weight:800;
-  color:#d9eaff
-}
-
-.brand-text small{
-  display:block;
-  font-size:12px;
-  letter-spacing:0;
-  font-weight:500;
-  color:#c0d8ef;
-  margin-top:5px
-}
-
-.pill{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:8px 12px;
-  border:1px solid #ffffff35;
-  background:#ffffff10;
-  border-radius:999px;
-  font-size:12px;
-  color:#e9f4ff;
-  white-space:nowrap
-}
-
-.pill:before{
-  content:"";
-  width:7px;
-  height:7px;
-  background:#6ee7a1;
-  border-radius:50%;
-  box-shadow:0 0 0 4px #6ee7a122
-}
-
-h1{
-  font-size:clamp(26px,4vw,37px);
-  line-height:1.12;
-  letter-spacing:-1px;
-  margin:25px 0 9px;
-  position:relative;
-  z-index:1
-}
-
-.hero p{
-  max-width:660px;
-  color:#d7e7f8;
-  font-size:15px;
-  line-height:1.6;
-  margin:0;
-  position:relative;
-  z-index:1
-}
-
-.layout{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) 340px;
-  gap:20px;
-  align-items:start
-}
-
-.maincol{min-width:0}
-
-.panel{
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:23px;
-  margin-bottom:16px;
-  box-shadow:var(--shadow)
-}
-
-.section-head{
-  display:flex;
-  align-items:flex-start;
-  gap:13px;
-  margin-bottom:18px
-}
-
-.step{
-  display:grid;
-  place-items:center;
-  width:36px;
-  height:36px;
-  flex:0 0 36px;
-  background:var(--sky);
-  color:var(--blue);
-  border-radius:12px;
-  font-weight:800;
-  font-size:14px
-}
-
-h2{
-  margin:1px 0 5px;
-  font-size:18px;
-  letter-spacing:-.3px
-}
-
-.desc{
-  font-size:13px;
-  line-height:1.55;
-  color:var(--muted);
-  margin:0
-}
-
-label.field-label{
-  display:block;
-  font-size:13px;
-  font-weight:750;
-  margin-bottom:8px;
-  color:#263b54
-}
-
-select{
-  width:100%;
-  min-height:48px;
-  padding:12px 42px 12px 13px;
-  border:1px solid #cfd9e5;
-  border-radius:12px;
-  background-color:#fff;
-  color:var(--ink);
-  font-size:14px;
-  outline:none;
-  margin-bottom:17px
-}
-
-select:focus,input:focus{
-  border-color:var(--blue2);
-  box-shadow:0 0 0 3px #2479c81c
-}
-
-.choices{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:10px;
-  margin:9px 0 20px
-}
-
-.choice{
-  width:100%;
-  min-height:76px;
-  padding:14px;
-  text-align:left;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:#fff;
-  color:var(--ink);
-  cursor:pointer;
-  transition:border-color .15s,background .15s,transform .15s
-}
-
-.choice:hover{
-  border-color:#9dbfe1;
-  transform:translateY(-1px)
-}
-
-.choice strong{
-  display:block;
-  margin-bottom:5px;
-  font-size:14px
-}
-
-.choice span{
-  display:block;
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.4
-}
-
-.choice.selected{
-  border:1.5px solid var(--blue2);
-  background:var(--sky);
-  box-shadow:inset 0 0 0 1px #2479c81c
-}
-
-.choice.selected strong{color:var(--blue)}
-
-.price-hint{
-  background:#f5f9fd;
-  border:1px solid #e0eaf4;
-  border-radius:12px;
-  padding:13px 14px;
-  font-size:13px;
-  line-height:1.5;
-  color:var(--muted)
-}
-
-.good{color:var(--green);font-weight:800}
-.bad{color:var(--red);font-weight:750}
-
-.extra-list{
-  display:grid;
-  gap:10px
-}
-
-.extra{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:13px 14px;
-  border:
+:root{--navy:#102b4e;--blue:#155da8;--blue2:#2479c8;--sky:#eaf4ff;--bg:#f3f6fb;--ink:#182b42;--muted:#6a7b90;--line:#dce5ef;--green:#15804a;--red:#b42318;--shadow:0 12px 34px #102b4e12}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif}button,select,input{font:inherit}main{max-width:1050px;margin:auto;padding:24px 18px 42px}
+.hero{background:linear-gradient(125deg,#0c2340,#123f76 60%,#2079ba);color:#fff;border-radius:24px;padding:26px 28px;margin-bottom:20px;box-shadow:0 18px 44px #102b4e20}.topline{display:flex;align-items:center;justify-content:space-between;gap:15px}.brand{display:flex;align-items:center;gap:14px}.brand-logo{width:88px;height:66px;object-fit:contain;background:white;border-radius:13px;padding:5px}.brand-text{font-size:12px;letter-spacing:1.5px;font-weight:800;color:#e1efff}.brand-text small{display:block;margin-top:5px;font-size:12px;letter-spacing:0;font-weight:500;color:#c5dcf4}.pill{border:1px solid #ffffff35;background:#ffffff12;border-radius:999px;padding:8px 12px;font-size:12px;white-space:nowrap}h1{font-size:clamp(26px,4vw,37px);line-height:1.12;letter-spacing:-.8px;margin:24px 0 8px}.hero p{margin:0;max-width:680px;color:#d7e7f8;font-size:14px;line-height:1.6}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 335px;gap:18px;align-items:start}.panel,.summary-card{background:#fff;border:1px solid var(--line);border-radius:19px;box-shadow:var(--shadow)}.panel{padding:22px;margin-bottom:16px}.section-head{display:flex;gap:12px;align-items:flex-start;margin-bottom:18px}.step{width:36px;height:36px;flex:0 0 36px;display:grid;place-items:center;background:var(--sky);color:var(--blue);border-radius:12px;font-size:13px;font-weight:850}h2{font-size:18px;margin:1px 0 5px;letter-spacing:-.3px}.desc{color:var(--muted);font-size:13px;line-height:1.5;margin:0}.field-label{display:block;font-size:13px;font-weight:750;margin:0 0 8px;color:#263b54}select{width:100%;min-height:47px;padding:11px 13px;border:1px solid #cfd9e5;border-radius:11px;background:#fff;color:var(--ink);font-size:14px;margin-bottom:17px;outline:none}select:focus,input:focus{border-color:var(--blue2);box-shadow:0 0 0 3px #2479c81c}
+.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:9px 0 19px}.choice{min-height:70px;padding:13px;text-align:left;border:1px solid var(--line);border-radius:13px;background:#fff;color:var(--ink);cursor:pointer}.choice strong{display:block;margin-bottom:5px;font-size:14px}.choice span{display:block;color:var(--muted);font-size:12px}.choice.selected{border:1.5px solid var(--blue2);background:var(--sky)}.choice.selected strong{color:var(--blue)}.price-hint{border:1px solid #e0eaf4;background:#f5f9fd;border-radius:12px;padding:13px;font-size:13px;color:var(--muted);line-height:1.5}.good{color:var(--green);font-weight:800}.bad{color:var(--red);font-weight:800}
+.extra-list{display:grid;gap:9px}.extra{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:13px}.extra-info{flex:1;min-width:0}.extra-info strong{display:block;font-size:13px;line-height:1.35}.extra-info small{display:block;color:var(--muted);font-size:12px;margin-top:4px}.qty{display:flex;align-items:center;gap:5px}.qty button{width:30px;height:31px;border:1px solid #d6e0eb;border-radius:8px;background:#f8fafc;color:var(--blue);font-weight:900;cursor:pointer}.qty button:disabled{opacity:.35;cursor:not-allowed}.qty input{width:38px;height:32px;text-align:center;border:1px solid #cfd9e5;border-radius:8px;font-weight:800;font-size:14px;padding:2px}.ext-total{min-width:74px;text-align:right;color:var(--muted);font-size:11px;white-space:nowrap}
+.btn{border:0;border-radius:11px;padding:12px 14px;font-size:13px;font-weight:800;cursor:pointer}.btn-primary{background:var(--blue);color:white}.btn-secondary{background:#edf2f8;color:#33485f}.buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.summary-card{position:sticky;top:16px;overflow:hidden}.summary-top{padding:20px;background:linear-gradient(135deg,#102b4e,#155da8);color:white}.summary-top small{display:block;color:#c8def4;font-size:11px;text-transform:uppercase;letter-spacing:1.2px;font-weight:800;margin-bottom:7px}.summary-top h2{font-size:19px;margin:0}.summary-body{padding:18px}.placeholder{color:var(--muted);font-size:13px;line-height:1.6;margin:0}.row{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #edf1f6;font-size:12px}.row span{color:var(--muted);line-height:1.45}.row strong{text-align:right;overflow-wrap:anywhere;line-height:1.45}.minor-title{margin:16px 0 3px;font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:850;color:var(--muted)}.total-box{padding:15px;margin-top:15px;background:#f0f7ff;border:1px solid #d9eaff;border-radius:13px}.total-caption{display:flex;justify-content:space-between;gap:8px;color:var(--blue);font-size:11px;font-weight:850;letter-spacing:.5px}.total-value{font-size:28px;font-weight:900;letter-spacing:-.6px;color:var(--navy);margin-top:7px;overflow-wrap:anywhere}.total-note,.note{font-size:11px;color:var(--muted);line-height:1.5;margin-top:7px}.note{margin-top:13px}.warning{margin-top:11px;padding:11px;background:#fff7e8;border:1px solid #f7e3bb;border-radius:10px;color:#79551c;font-size:11px;line-height:1.5}.summary-actions{display:grid;gap:8px;margin-top:15px}.summary-actions button{width:100%}footer{text-align:center;color:#8290a1;font-size:11px;padding:18px 0 0}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.summary-card{position:static;order:2}.hero{padding:21px}.panel{padding:18px}.brand-logo{width:74px;height:58px}.pill{display:none}}
+@media(max-width:440px){main{padding:10px 9px 28px}.choices{grid-template-columns:1fr}.choice{min-height:62px}.extra{gap:7px;padding:10px 8px}.qty{gap:3px}.qty button{width:27px;height:29px}.qty input{width:33px}.ext-total{min-width:61px;font-size:10px}.brand-text{font-size:10px;letter-spacing:1px}.brand-text small{font-size:11px}.brand-logo{width:64px;height:52px}.hero p{font-size:13px}}
+</style>
+</head>
+<body>
+<main>
+<header class="hero">
+  <div class="topline">
+    <div class="brand">
+      <img class="brand-logo" src="./LOGO%20RC.png" alt="Logo RC Red de Servicios">
+      <div class="brand-text">RC RED DE SERVICIOS<small>Representantes comerciales ADT</small></div>
+    </div>
+    <div class="pill">Herramienta comercial</div>
+  </div>
+  <h1>Calculadora de Kits ADT</h1>
+  <p>Armá tu propuesta comercial según región, score del cliente, promoción y adicionales. El presupuesto se actualiza automáticamente.</p>
+</header>
+<div class="layout">
+  <div>
+    <section class="panel">
+      <div class="section-head"><div class="step">01</div><div><h2>Región de instalación</h2><p class="desc">Seleccioná la zona donde se instalará la alarma.</p></div></div>
+      <label class="field-label" for="region">Región</label>
+      <select id="region"><option value="cordoba">Córdoba</option><option value="resto">Resto del país</option></select>
+    </section>
+    <section class="panel">
+      <div class="section-head"><div class="step">02</div><div><h2>Kit, score y promoción</h2><p class="desc">Elegí una combinación para consultar el precio disponible.</p></div></div>
+      <label class="field-label" for="kit">Kit de alarma</label>
+      <select id="kit"><option value="">Seleccioná un kit</option></select>
+      <label class="field-label">Score del cliente</label>
+      <div class="choices">
+        <button class="choice" id="green" type="button" onclick="setScore('verde')"><strong>🟢 Score verde</strong><span>830 a 999 puntos</span></button>
+        <button class="choice" id="yellow" type="button" onclick="setScore('amarillo')"><strong>🟡 Score amarillo</strong><span>470 a 829 puntos</span></button>
+      </div>
+      <label class="field-label">Promoción</label>
+      <div class="choices">
+        <button class="choice" id="p3" type="button" onclick="setPromo(3)"><strong>3 meses</strong><span>30% de descuento</span></button>
+        <button class="choice" id="p6" type="button" onclick="setPromo(6)"><strong>6 meses</strong><span>30% de descuento</span></button>
+      </div>
+      <p id="kitPrice" class="price-hint">Seleccioná kit, score y promoción para ver el precio.</p>
+    </section>
+    <section class="panel">
+      <div class="section-head"><div class="step">03</div><div><h2>Adicionales</h2><p class="desc">Indicá la cantidad de cada producto, desde 0 hasta 10 unidades.</p></div></div>
+      <div id="extras" class="extra-list"></div>
+      <div class="buttons"><button class="btn btn-secondary" type="button" onclick="clearExtras()">Restablecer cantidades</button></div>
+    </section>
+  </div>
+  <aside class="summary-card">
+    <div class="summary-top"><small>Tu presupuesto</small><h2>Resumen de la propuesta</h2></div>
+    <div class="summary-body">
+      <div id="summary"><p class="placeholder">Completá los datos para generar una cotización detallada.</p></div>
+      <div class="summary-actions">
+        <button class="btn btn-primary" type="button" onclick="copySummary()">Copiar presupuesto</button>
+        <button class="btn btn-secondary" type="button" onclick="resetAll()">Reiniciar calculadora</button>
+      </div>
+      <p class="note">Los precios se administran desde el archivo precios.js.</p>
+      <div class="warning">Si una combinación no tiene precio informado, aparecerá como no disponible y no se calculará un total.</div>
+    </div>
+  </aside>
+</div>
+<footer>RC Red de Servicios · Calculadora comercial ADT</footer>
+</main>
+<script src="./precios.js"></script>
+<script>
+"use strict";
+let data=window.PRECIOS_ADT,score="",months=0;
+const money=n=>new Intl.NumberFormat("es-AR",{style:"currency",currency:"ARS",maximumFractionDigits:0}).format(n);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function kitNow(){if(!data)return null;const list=data.regiones[document.getElementById("region").value].kits;return list.find(k=>k.id===document.getElementById("kit").value)||null}
+function renderKits(){const sel=document.getElementById("kit"),old=sel.value,list=data.regiones[document.getElementById("region").value].kits;sel.innerHTML='<option value="">Seleccioná un kit</option>';list.forEach(k=>{const o=document.createElement("option");o.value=k.id;o.textContent=k.nombre;sel.appendChild(o)});if(list.some(k=>k.id===old))sel.value=old;refresh()}
+function mark(id,on){document.getElementById(id).classList.toggle("selected",on)}
+function setScore(s){score=s;mark("green",s==="verde");mark("yellow",s==="amarillo");refresh()}
+function setPromo(m){months=m;mark("p3",m===3);mark("p6",m===6);refresh()}
+function priceNow(){const k=kitNow();return k&&score&&months?k[score][months]:null}
+function clampQty(v){const n=Number(v);return Math.min(10,Math.max(0,Number.isFinite(n)?Math.floor(n):0))}
+function renderExtras(){const container=document.getElementById("extras");container.innerHTML="";data.adicionales.forEach(a=>{const item=document.createElement("div");item.className="extra";const info=document.createElement("div");info.className="extra-info";info.innerHTML="<strong>"+esc(a.nombre)+"</strong><small>"+money(a.precio)+" por unidad</small>";const qty=document.createElement("div");qty.className="qty";const minus=document.createElement("button");minus.type="button";minus.textContent="−";minus.setAttribute("aria-label","Quitar una unidad de "+a.nombre);const input=document.createElement("input");input.type="number";input.min="0";input.max="10";input.step="1";input.value="0";input.inputMode="numeric";input.dataset.id=a.id;input.setAttribute("aria-label","Cantidad de "+a.nombre);const plus=document.createElement("button");plus.type="button";plus.textContent="+";plus.setAttribute("aria-label","Agregar una unidad de "+a.nombre);minus.addEventListener("click",()=>changeQty(a.id,-1));plus.addEventListener("click",()=>changeQty(a.id,1));input.addEventListener("input",()=>{if(input.value!=="")input.value=clampQty(input.value);syncQtyButtons();refresh()});input.addEventListener("change",()=>{input.value=clampQty(input.value);syncQtyButtons();refresh()});qty.append(minus,input,plus);const total=document.createElement("div");total.className="ext-total";total.dataset.totalId=a.id;total.textContent=money(0);item.append(info,qty,total);container.appendChild(item)});syncQtyButtons()}
+function changeQty(id,delta){const input=document.querySelector('#extras input[data-id="'+id+'"]');if(!input)return;input.value=clampQty(input.value)+delta;input.value=clampQty(input.value);syncQtyButtons();refresh()}
+function syncQtyButtons(){document.querySelectorAll("#extras .extra").forEach(item=>{const input=item.querySelector("input"),buttons=item.querySelectorAll("button"),n=clampQty(input.value);buttons[0].disabled=n<=0;buttons[1].disabled=n>=10})}
+function selectedExtras(){return data.adicionales.map(a=>{const input=document.querySelector('#extras input[data-id="'+a.id+'"]'),cantidad=input?clampQty(input.value):0;return {...a,cantidad,subtotal:cantidad*a.precio}}).filter(a=>a.cantidad>0)}
+function row(a,b){return '<div class="row"><span>'+esc(a)+'</span><strong>'+esc(b)+'</strong></div>'}
+function refresh(){if(!data)return;const k=kitNow(),p=priceNow(),box=document.getElementById("kitPrice");if(!k)box.textContent="Seleccioná un kit para continuar.";else if(!score)box.textContent="Seleccioná el score del cliente.";else if(!months)box.textContent="Seleccioná una promoción.";else if(p==null)box.innerHTML='<span class="bad">No hay precio disponible para esta combinación.</span>';else box.innerHTML='<span class="good">Precio del kit: '+esc(money(p))+'</span>';const ex=selectedExtras();document.querySelectorAll("[data-total-id]").forEach(el=>{const a=ex.find(x=>x.id===el.dataset.totalId);el.textContent=money(a?a.subtotal:0)});const summary=document.getElementById("summary");if(!k||!score||!months||p==null){summary.innerHTML='<p class="placeholder">Completá kit, score y promoción con un precio disponible para ver el presupuesto.</p>';return}const extrasTotal=ex.reduce((n,a)=>n+a.subtotal,0),total=p+extrasTotal;let h='<div>'+row("Región",data.regiones[document.getElementById("region").value].nombre)+row("Kit",k.nombre)+row("Score",score==="verde"?"Verde (830–999)":"Amarillo (470–829)")+row("Promoción",months+" meses con 30% de descuento")+row("Precio del kit",money(p));if(ex.length){h+='<div class="minor-title">Adicionales</div>';ex.forEach(a=>h+=row(a.nombre+" × "+a.cantidad,money(a.subtotal)));h+=row("Subtotal adicionales",money(extrasTotal))}else h+=row("Adicionales","Ninguno");h+='</div><div class="total-box"><div class="total-caption"><span>TOTAL COTIZADO</span><span>ARS</span></div><div class="total-value">'+esc(money(total))+'</div><div class="total-note">Kit + '+(ex.length?ex.reduce((n,a)=>n+a.cantidad,0)+" unidad(es) adicional(es)":"sin adicionales")+'.</div></div>';summary.innerHTML=h}
+function clearExtras(){document.querySelectorAll("#extras input").forEach(i=>i.value="0");syncQtyButtons();refresh()}
+function resetAll(){document.getElementById("region").value="cordoba";score="";months=0;["green","yellow","p3","p6"].forEach(id=>mark(id,false));clearExtras();renderKits()}
+function copySummary(){const t=document.getElementById("summary").innerText;if(!t||t.includes("Completá kit, score")){alert("Completá una combinación válida antes de copiar.");return}const text="RC RED DE SERVICIOS\nCOTIZACIÓN ADT\n\n"+t;if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(()=>alert("Presupuesto copiado.")).catch(()=>fallbackCopy(text));else fallbackCopy(text)}
+function fallbackCopy(t){const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");alert("Presupuesto copiado.")}catch(e){alert("No se pudo copiar automáticamente. Copiá el resumen manualmente.")}a.remove()}
+document.getElementById("region").addEventListener("change",renderKits);document.getElementById("kit").addEventListener("change",refresh);
+if(data&&data.regiones&&data.adicionales){renderExtras();renderKits()}else{document.getElementById("kitPrice").textContent="No se pudo cargar precios.js. Debe estar junto a index.html."}
+</script>
+</body>
+</html>
