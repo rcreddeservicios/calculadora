@@ -162,23 +162,73 @@ window.PRECIOS_ADT = {
   adicionales: [
     {
       id: "interior",
-      nombre: "Cámara inteligente interior",
+      nombre: "Cámara interior — Cam INT 515 c/aud c/grab local 2.4G",
       precio: 143245
     },
     {
       id: "exterior",
-      nombre: "Cámara exterior",
+      nombre: "Cámara exterior — Cam EXT 730 c/aud-grab local c/lamp + SD",
       precio: 300745
     },
     {
-      id: "caja",
-      nombre: "Caja estanca",
-      precio: 9745
+      id: "microsd",
+      nombre: "MicroSD 64Gb p/Cam",
+      precio: 46235
     },
     {
-      id: "microsd",
-      nombre: "MicroSD",
-      precio: 46235
+      id: "caja",
+      nombre: "Caja estanca p/Cam",
+      precio: 9735
+    },
+    {
+      id: "wifi-extensor",
+      nombre: "Expansor WiFi — Extensor Red WiFi y Ethernet",
+      precio: 55600
+    },
+    {
+      id: "magnetico-visonic",
+      nombre: "Sensor magnético Visonic — Magnetico Int Inal P/Visonic-Qolsys",
+      precio: 64510
+    },
+    {
+      id: "magnetico-cx",
+      nombre: "Sensor magnético CX — Magnetico Int Inal Slim p/Cx",
+      precio: 49690
+    },
+    {
+      id: "movimiento-visonic",
+      nombre: "Sensor de movimiento Visonic — PIR antimasc Int Inal H35 Kg/Visonic-Qolsys",
+      precio: 79880
+    },
+    {
+      id: "movimiento-cx",
+      nombre: "Sensor de movimiento CX — PIR Int Inal H 25Kg p/Cx",
+      precio: 78910
+    },
+    {
+      id: "doble-tecnologia-qolsys",
+      nombre: "Sensor doble tecnología Qolsys — PIR DT Int Inal H 18Kg p/Qolsys",
+      precio: 252635
+    },
+    {
+      id: "doble-tecnologia-cx",
+      nombre: "Sensor doble tecnología CX — PIR DT Int Inal p/Cx",
+      precio: 179735
+    },
+    {
+      id: "magnetico-blindado",
+      nombre: "Sensor magnético blindado — Magnetico Blindado Ext-Int",
+      precio: 82720
+    },
+    {
+      id: "trabajo-altura",
+      nombre: "Trabajo en altura (por dispositivo)",
+      precio: 6175
+    },
+    {
+      id: "segundo-tecnico",
+      nombre: "Asistencia de segundo técnico — Tecnico Ayudante p/instalacion",
+      precio: 41685
     }
   ]
 };
