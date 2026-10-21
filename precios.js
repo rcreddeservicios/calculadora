@@ -42,7 +42,7 @@ window.PRECIOS_ADT = {
         },
         {
           id: "cx-view-32",
-          nombre: "Kit CX Interactive View 3.2 PANEL INTELIGENTE (3 sensores de movimiento)",
+          nombre: "Kit Interactive View 3.2 PANEL INTELIGENTE (3 sensores de movimiento)",
           verde: { sin: 30999, 3: 43999, 6: 52999 },
           amarillo: { sin: null, 3: null, 6: null }
         },
