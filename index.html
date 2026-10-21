@@ -2,9 +2,8 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#123b70">
-<meta name="description" content="Calculadora comercial ADT de RC Red de Servicios">
 <title>Calculadora ADT | RC Red de Servicios</title>
 
 <style>
@@ -19,7 +18,7 @@
   --line:#dce5ef;
   --green:#15804a;
   --red:#b42318;
-  --shadow:0 12px 34px #102b4e12
+  --shadow:0 10px 30px #102b4e10
 }
 
 *{box-sizing:border-box}
@@ -61,12 +60,13 @@ main{
   gap:14px
 }
 
-/* LOGO RC: fondo transparente */
+/* LOGO RC: sin fondo agregado desde CSS */
 .brand-logo{
   width:88px;
   height:66px;
   object-fit:contain;
   background:transparent;
+  border:0;
   border-radius:0;
   padding:0;
   flex:0 0 auto
@@ -324,7 +324,7 @@ select:focus,input:focus{
 
 .btn-primary{
   background:var(--blue);
-  color:white
+  color:#fff
 }
 
 .btn-secondary{
@@ -348,7 +348,7 @@ select:focus,input:focus{
 .summary-top{
   padding:20px;
   background:linear-gradient(135deg,#102b4e,#155da8);
-  color:white
+  color:#fff
 }
 
 .summary-top small{
@@ -484,4 +484,589 @@ footer{
   .qty button{width:27px;height:29px}
   .qty input{width:33px}
   .ext-total{min-width:61px;font-size:10px}
-  .brand-text{
+  .brand-text{font-size:10px;letter-spacing:1px}
+  .brand-text small{font-size:11px}
+  .brand-logo{width:64px;height:52px}
+  .hero p{font-size:13px}
+}
+</style>
+</head>
+
+<body>
+<main>
+
+<header class="hero">
+  <div class="topline">
+    <div class="brand">
+      <img
+        class="brand-logo"
+        src="./LOGO%20RC.png"
+        alt="Logo RC Red de Servicios"
+      >
+      <div class="brand-text">
+        RC RED DE SERVICIOS
+        <small>Representantes comerciales ADT</small>
+      </div>
+    </div>
+    <div class="pill">Herramienta comercial</div>
+  </div>
+
+  <h1>Calculadora de Kits ADT</h1>
+  <p>
+    Armá tu propuesta comercial según región, score del cliente,
+    promoción y adicionales. El presupuesto se actualiza automáticamente.
+  </p>
+</header>
+
+<div class="layout">
+
+  <div>
+
+    <section class="panel">
+      <div class="section-head">
+        <div class="step">01</div>
+        <div>
+          <h2>Región de instalación</h2>
+          <p class="desc">Seleccioná la zona donde se instalará la alarma.</p>
+        </div>
+      </div>
+
+      <label class="field-label" for="region">Región</label>
+      <select id="region">
+        <option value="cordoba">Córdoba</option>
+        <option value="resto">Resto del país</option>
+      </select>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div class="step">02</div>
+        <div>
+          <h2>Kit, score y promoción</h2>
+          <p class="desc">Elegí una combinación para consultar el precio disponible.</p>
+        </div>
+      </div>
+
+      <label class="field-label" for="kit">Kit de alarma</label>
+      <select id="kit">
+        <option value="">Seleccioná un kit</option>
+      </select>
+
+      <label class="field-label">Score del cliente</label>
+      <div class="choices">
+
+        <button
+          class="choice"
+          id="green"
+          type="button"
+          onclick="setScore('verde')"
+        >
+          <strong>🟢 Score verde</strong>
+          <span>830 a 999 puntos</span>
+        </button>
+
+        <button
+          class="choice"
+          id="yellow"
+          type="button"
+          onclick="setScore('amarillo')"
+        >
+          <strong>🟡 Score amarillo</strong>
+          <span>470 a 829 puntos</span>
+        </button>
+
+      </div>
+
+      <label class="field-label">Promoción</label>
+      <div class="choices">
+
+        <button
+          class="choice"
+          id="p3"
+          type="button"
+          onclick="setPromo(3)"
+        >
+          <strong>3 meses</strong>
+          <span>30% de descuento</span>
+        </button>
+
+        <button
+          class="choice"
+          id="p6"
+          type="button"
+          onclick="setPromo(6)"
+        >
+          <strong>6 meses</strong>
+          <span>30% de descuento</span>
+        </button>
+
+      </div>
+
+      <p id="kitPrice" class="price-hint">
+        Seleccioná kit, score y promoción para ver el precio.
+      </p>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div class="step">03</div>
+        <div>
+          <h2>Adicionales</h2>
+          <p class="desc">
+            Indicá la cantidad de cada producto, desde 0 hasta 10 unidades.
+          </p>
+        </div>
+      </div>
+
+      <div id="extras" class="extra-list"></div>
+
+      <div class="buttons">
+        <button
+          class="btn btn-secondary"
+          type="button"
+          onclick="clearExtras()"
+        >
+          Restablecer cantidades
+        </button>
+      </div>
+    </section>
+
+  </div>
+
+  <aside class="summary-card">
+    <div class="summary-top">
+      <small>Tu presupuesto</small>
+      <h2>Resumen de la propuesta</h2>
+    </div>
+
+    <div class="summary-body">
+
+      <div id="summary">
+        <p class="placeholder">
+          Completá los datos para generar una cotización detallada.
+        </p>
+      </div>
+
+      <div class="summary-actions">
+        <button
+          class="btn btn-primary"
+          type="button"
+          onclick="copySummary()"
+        >
+          Copiar presupuesto
+        </button>
+
+        <button
+          class="btn btn-secondary"
+          type="button"
+          onclick="resetAll()"
+        >
+          Reiniciar calculadora
+        </button>
+      </div>
+
+      <p class="note">
+        Los precios se administran desde el archivo precios.js.
+      </p>
+
+      <div class="warning">
+        Si una combinación no tiene precio informado, aparecerá como no disponible
+        y no se calculará un total.
+      </div>
+
+    </div>
+  </aside>
+
+</div>
+
+<footer>RC Red de Servicios · Calculadora comercial ADT</footer>
+</main>
+
+<script src="./precios.js"></script>
+
+<script>
+"use strict";
+
+let data = window.PRECIOS_ADT;
+let score = "";
+let months = 0;
+
+const money = n => new Intl.NumberFormat("es-AR", {
+  style: "currency",
+  currency: "ARS",
+  maximumFractionDigits: 0
+}).format(n);
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+  "'": "&#39;"
+}[c]));
+
+function kitNow() {
+  if (!data) return null;
+
+  const list = data.regiones[
+    document.getElementById("region").value
+  ].kits;
+
+  return list.find(k =>
+    k.id === document.getElementById("kit").value
+  ) || null;
+}
+
+function renderKits() {
+  const sel = document.getElementById("kit");
+  const old = sel.value;
+
+  const list = data.regiones[
+    document.getElementById("region").value
+  ].kits;
+
+  sel.innerHTML = '<option value="">Seleccioná un kit</option>';
+
+  list.forEach(k => {
+    const o = document.createElement("option");
+    o.value = k.id;
+    o.textContent = k.nombre;
+    sel.appendChild(o);
+  });
+
+  if (list.some(k => k.id === old)) {
+    sel.value = old;
+  }
+
+  refresh();
+}
+
+function mark(id, on) {
+  document.getElementById(id).classList.toggle("selected", on);
+}
+
+function setScore(s) {
+  score = s;
+  mark("green", s === "verde");
+  mark("yellow", s === "amarillo");
+  refresh();
+}
+
+function setPromo(m) {
+  months = m;
+  mark("p3", m === 3);
+  mark("p6", m === 6);
+  refresh();
+}
+
+function priceNow() {
+  const k = kitNow();
+  return k && score && months ? k[score][months] : null;
+}
+
+function clampQty(v) {
+  const n = Number(v);
+
+  return Math.min(
+    10,
+    Math.max(0, Number.isFinite(n) ? Math.floor(n) : 0)
+  );
+}
+
+function renderExtras() {
+  const box = document.getElementById("extras");
+  box.innerHTML = "";
+
+  data.adicionales.forEach(a => {
+    const item = document.createElement("div");
+    item.className = "extra";
+
+    const info = document.createElement("div");
+    info.className = "extra-info";
+
+    info.innerHTML =
+      "<strong>" + esc(a.nombre) + "</strong>" +
+      "<small>" + money(a.precio) + " por unidad</small>";
+
+    const qty = document.createElement("div");
+    qty.className = "qty";
+
+    const minus = document.createElement("button");
+    minus.type = "button";
+    minus.textContent = "−";
+    minus.setAttribute(
+      "aria-label",
+      "Quitar una unidad de " + a.nombre
+    );
+
+    const input = document.createElement("input");
+    input.type = "number";
+    input.min = "0";
+    input.max = "10";
+    input.step = "1";
+    input.value = "0";
+    input.inputMode = "numeric";
+    input.dataset.id = a.id;
+    input.setAttribute(
+      "aria-label",
+      "Cantidad de " + a.nombre
+    );
+
+    const plus = document.createElement("button");
+    plus.type = "button";
+    plus.textContent = "+";
+    plus.setAttribute(
+      "aria-label",
+      "Agregar una unidad de " + a.nombre
+    );
+
+    minus.addEventListener("click", () => changeQty(a.id, -1));
+    plus.addEventListener("click", () => changeQty(a.id, 1));
+
+    input.addEventListener("input", () => {
+      if (input.value !== "") {
+        input.value = clampQty(input.value);
+      }
+
+      syncQtyButtons();
+      refresh();
+    });
+
+    input.addEventListener("change", () => {
+      input.value = clampQty(input.value);
+      syncQtyButtons();
+      refresh();
+    });
+
+    qty.append(minus, input, plus);
+
+    const total = document.createElement("div");
+    total.className = "ext-total";
+    total.dataset.totalId = a.id;
+    total.textContent = money(0);
+
+    item.append(info, qty, total);
+    box.appendChild(item);
+  });
+
+  syncQtyButtons();
+}
+
+function changeQty(id, delta) {
+  const input = document.querySelector(
+    '#extras input[data-id="' + id + '"]'
+  );
+
+  if (!input) return;
+
+  input.value = clampQty(input.value) + delta;
+  input.value = clampQty(input.value);
+
+  syncQtyButtons();
+  refresh();
+}
+
+function syncQtyButtons() {
+  document.querySelectorAll("#extras .extra").forEach(item => {
+    const input = item.querySelector("input");
+    const buttons = item.querySelectorAll("button");
+    const n = clampQty(input.value);
+
+    buttons[0].disabled = n <= 0;
+    buttons[1].disabled = n >= 10;
+  });
+}
+
+function selectedExtras() {
+  return data.adicionales.map(a => {
+    const input = document.querySelector(
+      '#extras input[data-id="' + a.id + '"]'
+    );
+
+    const cantidad = input ? clampQty(input.value) : 0;
+
+    return {
+      ...a,
+      cantidad: cantidad,
+      subtotal: cantidad * a.precio
+    };
+  }).filter(a => a.cantidad > 0);
+}
+
+function row(a, b) {
+  return '<div class="row"><span>' +
+    esc(a) +
+    '</span><strong>' +
+    esc(b) +
+    '</strong></div>';
+}
+
+function refresh() {
+  if (!data) return;
+
+  const k = kitNow();
+  const p = priceNow();
+  const box = document.getElementById("kitPrice");
+
+  if (!k) {
+    box.textContent = "Seleccioná un kit para continuar.";
+  } else if (!score) {
+    box.textContent = "Seleccioná el score del cliente.";
+  } else if (!months) {
+    box.textContent = "Seleccioná una promoción.";
+  } else if (p == null) {
+    box.innerHTML =
+      '<span class="bad">No hay precio disponible para esta combinación.</span>';
+  } else {
+    box.innerHTML =
+      '<span class="good">Precio del kit: ' +
+      esc(money(p)) +
+      '</span>';
+  }
+
+  const ex = selectedExtras();
+
+  document.querySelectorAll("[data-total-id]").forEach(el => {
+    const a = ex.find(x => x.id === el.dataset.totalId);
+    el.textContent = money(a ? a.subtotal : 0);
+  });
+
+  const summary = document.getElementById("summary");
+
+  if (!k || !score || !months || p == null) {
+    summary.innerHTML =
+      '<p class="placeholder">Completá kit, score y promoción con un precio disponible para ver el presupuesto.</p>';
+    return;
+  }
+
+  const exTotal = ex.reduce((n, a) => n + a.subtotal, 0);
+  const total = p + exTotal;
+
+  let h = '<div>' +
+    row(
+      "Región",
+      data.regiones[
+        document.getElementById("region").value
+      ].nombre
+    ) +
+    row("Kit", k.nombre) +
+    row(
+      "Score",
+      score === "verde" ? "Verde (830–999)" : "Amarillo (470–829)"
+    ) +
+    row("Promoción", months + " meses con 30% de descuento") +
+    row("Precio del kit", money(p));
+
+  if (ex.length) {
+    h += '<div class="minor-title">Adicionales</div>';
+
+    ex.forEach(a => {
+      h += row(
+        a.nombre + " × " + a.cantidad,
+        money(a.subtotal)
+      );
+    });
+
+    h += row("Subtotal adicionales", money(exTotal));
+  } else {
+    h += row("Adicionales", "Ninguno");
+  }
+
+  h += '</div>' +
+    '<div class="total-box">' +
+      '<div class="total-caption">' +
+        '<span>TOTAL COTIZADO</span>' +
+        '<span>ARS</span>' +
+      '</div>' +
+      '<div class="total-value">' +
+        esc(money(total)) +
+      '</div>' +
+      '<div class="total-note">Kit + ' +
+        (
+          ex.length
+            ? ex.reduce((n, a) => n + a.cantidad, 0) +
+              " unidad(es) adicional(es)"
+            : "sin adicionales"
+        ) +
+      '.</div>' +
+    '</div>';
+
+  summary.innerHTML = h;
+}
+
+function clearExtras() {
+  document.querySelectorAll("#extras input").forEach(i => {
+    i.value = "0";
+  });
+
+  syncQtyButtons();
+  refresh();
+}
+
+function resetAll() {
+  document.getElementById("region").value = "cordoba";
+
+  score = "";
+  months = 0;
+
+  ["green", "yellow", "p3", "p6"].forEach(id => {
+    mark(id, false);
+  });
+
+  clearExtras();
+  renderKits();
+}
+
+function copySummary() {
+  const t = document.getElementById("summary").innerText;
+
+  if (!t || t.includes("Completá kit, score")) {
+    alert("Completá una combinación válida antes de copiar.");
+    return;
+  }
+
+  const text =
+    "RC RED DE SERVICIOS\nCOTIZACIÓN ADT\n\n" + t;
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text)
+      .then(() => alert("Presupuesto copiado."))
+      .catch(() => fallbackCopy(text));
+  } else {
+    fallbackCopy(text);
+  }
+}
+
+function fallbackCopy(t) {
+  const a = document.createElement("textarea");
+  a.value = t;
+
+  document.body.appendChild(a);
+  a.select();
+
+  try {
+    document.execCommand("copy");
+    alert("Presupuesto copiado.");
+  } catch (e) {
+    alert("No se pudo copiar automáticamente. Copiá el resumen manualmente.");
+  }
+
+  a.remove();
+}
+
+document.getElementById("region")
+  .addEventListener("change", renderKits);
+
+document.getElementById("kit")
+  .addEventListener("change", refresh);
+
+if (data && data.regiones && data.adicionales) {
+  renderExtras();
+  renderKits();
+} else {
+  document.getElementById("kitPrice").textContent =
+    "No se pudo cargar precios.js. Debe estar junto a index.html.";
+}
+</script>
+</body>
+</html>
