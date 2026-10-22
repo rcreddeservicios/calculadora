@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#123b70">
 <title>Calculadora ADT | RC Red de Servicios</title>
-
 <style>
 :root {
   --navy:#102b4e;
@@ -18,53 +17,45 @@
   --line:#dce5ef;
   --green:#15804a;
   --red:#b42318;
-  --shadow:0 10px 30px #102b4e10;
+  --shadow:0 10px 30px #102b4e10
 }
-
 * {
-  box-sizing:border-box;
+  box-sizing:border-box
 }
-
 body {
   margin:0;
   background:var(--bg);
   color:var(--ink);
-  font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif
 }
-
 button,select,input {
-  font:inherit;
+  font:inherit
 }
-
 main {
   max-width:1080px;
   margin:auto;
-  padding:24px 18px 42px;
+  padding:24px 18px 42px
 }
-
 .hero {
   background:linear-gradient(125deg,#0c2340,#123f76 60%,#2079ba);
   color:#fff;
   border-radius:24px;
   padding:25px 28px;
   margin-bottom:20px;
-  box-shadow:0 18px 44px #102b4e20;
+  box-shadow:0 18px 44px #102b4e20
 }
-
 .topline {
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:18px;
+  gap:18px
 }
-
 .brand {
   display:flex;
   align-items:center;
   gap:18px;
-  min-width:0;
+  min-width:0
 }
-
 .brand-logo {
   display:block;
   width:150px;
@@ -73,75 +64,65 @@ main {
   background:transparent;
   border:0;
   padding:0;
-  flex:0 0 auto;
+  flex:0 0 auto
 }
-
 .brand-text {
   font-size:13px;
   letter-spacing:1.5px;
   font-weight:800;
-  color:#e1efff;
+  color:#e1efff
 }
-
 .brand-text small {
   display:block;
   margin-top:7px;
   font-size:13px;
   letter-spacing:0;
   font-weight:500;
-  color:#c5dcf4;
+  color:#c5dcf4
 }
-
 .pill {
   border:1px solid #ffffff35;
   background:#ffffff12;
   border-radius:999px;
   padding:8px 12px;
   font-size:12px;
-  white-space:nowrap;
+  white-space:nowrap
 }
-
 h1 {
   font-size:clamp(27px,4vw,38px);
   line-height:1.12;
   letter-spacing:-.8px;
-  margin:18px 0 9px;
+  margin:18px 0 9px
 }
-
 .hero p {
   margin:0;
   max-width:700px;
   color:#d7e7f8;
   font-size:14px;
-  line-height:1.6;
+  line-height:1.6
 }
-
 .layout {
   display:grid;
   grid-template-columns:minmax(0,1fr) 350px;
   gap:18px;
-  align-items:start;
+  align-items:start
 }
-
 .panel,.summary-card {
   background:#fff;
   border:1px solid var(--line);
   border-radius:19px;
-  box-shadow:var(--shadow);
+  box-shadow:var(--shadow)
 }
-
 .panel {
   padding:22px;
-  margin-bottom:16px;
+  margin-bottom:16px
 }
-
 .section-head {
   display:flex;
   gap:12px;
   align-items:flex-start;
-  margin-bottom:18px;
+  margin-bottom:18px
 }
-
 .step {
   width:36px;
   height:36px;
@@ -152,30 +133,26 @@ h1 {
   color:var(--blue);
   border-radius:12px;
   font-size:13px;
-  font-weight:850;
+  font-weight:850
 }
-
 h2 {
   font-size:18px;
   margin:1px 0 5px;
-  letter-spacing:-.3px;
+  letter-spacing:-.3px
 }
-
 .desc {
   color:var(--muted);
   font-size:13px;
   line-height:1.5;
-  margin:0;
+  margin:0
 }
-
 .field-label {
   display:block;
   font-size:13px;
   font-weight:750;
   margin:0 0 8px;
-  color:#263b54;
+  color:#263b54
 }
-
 select {
   width:100%;
   min-height:47px;
@@ -186,25 +163,21 @@ select {
   color:var(--ink);
   font-size:14px;
   margin-bottom:17px;
-  outline:none;
+  outline:none
 }
-
 select:focus,input:focus {
   border-color:var(--blue2);
-  box-shadow:0 0 0 3px #2479c81c;
+  box-shadow:0 0 0 3px #2479c81c
 }
-
 .choices {
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:10px;
-  margin:9px 0 19px;
+  margin:9px 0 19px
 }
-
 .promo-choices {
-  grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-template-columns:repeat(3,minmax(0,1fr))
 }
-
 .choice {
   min-height:70px;
   padding:12px;
@@ -213,36 +186,30 @@ select:focus,input:focus {
   border-radius:13px;
   background:#fff;
   color:var(--ink);
-  cursor:pointer;
+  cursor:pointer
 }
-
 .choice strong {
   display:block;
   margin-bottom:5px;
-  font-size:13px;
+  font-size:13px
 }
-
 .choice span {
   display:block;
   color:var(--muted);
   font-size:11px;
-  line-height:1.4;
+  line-height:1.4
 }
-
 .choice.selected {
   border:1.5px solid var(--blue2);
-  background:var(--sky);
+  background:var(--sky)
 }
-
 .choice.selected strong {
-  color:var(--blue);
+  color:var(--blue)
 }
-
 .choice:disabled {
   opacity:.4;
-  cursor:not-allowed;
+  cursor:not-allowed
 }
-
 .price-hint {
   border:1px solid #e0eaf4;
   background:#f5f9fd;
@@ -250,58 +217,49 @@ select:focus,input:focus {
   padding:13px;
   font-size:13px;
   color:var(--muted);
-  line-height:1.5;
+  line-height:1.5
 }
-
 .good {
   color:var(--green);
-  font-weight:800;
+  font-weight:800
 }
-
 .bad {
   color:var(--red);
-  font-weight:800;
+  font-weight:800
 }
-
 .extra-list {
   display:grid;
-  gap:9px;
+  gap:9px
 }
-
 .extra {
   display:flex;
   align-items:center;
   gap:9px;
   padding:11px;
   border:1px solid var(--line);
-  border-radius:13px;
+  border-radius:13px
 }
-
 .extra-info {
   flex:1;
-  min-width:0;
+  min-width:0
 }
-
 .extra-info strong {
   display:block;
   font-size:12px;
-  line-height:1.4;
+  line-height:1.4
 }
-
 .extra-info small {
   display:block;
   color:var(--muted);
   font-size:11px;
-  margin-top:4px;
+  margin-top:4px
 }
-
 .qty {
   display:flex;
   align-items:center;
   gap:4px;
-  flex:0 0 auto;
+  flex:0 0 auto
 }
-
 .qty button {
   width:28px;
   height:30px;
@@ -310,33 +268,29 @@ select:focus,input:focus {
   background:#f8fafc;
   color:var(--blue);
   font-weight:900;
-  cursor:pointer;
+  cursor:pointer
 }
-
 .qty button:disabled {
   opacity:.35;
-  cursor:not-allowed;
+  cursor:not-allowed
 }
-
 .qty input {
-  width:35px;
+  width:42px;
   height:31px;
   text-align:center;
   border:1px solid #cfd9e5;
   border-radius:8px;
   font-weight:800;
   font-size:13px;
-  padding:2px;
+  padding:2px
 }
-
 .ext-total {
   min-width:67px;
   text-align:right;
   color:var(--muted);
   font-size:10px;
-  white-space:nowrap;
+  white-space:nowrap
 }
-
 .stock-notice {
   margin-top:12px;
   padding:12px 14px;
@@ -346,52 +300,44 @@ select:focus,input:focus {
   color:#79551c;
   font-size:12px;
   line-height:1.5;
-  font-weight:800;
+  font-weight:800
 }
-
 .btn {
   border:0;
   border-radius:11px;
   padding:12px 14px;
   font-size:13px;
   font-weight:800;
-  cursor:pointer;
+  cursor:pointer
 }
-
 .btn-primary {
   background:var(--blue);
-  color:#fff;
+  color:#fff
 }
-
 .btn-secondary {
   background:#edf2f8;
-  color:#33485f;
+  color:#33485f
 }
-
 .btn:disabled {
   opacity:.6;
-  cursor:wait;
+  cursor:wait
 }
-
 .buttons {
   display:flex;
   gap:8px;
   flex-wrap:wrap;
-  margin-top:15px;
+  margin-top:15px
 }
-
 .summary-card {
   position:sticky;
   top:16px;
-  overflow:hidden;
+  overflow:hidden
 }
-
 .summary-top {
   padding:20px;
   background:linear-gradient(135deg,#102b4e,#155da8);
-  color:#fff;
+  color:#fff
 }
-
 .summary-top small {
   display:block;
   color:#c8def4;
@@ -399,25 +345,21 @@ select:focus,input:focus {
   text-transform:uppercase;
   letter-spacing:1.2px;
   font-weight:800;
-  margin-bottom:7px;
+  margin-bottom:7px
 }
-
 .summary-top h2 {
   font-size:19px;
-  margin:0;
+  margin:0
 }
-
 .summary-body {
-  padding:18px;
+  padding:18px
 }
-
 .placeholder {
   color:var(--muted);
   font-size:13px;
   line-height:1.6;
-  margin:0;
+  margin:0
 }
-
 .row {
   display:flex;
   justify-content:space-between;
@@ -425,37 +367,32 @@ select:focus,input:focus {
   gap:10px;
   padding:10px 0;
   border-bottom:1px solid #edf1f6;
-  font-size:12px;
+  font-size:12px
 }
-
 .row span {
   color:var(--muted);
-  line-height:1.45;
+  line-height:1.45
 }
-
 .row strong {
   text-align:right;
   overflow-wrap:anywhere;
-  line-height:1.45;
+  line-height:1.45
 }
-
 .minor-title {
   margin:16px 0 3px;
   font-size:11px;
   text-transform:uppercase;
   letter-spacing:1px;
   font-weight:850;
-  color:var(--muted);
+  color:var(--muted)
 }
-
 .total-box {
   padding:15px;
   margin-top:15px;
   background:#f0f7ff;
   border:1px solid #d9eaff;
-  border-radius:13px;
+  border-radius:13px
 }
-
 .total-caption {
   display:flex;
   justify-content:space-between;
@@ -463,28 +400,24 @@ select:focus,input:focus {
   color:var(--blue);
   font-size:11px;
   font-weight:850;
-  letter-spacing:.4px;
+  letter-spacing:.4px
 }
-
 .total-value {
   font-size:27px;
   font-weight:900;
   color:var(--navy);
   margin-top:7px;
-  overflow-wrap:anywhere;
+  overflow-wrap:anywhere
 }
-
 .total-note,.note {
   font-size:11px;
   color:var(--muted);
   line-height:1.5;
-  margin-top:7px;
+  margin-top:7px
 }
-
 .note {
-  margin-top:13px;
+  margin-top:13px
 }
-
 .warning {
   margin-top:11px;
   padding:11px;
@@ -493,16 +426,14 @@ select:focus,input:focus {
   border-radius:10px;
   color:#79551c;
   font-size:11px;
-  line-height:1.5;
+  line-height:1.5
 }
-
 .component-grid {
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:7px;
-  margin:10px 0 12px;
+  margin:10px 0 12px
 }
-
 .component-item {
   display:flex;
   gap:7px;
@@ -511,72 +442,62 @@ select:focus,input:focus {
   border:1px solid #e6edf5;
   border-radius:9px;
   background:#fbfdff;
-  min-width:0;
+  min-width:0
 }
-
 .component-item img {
   width:48px;
   height:40px;
   object-fit:contain;
-  flex:0 0 48px;
+  flex:0 0 48px
 }
-
 .component-item span {
   font-size:10px;
   line-height:1.25;
   color:#33485f;
-  font-weight:700;
+  font-weight:700
 }
-
 .component-item .quantity {
   color:var(--blue);
   display:block;
   font-size:10px;
-  margin-top:2px;
+  margin-top:2px
 }
-
 .payment-info {
-  margin-top:18px;
+  margin-top:18px
 }
-
 .payment-grid {
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:12px;
-  margin-top:14px;
+  margin-top:14px
 }
-
 .payment-option {
   padding:16px;
   border:1px solid var(--line);
   border-radius:12px;
   background:#f8fbff;
-  min-width:0;
+  min-width:0
 }
-
 .payment-option h3 {
   margin:0 0 7px;
   color:var(--navy);
   font-size:13px;
-  line-height:1.4;
+  line-height:1.4
 }
-
 .payment-option p {
   margin:0;
   color:var(--muted);
   font-size:12px;
-  line-height:1.5;
+  line-height:1.5
 }
-
 .payment-logos {
   display:flex;
   align-items:center;
   flex-wrap:wrap;
   gap:10px;
   margin:12px 0;
-  min-height:38px;
+  min-height:38px
 }
-
 .payment-logos img {
   display:block;
   width:auto;
@@ -586,15 +507,13 @@ select:focus,input:focus {
   padding:3px 5px;
   border:1px solid #e3e9f1;
   border-radius:6px;
-  background:#fff;
+  background:#fff
 }
-
 .payment-logos img.naranja-logo {
   height:58px;
   max-width:70px;
-  padding:2px 4px;
+  padding:2px 4px
 }
-
 .payment-logos img.pagofacil-logo {
   width:auto;
   height:58px;
@@ -603,25 +522,21 @@ select:focus,input:focus {
   padding:2px;
   border:0;
   border-radius:0;
-  background:transparent;
+  background:transparent
 }
-
 .payment-logos.compact {
   gap:7px;
-  margin:10px 0 0;
+  margin:10px 0 0
 }
-
 .payment-logos.compact img {
   max-width:74px;
   height:24px;
-  padding:2px 4px;
+  padding:2px 4px
 }
-
 .payment-logos.compact img.naranja-logo {
   height:46px;
-  max-width:56px;
+  max-width:56px
 }
-
 .finance-inline-note {
   margin:12px 0 0;
   padding:11px 12px;
@@ -630,1586 +545,749 @@ select:focus,input:focus {
   border-radius:10px;
   color:var(--navy);
   font-size:11px;
-  line-height:1.5;
+  line-height:1.5
 }
-
 .summary-actions {
   display:grid;
   gap:8px;
-  margin-top:15px;
+  margin-top:15px
 }
-
 .summary-actions button {
-  width:100%;
+  width:100%
 }
-
 footer {
   text-align:center;
   color:#8290a1;
   font-size:11px;
-  padding:18px 0 0;
+  padding:18px 0 0
 }
-
 @media(max-width:850px) {
   .layout {
-    grid-template-columns:1fr;
+    grid-template-columns:1fr
   }
-
   .summary-card {
-    position:static;
+    position:static
   }
-
   .hero {
-    padding:21px;
+    padding:21px
   }
-
   .panel {
-    padding:18px;
+    padding:18px
   }
-
   .brand {
-    gap:14px;
+    gap:14px
   }
-
   .brand-logo {
     width:125px;
-    height:95px;
+    height:95px
   }
-
   .pill {
-    display:none;
+    display:none
   }
-
   .payment-grid {
-    grid-template-columns:1fr;
+    grid-template-columns:1fr
   }
 }
-
 @media(max-width:480px) {
   main {
-    padding:10px 9px 28px;
+    padding:10px 9px 28px
   }
-
   .choices,.promo-choices {
-    grid-template-columns:1fr;
+    grid-template-columns:1fr
   }
-
   .choice {
-    min-height:60px;
+    min-height:60px
   }
-
   .extra {
     gap:6px;
-    padding:9px 7px;
+    padding:9px 7px
   }
-
   .qty {
-    gap:3px;
+    gap:3px
   }
-
   .qty button {
     width:25px;
-    height:28px;
+    height:28px
   }
-
   .qty input {
-    width:31px;
+    width:38px
   }
-
   .ext-total {
     min-width:58px;
-    font-size:10px;
+    font-size:10px
   }
-
   .brand {
-    gap:10px;
+    gap:10px
   }
-
   .brand-logo {
     width:100px;
-    height:76px;
+    height:76px
   }
-
   .brand-text {
     font-size:10px;
-    letter-spacing:1px;
+    letter-spacing:1px
   }
-
   .brand-text small {
-    font-size:11px;
+    font-size:11px
   }
-
   .hero p {
-    font-size:13px;
+    font-size:13px
   }
 }
 </style>
 </head>
-
 <body>
 <main>
-
 <header class="hero">
-  <div class="topline">
-    <div class="brand">
-      <img class="brand-logo" src="./LOGO%20RC.png" alt="Logo RC Red de Servicios">
-      <div class="brand-text">
-        RC RED DE SERVICIOS
-        <small>Representantes comerciales ADT</small>
-      </div>
-    </div>
-    <div class="pill">Herramienta comercial</div>
-  </div>
-
-  <h1>Calculadora de Kits ADT</h1>
-  <p>
-    Cotizá kits, promociones, abonos mensuales y adicionales.
-    Copiá el presupuesto o descargalo en PDF.
-  </p>
-</header>
-
-<div class="layout">
-  <div>
-
-    <section class="panel">
-      <div class="section-head">
-        <div class="step">01</div>
-        <div>
-          <h2>Región de instalación</h2>
-          <p class="desc">Seleccioná dónde se instalará la alarma.</p>
-        </div>
-      </div>
-
-      <label class="field-label" for="region">Región</label>
-      <select id="region">
-        <option value="cordoba">Córdoba</option>
-        <option value="resto">Resto del país</option>
-      </select>
-    </section>
-
-    <section class="panel">
-      <div class="section-head">
-        <div class="step">02</div>
-        <div>
-          <h2>Kit, score y promoción</h2>
-          <p class="desc">Seleccioná una combinación para ver los precios.</p>
-        </div>
-      </div>
-
-      <label class="field-label" for="kit">Kit de alarma</label>
-      <select id="kit">
-        <option value="">Cargando kits...</option>
-      </select>
-
-      <label class="field-label">Score del cliente</label>
-      <div class="choices">
-        <button class="choice" id="green" type="button" onclick="setScore('verde')">
-          <strong>Score verde</strong>
-          <span>830 a 999 puntos</span>
-        </button>
-
-        <button class="choice" id="yellow" type="button" onclick="setScore('amarillo')">
-          <strong>Score amarillo</strong>
-          <span>470 a 829 puntos</span>
-        </button>
-      </div>
-
-      <label class="field-label">Promoción</label>
-      <div class="choices promo-choices">
-        <button class="choice" id="p0" type="button" onclick="setPromo('sin')">
-          <strong>Sin promo</strong>
-          <span>Abono pleno</span>
-        </button>
-
-        <button class="choice" id="p3" type="button" onclick="setPromo(3)">
-          <strong>3 meses</strong>
-          <span>30% de descuento</span>
-        </button>
-
-        <button class="choice" id="p6" type="button" onclick="setPromo(6)">
-          <strong>6 meses</strong>
-          <span>30% de descuento</span>
-        </button>
-      </div>
-
-      <p class="desc" id="promoHelp" style="margin-bottom:12px">
-        Elegí la promoción para calcular el precio del kit y el abono mensual.
-      </p>
-
-      <p id="kitPrice" class="price-hint">
-        Seleccioná kit, score y promoción.
-      </p>
-    </section>
-
-    <section class="panel">
-      <div class="section-head">
-        <div class="step">03</div>
-        <div>
-          <h2>Adicionales</h2>
-          <p class="desc">Seleccioná de 0 a 10 unidades por producto.</p>
-        </div>
-      </div>
-
-      <div id="extras" class="extra-list">
-        <p class="placeholder">Cargando adicionales...</p>
-      </div>
-
-      <div class="stock-notice">
-        CONSULTAR PREVIAMENTE STOCK DE ADICIONALES QUE NO SEAN CÁMARAS, MICRO SD O CAJAS ESTANCAS. El precio se agregará al valor de la instalación. Por más cámaras o sensores que se agreguen, el valor del abono se mantendrá igual.
-      </div>
-
-      <div class="buttons">
-        <button class="btn btn-secondary" type="button" onclick="clearExtras()">
-          Restablecer cantidades
-        </button>
-      </div>
-    </section>
-
-  </div>
-
-  <aside class="summary-card">
-    <div class="summary-top">
-      <small>Tu presupuesto</small>
-      <h2>Resumen de la propuesta</h2>
-    </div>
-
-    <div class="summary-body">
-      <div id="summary">
-        <p class="placeholder">Completá los datos para generar una cotización.</p>
-      </div>
-
-      <div class="summary-actions">
-        <button class="btn btn-primary" type="button" onclick="downloadQuotePdf()">
-          Descargar presupuesto en PDF
-        </button>
-
-        <button class="btn btn-secondary" type="button" onclick="copySummary()">
-          Copiar presupuesto
-        </button>
-
-        <button class="btn btn-secondary" type="button" onclick="resetAll()">
-          Reiniciar calculadora
-        </button>
-      </div>
-
-      <p class="note">
-        El PDF incluye el detalle de la cotización y los términos y condiciones.
-      </p>
-
-      <div class="warning">
-        Las combinaciones sin precio cargado aparecerán como no disponibles.
-      </div>
-    </div>
-  </aside>
+<div class="topline">
+<div class="brand">
+<img class="brand-logo" src="./LOGO%20RC.png" alt="Logo RC Red de Servicios">
+<div class="brand-text">RC RED DE SERVICIOS<small>Representantes comerciales ADT</small>
 </div>
-
-<section class="panel payment-info">
-  <div class="section-head">
-    <div class="step">04</div>
-    <div>
-      <h2>Condiciones de pago</h2>
-      <p class="desc">Opciones de financiación de la instalación y forma de cobro del abono mensual.</p>
-    </div>
-  </div>
-
-  <div class="payment-grid">
-
-    <div class="payment-option">
-      <h3>Instalación — tarjetas de crédito bancarias</h3>
-
-      <div class="payment-logos" aria-label="Logos de tarjetas bancarias">
-        <img src="./visa.png" alt="Visa">
-        <img src="./mastercard.png" alt="Mastercard">
-        <img src="./cabal.png" alt="Cabal">
-      </div>
-
-      <p>Pagá el total de la instalación en 1, 3 o 6 cuotas sin interés.</p>
-    </div>
-
-    <div class="payment-option">
-      <h3>Instalación — tarjeta Naranja</h3>
-
-      <div class="payment-logos" aria-label="Logo de tarjeta Naranja">
-        <img class="naranja-logo" src="./narnaja.png" alt="Naranja">
-      </div>
-
-      <p>Financiación de hasta 12 cuotas sin interés.</p>
-    </div>
-
-    <div class="payment-option">
-      <h3>Abono mensual</h3>
-
-      <div class="payment-logos compact" aria-label="Imágenes de tarjetas de crédito">
-        <img src="./visa.png" alt="Visa">
-        <img src="./mastercard.png" alt="Mastercard">
-        <img src="./cabal.png" alt="Cabal">
-        <img class="naranja-logo" src="./narnaja.png" alt="Naranja">
-      </div>
-
-      <p>Es obligatorio adherir una tarjeta de crédito al débito automático para el cobro mensual del abono.</p>
-    </div>
-
-    <div class="payment-option">
-      <h3>Instalación — efectivo en Pago Fácil</h3>
-
-      <div class="payment-logos" aria-label="Logo de Pago Fácil">
-        <img class="pagofacil-logo" src="./pagofacil.png" alt="Pago Fácil">
-      </div>
-
-      <p>
-        PARA EL PAGO DE TU INSTALACIÓN SOLICITAR NUMERO DE CONTRATO AL ASESOR, ACERCATE AL PAGOFACIL Y DECIRLE AL CAJERO QUE VAS A ABONAR UNA INSTALACIÓN DE ADT ALARMAS.
-      </p>
-    </div>
-
-  </div>
-
-  <p class="finance-inline-note">
-    Los importes de las cuotas se calculan sobre el total de kit más
-    adicionales. El abono mensual se cobra por separado.
-  </p>
+</div>
+<div class="pill">Herramienta comercial</div>
+</div>
+<h1>Calculadora de Kits ADT</h1>
+<p>Cotizá kits, promociones, abonos mensuales y adicionales. Copiá el presupuesto o descargalo en PDF.</p>
+</header>
+<div class="layout">
+<div>
+<section class="panel">
+<div class="section-head">
+<div class="step">01</div>
+<div>
+<h2>Región de instalación</h2>
+<p class="desc">Seleccioná dónde se instalará la alarma.</p>
+</div>
+</div>
+<label class="field-label" for="region">Región</label>
+<select id="region">
+<option value="cordoba">Córdoba</option>
+<option value="resto">Resto del país</option>
+</select>
 </section>
-
+<section class="panel">
+<div class="section-head">
+<div class="step">02</div>
+<div>
+<h2>Kit, score y promoción</h2>
+<p class="desc">Seleccioná una combinación para ver los precios.</p>
+</div>
+</div>
+<label class="field-label" for="kit">Kit de alarma</label>
+<select id="kit">
+<option value="">Cargando kits...</option>
+</select>
+<label class="field-label">Score del cliente</label>
+<div class="choices">
+<button class="choice" id="green" type="button" onclick="setScore('verde')">
+<strong>Score verde</strong>
+<span>830 a 999 puntos</span>
+</button>
+<button class="choice" id="yellow" type="button" onclick="setScore('amarillo')">
+<strong>Score amarillo</strong>
+<span>470 a 829 puntos</span>
+</button>
+</div>
+<label class="field-label">Promoción</label>
+<div class="choices promo-choices">
+<button class="choice" id="p0" type="button" onclick="setPromo('sin')">
+<strong>Sin promo</strong>
+<span>Abono pleno</span>
+</button>
+<button class="choice" id="p3" type="button" onclick="setPromo(3)">
+<strong>3 meses</strong>
+<span>30% de descuento</span>
+</button>
+<button class="choice" id="p6" type="button" onclick="setPromo(6)">
+<strong>6 meses</strong>
+<span>30% de descuento</span>
+</button>
+</div>
+<p class="desc" id="promoHelp" style="margin-bottom:12px">Elegí la promoción para calcular el precio del kit y el abono mensual.</p>
+<p id="kitPrice" class="price-hint">Seleccioná kit, score y promoción.</p>
+</section>
+<section class="panel">
+<div class="section-head">
+<div class="step">03</div>
+<div>
+<h2>Adicionales</h2>
+<p class="desc">Seleccioná de 0 a 50 unidades por producto.</p>
+</div>
+</div>
+<div id="extras" class="extra-list">
+<p class="placeholder">Cargando adicionales...</p>
+</div>
+<div class="stock-notice">CONSULTAR PREVIAMENTE STOCK DE ADICIONALES QUE NO SEAN CÁMARAS, MICRO SD O CAJAS ESTANCAS. El precio se agregará al valor de la instalación. Por más cámaras o sensores que se agreguen, el valor del abono se mantendrá igual.</div>
+<div class="buttons">
+<button class="btn btn-secondary" type="button" onclick="clearExtras()">Restablecer cantidades</button>
+</div>
+</section>
+</div>
+<aside class="summary-card">
+<div class="summary-top">
+<small>Tu presupuesto</small>
+<h2>Resumen de la propuesta</h2>
+</div>
+<div class="summary-body">
+<div id="summary">
+<p class="placeholder">Completá los datos para generar una cotización.</p>
+</div>
+<div class="summary-actions">
+<button class="btn btn-primary" type="button" onclick="downloadQuotePdf()">Descargar presupuesto en PDF</button>
+<button class="btn btn-secondary" type="button" onclick="copySummary()">Copiar presupuesto</button>
+<button class="btn btn-secondary" type="button" onclick="resetAll()">Reiniciar calculadora</button>
+</div>
+<p class="note">El PDF incluye el detalle de la cotización y los términos y condiciones.</p>
+<div class="warning">Las combinaciones sin precio cargado aparecerán como no disponibles.</div>
+</div>
+</aside>
+</div>
+<section class="panel payment-info">
+<div class="section-head">
+<div class="step">04</div>
+<div>
+<h2>Condiciones de pago</h2>
+<p class="desc">Opciones de financiación de la instalación y forma de cobro del abono mensual.</p>
+</div>
+</div>
+<div class="payment-grid">
+<div class="payment-option">
+<h3>Instalación — tarjetas de crédito bancarias</h3>
+<div class="payment-logos" aria-label="Logos de tarjetas bancarias">
+<img src="./visa.png" alt="Visa">
+<img src="./mastercard.png" alt="Mastercard">
+<img src="./cabal.png" alt="Cabal">
+</div>
+<p>Pagá el total de la instalación en 1, 3 o 6 cuotas sin interés.</p>
+</div>
+<div class="payment-option">
+<h3>Instalación — tarjeta Naranja</h3>
+<div class="payment-logos">
+<img class="naranja-logo" src="./narnaja.png" alt="Naranja">
+</div>
+<p>Financiación de hasta 12 cuotas sin interés.</p>
+</div>
+<div class="payment-option">
+<h3>Abono mensual</h3>
+<div class="payment-logos compact">
+<img src="./visa.png" alt="Visa">
+<img src="./mastercard.png" alt="Mastercard">
+<img src="./cabal.png" alt="Cabal">
+<img class="naranja-logo" src="./narnaja.png" alt="Naranja">
+</div>
+<p>Es obligatorio adherir una tarjeta de crédito al débito automático para el cobro mensual del abono.</p>
+</div>
+<div class="payment-option">
+<h3>Instalación — efectivo en Pago Fácil</h3>
+<div class="payment-logos">
+<img class="pagofacil-logo" src="./pagofacil.png" alt="Pago Fácil">
+</div>
+<p>PARA EL PAGO DE TU INSTALACIÓN SOLICITAR NUMERO DE CONTRATO AL ASESOR, ACERCATE AL PAGOFACIL Y DECIRLE AL CAJERO QUE VAS A ABONAR UNA INSTALACIÓN DE ADT ALARMAS.</p>
+</div>
+</div>
+<p class="finance-inline-note">Los importes de las cuotas se calculan sobre el total de kit más adicionales. El abono mensual se cobra por separado.</p>
+</section>
 <footer>RC Red de Servicios · Calculadora comercial ADT</footer>
 </main>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 <script src="./precios.js"></script>
-
 <script>
 "use strict";
-
-let data = window.PRECIOS_ADT;
-let score = "";
-let months = "";
-
-const $ = id => document.getElementById(id);
-
-const money = n => new Intl.NumberFormat("es-AR", {
-  style: "currency",
-  currency: "ARS",
-  maximumFractionDigits: 0
-}).format(n);
-
-const moneyMonthly = n => new Intl.NumberFormat("es-AR", {
-  style: "currency",
-  currency: "ARS",
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2
-}).format(n);
-
-const esc = s => String(s).replace(/[&<>"']/g, c => ({
-  "&": "&amp;",
-  "<": "&lt;",
-  ">": "&gt;",
-  '"': "&quot;",
-  "'": "&#39;"
-}[c]));
-
-const regionKey = () => $("region").value;
-
-function kitNow() {
-  const region = data && data.regiones && data.regiones[regionKey()];
-
-  return region && Array.isArray(region.kits)
-    ? region.kits.find(k => k.id === $("kit").value) || null
-    : null;
+let data=window.PRECIOS_ADT,score="",months="";
+const $=id=>document.getElementById(id);
+const money=n=>new Intl.NumberFormat("es-AR", {
+  style:"currency",currency:"ARS",maximumFractionDigits:0
 }
-
-function isCameraKit(k = kitNow()) {
-  return Boolean(k && k.id === "cam-inteligentes");
+).format(n);
+const moneyMonthly=n=>new Intl.NumberFormat("es-AR", {
+  style:"currency",currency:"ARS",minimumFractionDigits:2,maximumFractionDigits:2
 }
+).format(n);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const regionKey=()=>$("region").value;
+function kitNow(){const region=data&&data.regiones&&data.regiones[regionKey()];return region&&Array.isArray(region.kits)?region.kits.find(k=>k.id===$("kit").value)||null:null;}
+function isCameraKit(k=kitNow()){return Boolean(k&&k.id==="cam-inteligentes");}
+function renderKits(){if(!data||!data.regiones){showDataError();return;}const region=data.regiones[regionKey()];if(!region||!Array.isArray(region.kits)){showDataError();return;}const previous=$("kit").value;$("kit").innerHTML='<option value="">Seleccioná un kit</option>';region.kits.forEach(k=>{const opt=document.createElement("option");opt.value=k.id;opt.textContent=k.nombre;$("kit").appendChild(opt);});if(region.kits.some(k=>k.id===previous))$("kit").value=previous;updatePromoRules();refresh();}
+function showDataError(){$("kit").innerHTML='<option value="">No se pudieron cargar los kits</option>';$("extras").innerHTML='<p class="bad">No se pudo leer precios.js. Verificá que esté en la raíz del repositorio.</p>';$("kitPrice").innerHTML='<span class="bad">Error al cargar los datos. Revisá precios.js.</span>';}
+function mark(id,on){$(id).classList.toggle("selected",on);}
+function updatePromoRules(){const cam=isCameraKit();$("p0").disabled=cam;$("p3").disabled=cam;if(cam)months=6;mark("p0",months==="sin");mark("p3",months===3);mark("p6",months===6);$("promoHelp").textContent=cam?"El Kit Cámaras Inteligentes solo permite 6 meses al 30%.":"Sin promo aplica el abono pleno. Con 3 o 6 meses se aplica el descuento del 30% durante ese período.";}
+function setScore(s){score=s;mark("green",s==="verde");mark("yellow",s==="amarillo");refresh();}
+function setPromo(value){if(isCameraKit()&&value!==6)return;months=value;mark("p0",value==="sin");mark("p3",value===3);mark("p6",value===6);refresh();}
+function promoLabel(){return months==="sin"?"Sin promo":months+" meses al 30%";}
+function priceNow(){const k=kitNow();if(!k||!score||!months)return null;const key=months==="sin"?"sin":String(months),p=k[score];if(!p||!(key in p))return null;return p[key];}
+function abonoNow(){const k=kitNow();if(!k||!data)return null;const region=data.regiones[regionKey()];if(!region||!region.abonos)return null;const type=k.id==="cam-inteligentes"?"camara":/view/i.test(k.nombre)?"view":"security";return region.abonos[type]||null;}
+function currentAbonoPrice(a=abonoNow()){if(!a||!months)return null;return months==="sin"?a.pleno:a.descuento;}
+function clampQty(value){const n=Number(value);return Math.min(50,Math.max(0,Number.isFinite(n)?Math.floor(n):0));}
+function renderExtras(){if(!data||!Array.isArray(data.adicionales)){$("extras").innerHTML='<p class="bad">No se encontraron adicionales en precios.js.</p>';return;}const box=$("extras");box.innerHTML="";data.adicionales.forEach(a=>{const item=document.createElement("div");item.className="extra";const info=document.createElement("div");info.className="extra-info";const name=document.createElement("strong");name.textContent=a.nombre;const unit=document.createElement("small");unit.textContent=money(a.precio)+" por unidad";info.append(name,unit);const qty=document.createElement("div");qty.className="qty";const minus=document.createElement("button");minus.type="button";minus.textContent="−";minus.setAttribute("aria-label","Quitar una unidad de "+a.nombre);minus.addEventListener("click",()=>changeQty(a.id,-1));const input=document.createElement("input");input.type="number";input.min="0";input.max="50";input.step="1";input.value="0";input.inputMode="numeric";input.dataset.id=a.id;input.setAttribute("aria-label","Cantidad de "+a.nombre);input.addEventListener("change",()=>{input.value=clampQty(input.value);syncQtyButtons();refresh();});input.addEventListener("input",()=>{if(input.value!=="")input.value=clampQty(input.value);syncQtyButtons();refresh();});const plus=document.createElement("button");plus.type="button";plus.textContent="+";plus.setAttribute("aria-label","Agregar una unidad de "+a.nombre);plus.addEventListener("click",()=>changeQty(a.id,1));qty.append(minus,input,plus);const subtotal=document.createElement("div");subtotal.className="ext-total";subtotal.dataset.totalId=a.id;subtotal.textContent=money(0);item.append(info,qty,subtotal);box.appendChild(item);});syncQtyButtons();}
+function changeQty(id,delta){const input=document.querySelector('#extras input[data-id="'+id+'"]');if(!input)return;input.value=clampQty(input.value)+delta;input.value=clampQty(input.value);syncQtyButtons();refresh();}
+function syncQtyButtons(){document.querySelectorAll("#extras .extra").forEach(item=>{const input=item.querySelector("input"),buttons=item.querySelectorAll("button"),qty=clampQty(input.value);buttons[0].disabled=qty<=0;buttons[1].disabled=qty>=50;});}
+function selectedExtras(){if(!data||!Array.isArray(data.adicionales))return[];return data.adicionales.map(a=>{const input=document.querySelector('#extras input[data-id="'+a.id+'"]'),cantidad=input?clampQty(input.value):0;return{...a,cantidad,subtotal:cantidad*a.precio};}).filter(a=>a.cantidad>0);}
 
-function renderKits() {
-  if (!data || !data.regiones) {
-    showDataError();
-    return;
+/* Mapa único de composición: respeta región, sufijos del kit y reglas de sensores acordadas. */
+function kitComponents(k=kitNow(),region=regionKey()){
+ if(!k)return[];
+ const id=k.id||"",isCordoba=region==="cordoba";
+ if(id==="cam-inteligentes")return[
+  {name:"Cámara interior",qty:"Cámara",path:"camarainterior.png"},
+  {name:"Cámara exterior",qty:"Cámara",path:"camaraexterior.png"}
+ ];
+ const isCxKit=/\bCX\b/i.test(k.nombre||"");
+ const useCxCentral=!isCordoba||isCxKit;
+ const out=[{name:useCxCentral?"Central de alarma CX":"Panel inteligente (tablet)",qty:"Central",path:useCxCentral?"centralcx.png":"panelinteligente.png"}];
+ const isCommerce=id.startsWith("comercio-cx-21"),isGalpon=id.startsWith("galpon-22"),isOneOne=/(^|-)11$/.test(id),isThreeTwo=id==="cx-view-32";
+ const movements=isCommerce?2:isThreeTwo?3:isOneOne?1:2;
+ const magnets=isCommerce?0:isOneOne?1:2;
+ out.push({name:"Sensor de movimiento",qty:"× "+movements,path:isCordoba?"sensordemovimientopanel.png":"sensordemovimientocx.png"});
+ if(magnets>0)out.push({name:"Sensor magnético de apertura",qty:"× "+magnets,path:"sensorapertura.png"});
+ if(isGalpon||isCommerce)out.push({name:"Sensor de apertura magnético blindado",qty:"× 1",path:"sensorapertura.png"});
+ if(!isCordoba)out.push({name:"Teclado de control",qty:"× 1",path:"teclado.png"});
+ const hasViewCamera=/view/i.test(k.nombre)&&id!=="comercio-cx-21";
+ if(hasViewCamera){
+  if(id==="cx-view-22"){
+   out.push({name:"Cámara interior",qty:"× 1",path:"camarainterior.png"},{name:"Cámara exterior",qty:"× 1",path:"camaraexterior.png"});
+  }else{
+   out.push({name:"Cámara exterior",qty:"× 1",path:"camaraexterior.png"});
   }
-
-  const region = data.regiones[regionKey()];
-
-  if (!region || !Array.isArray(region.kits)) {
-    showDataError();
-    return;
-  }
-
-  const previous = $("kit").value;
-  $("kit").innerHTML = '<option value="">Seleccioná un kit</option>';
-
-  region.kits.forEach(k => {
-    const option = document.createElement("option");
-    option.value = k.id;
-    option.textContent = k.nombre;
-    $("kit").appendChild(option);
-  });
-
-  if (region.kits.some(k => k.id === previous)) {
-    $("kit").value = previous;
-  }
-
-  updatePromoRules();
-  refresh();
+ }
+ return out;
 }
-
-function showDataError() {
-  $("kit").innerHTML = '<option value="">No se pudieron cargar los kits</option>';
-
-  $("extras").innerHTML =
-    '<p class="bad">No se pudo leer precios.js. Verificá que esté en la raíz del repositorio y que comience con window.PRECIOS_ADT.</p>';
-
-  $("kitPrice").innerHTML =
-    '<span class="bad">Error al cargar los datos. Revisá precios.js.</span>';
+function componentHtml(k=kitNow()){
+ const list=kitComponents(k);if(!list.length)return"";
+ return '<div class="minor-title">Componentes del kit</div><div class="component-grid">'+list.map(c=>'<div class="component-item"><img src="./'+esc(c.path)+'" alt="'+esc(c.name)+'" onerror="this.style.display=\'none\'"><span>'+esc(c.name)+'<span class="quantity">'+esc(c.qty)+'</span></span></div>').join("")+'</div>';
 }
-
-function mark(id, on) {
-  $(id).classList.toggle("selected", on);
+function row(label,value) {
+  return '<div class="row"><span>'+esc(label)+'</span><strong>'+esc(value)+'</strong></div>';
 }
-
-function updatePromoRules() {
-  const cameraKit = isCameraKit();
-
-  $("p0").disabled = cameraKit;
-  $("p3").disabled = cameraKit;
-
-  if (cameraKit) {
-    months = 6;
-  }
-
-  mark("p0", months === "sin");
-  mark("p3", months === 3);
-  mark("p6", months === 6);
-
-  $("promoHelp").textContent = cameraKit
-    ? "El Kit Cámaras Inteligentes solo permite 6 meses al 30%."
-    : "Sin promo aplica el abono pleno. Con 3 o 6 meses se aplica el descuento del 30% durante ese período.";
-}
-
-function setScore(s) {
-  score = s;
-  mark("green", s === "verde");
-  mark("yellow", s === "amarillo");
-  refresh();
-}
-
-function setPromo(value) {
-  if (isCameraKit() && value !== 6) {
-    return;
-  }
-
-  months = value;
-
-  mark("p0", value === "sin");
-  mark("p3", value === 3);
-  mark("p6", value === 6);
-
-  refresh();
-}
-
-function promoLabel() {
-  return months === "sin" ? "Sin promo" : months + " meses al 30%";
-}
-
-function priceNow() {
-  const k = kitNow();
-
-  if (!k || !score || !months) {
-    return null;
-  }
-
-  const key = months === "sin" ? "sin" : String(months);
-  const scorePrices = k[score];
-
-  if (!scorePrices || !(key in scorePrices)) {
-    return null;
-  }
-
-  return scorePrices[key];
-}
-
-function abonoNow() {
-  const k = kitNow();
-
-  if (!k || !data) {
-    return null;
-  }
-
-  const region = data.regiones[regionKey()];
-
-  if (!region || !region.abonos) {
-    return null;
-  }
-
-  const type = k.id === "cam-inteligentes"
-    ? "camara"
-    : /view/i.test(k.nombre)
-      ? "view"
-      : "security";
-
-  return region.abonos[type] || null;
-}
-
-function currentAbonoPrice(abono = abonoNow()) {
-  if (!abono || !months) {
-    return null;
-  }
-
-  return months === "sin" ? abono.pleno : abono.descuento;
-}
-
-function clampQty(value) {
-  const n = Number(value);
-  return Math.min(10, Math.max(0, Number.isFinite(n) ? Math.floor(n) : 0));
-}
-
-function renderExtras() {
-  if (!data || !Array.isArray(data.adicionales)) {
-    $("extras").innerHTML =
-      '<p class="bad">No se encontraron adicionales en precios.js.</p>';
-    return;
-  }
-
-  const box = $("extras");
-  box.innerHTML = "";
-
-  data.adicionales.forEach(a => {
-    const item = document.createElement("div");
-    item.className = "extra";
-
-    const info = document.createElement("div");
-    info.className = "extra-info";
-
-    const name = document.createElement("strong");
-    name.textContent = a.nombre;
-
-    const unit = document.createElement("small");
-    unit.textContent = money(a.precio) + " por unidad";
-
-    info.append(name, unit);
-
-    const qty = document.createElement("div");
-    qty.className = "qty";
-
-    const minus = document.createElement("button");
-    minus.type = "button";
-    minus.textContent = "−";
-    minus.setAttribute("aria-label", "Quitar una unidad de " + a.nombre);
-    minus.addEventListener("click", () => changeQty(a.id, -1));
-
-    const input = document.createElement("input");
-    input.type = "number";
-    input.min = "0";
-    input.max = "10";
-    input.step = "1";
-    input.value = "0";
-    input.inputMode = "numeric";
-    input.dataset.id = a.id;
-    input.setAttribute("aria-label", "Cantidad de " + a.nombre);
-
-    input.addEventListener("change", () => {
-      input.value = clampQty(input.value);
-      syncQtyButtons();
-      refresh();
-    });
-
-    input.addEventListener("input", () => {
-      if (input.value !== "") {
-        input.value = clampQty(input.value);
-      }
-
-      syncQtyButtons();
-      refresh();
-    });
-
-    const plus = document.createElement("button");
-    plus.type = "button";
-    plus.textContent = "+";
-    plus.setAttribute("aria-label", "Agregar una unidad de " + a.nombre);
-    plus.addEventListener("click", () => changeQty(a.id, 1));
-
-    qty.append(minus, input, plus);
-
-    const subtotal = document.createElement("div");
-    subtotal.className = "ext-total";
-    subtotal.dataset.totalId = a.id;
-    subtotal.textContent = money(0);
-
-    item.append(info, qty, subtotal);
-    box.appendChild(item);
-  });
-
-  syncQtyButtons();
-}
-
-function changeQty(id, delta) {
-  const input = document.querySelector(
-    '#extras input[data-id="' + id + '"]'
-  );
-
-  if (!input) {
-    return;
-  }
-
-  input.value = clampQty(input.value) + delta;
-  input.value = clampQty(input.value);
-
-  syncQtyButtons();
-  refresh();
-}
-
-function syncQtyButtons() {
-  document.querySelectorAll("#extras .extra").forEach(item => {
-    const input = item.querySelector("input");
-    const buttons = item.querySelectorAll("button");
-    const quantity = clampQty(input.value);
-
-    buttons[0].disabled = quantity <= 0;
-    buttons[1].disabled = quantity >= 10;
-  });
-}
-
-function selectedExtras() {
-  if (!data || !Array.isArray(data.adicionales)) {
-    return [];
-  }
-
-  return data.adicionales.map(a => {
-    const input = document.querySelector(
-      '#extras input[data-id="' + a.id + '"]'
-    );
-
-    const cantidad = input ? clampQty(input.value) : 0;
-
-    return {
-      ...a,
-      cantidad,
-      subtotal: cantidad * a.precio
-    };
-  }).filter(a => a.cantidad > 0);
-}
-
-/*
- * Composición de los kits.
- *
- * Regla de la central:
- * - Si el kit se identifica como CX, utiliza centralcx.png,
- *   incluso cuando la región elegida es Córdoba.
- * - Si la región es Córdoba y el kit no es CX, utiliza
- *   panelinteligente.png.
- * - En el resto del país, los kits de alarma utilizan la central CX.
- *
- * Los sensores de movimiento siguen la regla regional indicada:
- * Córdoba = sensordemovimientopanel.png.
- * Resto del país = sensordemovimientocx.png.
- */
-function kitComponents(k = kitNow(), region = regionKey()) {
-  if (!k) {
-    return [];
-  }
-
-  const id = k.id || "";
-  const isCordoba = region === "cordoba";
-
-  // Este kit incluye cámaras solamente.
-  if (id === "cam-inteligentes") {
-    return [
-      {
-        name: "Cámara interior",
-        qty: "Cámara",
-        path: "camarainterior.png"
-      },
-      {
-        name: "Cámara exterior",
-        qty: "Cámara",
-        path: "camaraexterior.png"
-      }
-    ];
-  }
-
-  /*
-   * CAMBIO IMPORTANTE:
-   * Un kit cuyo nombre contiene CX usa la central CX,
-   * incluso si la región seleccionada es Córdoba.
-   */
-  const isCxKit = /\bCX\b/i.test(k.nombre || "");
-  const useCxCentral = !isCordoba || isCxKit;
-
-  const out = [
-    {
-      name: useCxCentral
-        ? "Central de alarma CX"
-        : "Panel inteligente (tablet)",
-      qty: "Central",
-      path: useCxCentral
-        ? "centralcx.png"
-        : "panelinteligente.png"
-    }
-  ];
-
-  const isCommerce = id.startsWith("comercio-cx-21");
-  const isGalpon = id.startsWith("galpon-22");
-  const isOneOne = /(^|-)11$/.test(id);
-  const isThreeTwo = id === "cx-view-32";
-
-  const movements = isCommerce
-    ? 2
-    : isThreeTwo
-      ? 3
-      : isOneOne
-        ? 1
-        : 2;
-
-  const magnets = isCommerce
-    ? 0
-    : isOneOne
-      ? 1
-      : 2;
-
-  out.push({
-    name: "Sensor de movimiento",
-    qty: "× " + movements,
-    path: isCordoba
-      ? "sensordemovimientopanel.png"
-      : "sensordemovimientocx.png"
-  });
-
-  if (magnets > 0) {
-    out.push({
-      name: "Sensor magnético de apertura",
-      qty: "× " + magnets,
-      path: "sensorapertura.png"
-    });
-  }
-
-  if (isGalpon || isCommerce) {
-    out.push({
-      name: "Sensor magnético de apertura blindado",
-      qty: "× 1",
-      path: "sensorapertura.png"
-    });
-  }
-
-  if (!isCordoba) {
-    out.push({
-      name: "Teclado de control",
-      qty: "× 1",
-      path: "teclado.png"
-    });
-  }
-
-  const hasViewCamera =
-    /view/i.test(k.nombre) &&
-    id !== "comercio-cx-21";
-
-  if (hasViewCamera) {
-    if (id === "cx-view-22") {
-      out.push(
-        {
-          name: "Cámara interior",
-          qty: "× 1",
-          path: "camarainterior.png"
-        },
-        {
-          name: "Cámara exterior",
-          qty: "× 1",
-          path: "camaraexterior.png"
-        }
-      );
-    } else {
-      out.push({
-        name: "Cámara exterior",
-        qty: "× 1",
-        path: "camaraexterior.png"
-      });
-    }
-  }
-
-  return out;
-}
-
-function componentHtml(k = kitNow()) {
-  const list = kitComponents(k);
-
-  if (!list.length) {
-    return "";
-  }
-
-  return '<div class="minor-title">Componentes del kit</div>' +
-    '<div class="component-grid">' +
-    list.map(c =>
-      '<div class="component-item">' +
-        '<img src="./' + esc(c.path) + '" alt="' + esc(c.name) +
-        '" onerror="this.style.display=\'none\'">' +
-        '<span>' + esc(c.name) +
-          '<span class="quantity">' + esc(c.qty) + '</span>' +
-        '</span>' +
-      '</div>'
-    ).join("") +
-    '</div>';
-}
-
-function row(label, value) {
-  return '<div class="row"><span>' +
-    esc(label) +
-    '</span><strong>' +
-    esc(value) +
-    '</strong></div>';
-}
-
 function refresh() {
-  if (!data || !data.regiones) {
+  if(!data||!data.regiones)return;
+  const kit=kitNow(),price=priceNow(),abono=abonoNow();
+  if(!kit) {
+    $("kitPrice").textContent="Seleccioná un kit para continuar.";
+  }
+  else if(!score) {
+    $("kitPrice").textContent="Seleccioná el score del cliente.";
+  }
+  else if(!months) {
+    $("kitPrice").textContent="Seleccioná una promoción.";
+  }
+  else if(price==null) {
+    $("kitPrice").innerHTML='<span class="bad">No hay precio disponible para esta combinación.</span>';
+  }
+  else {
+    $("kitPrice").innerHTML='<span class="good">Precio del kit: '+esc(money(price))+'</span>';
+  }
+  const extras=selectedExtras();
+  document.querySelectorAll("[data-total-id]").forEach(el=> {
+    const extra=extras.find(a=>a.id===el.dataset.totalId);
+    el.textContent=money(extra?extra.subtotal:0);
+  }
+  );
+  const summary=$("summary");
+  if(!kit||!score||!months||price==null||!abono) {
+    summary.innerHTML='<p class="placeholder">Completá kit, score y promoción con precio disponible para generar la cotización.</p>';
     return;
   }
-
-  const kit = kitNow();
-  const price = priceNow();
-  const abono = abonoNow();
-
-  if (!kit) {
-    $("kitPrice").textContent = "Seleccioná un kit para continuar.";
-  } else if (!score) {
-    $("kitPrice").textContent = "Seleccioná el score del cliente.";
-  } else if (!months) {
-    $("kitPrice").textContent = "Seleccioná una promoción.";
-  } else if (price == null) {
-    $("kitPrice").innerHTML =
-      '<span class="bad">No hay precio disponible para esta combinación.</span>';
-  } else {
-    $("kitPrice").innerHTML =
-      '<span class="good">Precio del kit: ' +
-      esc(money(price)) +
-      '</span>';
+  const extTotal=extras.reduce((sum,a)=>sum+a.subtotal,0),total=price+extTotal,monthly=currentAbonoPrice(abono);
+  let html='<div>'+row("Región",data.regiones[regionKey()].nombre)+row("Kit",kit.nombre)+row("Score",score==="verde"?"Verde (830–999)":"Amarillo (470–829)")+row("Promoción",promoLabel())+row("Precio del kit",money(price))+'</div>'+componentHtml(kit);
+  if(extras.length) {
+    html+='<div class="minor-title">Adicionales</div>';
+    extras.forEach(a=>html+=row(a.nombre+" × "+a.cantidad,money(a.subtotal)));
+    html+=row("Subtotal adicionales",money(extTotal));
   }
-
-  const extras = selectedExtras();
-
-  document.querySelectorAll("[data-total-id]").forEach(element => {
-    const extra = extras.find(a => a.id === element.dataset.totalId);
-    element.textContent = money(extra ? extra.subtotal : 0);
-  });
-
-  const summary = $("summary");
-
-  if (!kit || !score || !months || price == null || !abono) {
-    summary.innerHTML =
-      '<p class="placeholder">Completá kit, score y promoción con precio disponible para generar la cotización.</p>';
-    return;
+  else {
+    html+='<div class="minor-title">Adicionales</div>'+row("Adicionales","Ninguno");
   }
-
-  const extrasTotal = extras.reduce((sum, a) => sum + a.subtotal, 0);
-  const total = price + extrasTotal;
-  const monthly = currentAbonoPrice(abono);
-
-  let html =
-    '<div>' +
-      row("Región", data.regiones[regionKey()].nombre) +
-      row("Kit", kit.nombre) +
-      row("Score", score === "verde"
-        ? "Verde (830–999)"
-        : "Amarillo (470–829)") +
-      row("Promoción", promoLabel()) +
-      row("Precio del kit", money(price)) +
-    '</div>' +
-    componentHtml(kit);
-
-  if (extras.length) {
-    html += '<div class="minor-title">Adicionales</div>';
-
-    extras.forEach(a => {
-      html += row(
-        a.nombre + " × " + a.cantidad,
-        money(a.subtotal)
-      );
-    });
-
-    html += row("Subtotal adicionales", money(extrasTotal));
-  } else {
-    html += '<div class="minor-title">Adicionales</div>' +
-      row("Adicionales", "Ninguno");
-  }
-
-  html +=
-    '<div class="minor-title">Abono mensual</div>' +
-    row("Servicio", abono.nombre) +
-    (
-      months === "sin"
-        ? row(
-            "Abono mensual pleno",
-            moneyMonthly(monthly) + " / mes"
-          )
-        : row(
-            "Abono mensual con descuento",
-            moneyMonthly(monthly) + " / mes"
-          ) +
-          row(
-            "Luego de " + months + " meses",
-            moneyMonthly(abono.pleno) + " / mes"
-          )
-    ) +
-    '<div class="total-box">' +
-      '<div class="total-caption">' +
-        '<span>TOTAL KIT + ADICIONALES</span><span>ARS</span>' +
-      '</div>' +
-      '<div class="total-value">' + esc(money(total)) + '</div>' +
-      '<div class="total-note">El abono mensual se factura aparte.</div>' +
-    '</div>' +
-    '<div class="minor-title">Financiación de la instalación</div>' +
-    row(
-      "Tarjeta bancaria — 1 cuota sin interés",
-      moneyMonthly(total) + " por cuota"
-    ) +
-    row(
-      "Tarjeta bancaria — 3 cuotas sin interés",
-      moneyMonthly(total / 3) + " por cuota"
-    ) +
-    row(
-      "Tarjeta bancaria — 6 cuotas sin interés",
-      moneyMonthly(total / 6) + " por cuota"
-    ) +
-    row(
-      "Tarjeta Naranja — hasta 12 cuotas sin interés",
-      moneyMonthly(total / 12) + " por cuota en 12 cuotas"
-    ) +
-    '<p class="finance-inline-note"><strong>Pago en efectivo en Pago Fácil:</strong> PARA EL PAGO DE TU INSTALACIÓN SOLICITAR NUMERO DE CONTRATO AL ASESOR, ACERCATE AL PAGOFACIL Y DECIRLE AL CAJERO QUE VAS A ABONAR UNA INSTALACIÓN DE ADT ALARMAS.</p>' +
-    '<p class="finance-inline-note">El abono mensual requiere adherir obligatoriamente una tarjeta de crédito al débito automático. Este importe se cobra por separado de la instalación.</p>';
-
-  summary.innerHTML = html;
+  html+='<div class="minor-title">Abono mensual</div>'+row("Servicio",abono.nombre)+(months==="sin"?row("Abono mensual pleno",moneyMonthly(monthly)+" / mes"):row("Abono mensual con descuento",moneyMonthly(monthly)+" / mes")+row("Luego de "+months+" meses",moneyMonthly(abono.pleno)+" / mes"))+'<div class="total-box"><div class="total-caption"><span>TOTAL KIT + ADICIONALES</span><span>ARS</span></div><div class="total-value">'+esc(money(total))+'</div><div class="total-note">El abono mensual se factura aparte.</div></div><div class="minor-title">Financiación de la instalación</div>'+row("Tarjeta bancaria — 1 cuota sin interés",moneyMonthly(total)+" por cuota")+row("Tarjeta bancaria — 3 cuotas sin interés",moneyMonthly(total/3)+" por cuota")+row("Tarjeta bancaria — 6 cuotas sin interés",moneyMonthly(total/6)+" por cuota")+row("Tarjeta Naranja — hasta 12 cuotas sin interés",moneyMonthly(total/12)+" por cuota en 12 cuotas")+'<p class="finance-inline-note"><strong>Pago en efectivo en Pago Fácil:</strong> PARA EL PAGO DE TU INSTALACIÓN SOLICITAR NUMERO DE CONTRATO AL ASESOR, ACERCATE AL PAGOFACIL Y DECIRLE AL CAJERO QUE VAS A ABONAR UNA INSTALACIÓN DE ADT ALARMAS.</p><p class="finance-inline-note">El abono mensual requiere adherir obligatoriamente una tarjeta de crédito al débito automático. Este importe se cobra por separado de la instalación.</p>';
+  summary.innerHTML=html;
 }
-
 function clearExtras() {
-  document.querySelectorAll("#extras input").forEach(input => {
-    input.value = "0";
-  });
-
+  document.querySelectorAll("#extras input").forEach(i=>i.value="0");
   syncQtyButtons();
   refresh();
 }
-
 function resetAll() {
-  $("region").value = "cordoba";
-  score = "";
-  months = "";
-
-  ["green", "yellow", "p0", "p3", "p6"].forEach(id => {
-    mark(id, false);
-  });
-
+  $("region").value="cordoba";
+  score="";
+  months="";
+  ["green","yellow","p0","p3","p6"].forEach(id=>mark(id,false));
   clearExtras();
   renderKits();
 }
-
 function copySummary() {
-  const summaryText = $("summary").innerText;
-
-  if (!summaryText || summaryText.includes("Completá kit")) {
+  const text0=$("summary").innerText;
+  if(!text0||text0.includes("Completá kit")) {
     alert("Completá una combinación válida antes de copiar.");
     return;
   }
-
-  const text =
-    "RC RED DE SERVICIOS\nCOTIZACIÓN ADT\n\n" +
-    summaryText;
-
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(text)
-      .then(() => alert("Presupuesto copiado."))
-      .catch(() => fallbackCopy(text));
-  } else {
-    fallbackCopy(text);
+  const text="RC RED DE SERVICIOS\nCOTIZACIÓN ADT\n\n"+text0;
+  if(navigator.clipboard&&navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(()=>alert("Presupuesto copiado.")).catch(()=>fallbackCopy(text));
   }
+  else fallbackCopy(text);
 }
-
 function fallbackCopy(text) {
-  const area = document.createElement("textarea");
-  area.value = text;
+  const area=document.createElement("textarea");
+  area.value=text;
   document.body.appendChild(area);
   area.select();
-
   try {
     document.execCommand("copy");
     alert("Presupuesto copiado.");
-  } catch (error) {
+  }
+  catch(e) {
     alert("No se pudo copiar automáticamente. Copiá el resumen manualmente.");
   }
-
   area.remove();
 }
-
 function readAsDataURL(blob) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
+  return new Promise((resolve,reject)=> {
+    const reader=new FileReader();
+    reader.onload=()=>resolve(reader.result);
+    reader.onerror=reject;
     reader.readAsDataURL(blob);
-  });
-}
-
-async function fetchImageData(path) {
-  const response = await fetch("./" + encodeURI(path), {
-    cache: "no-store"
-  });
-
-  if (!response.ok) {
-    throw new Error("No se encontró la imagen " + path);
   }
-
+  );
+}
+async function fetchImageData(path) {
+  const response=await fetch("./"+encodeURI(path), {
+    cache:"no-store"
+  }
+  );
+  if(!response.ok)throw new Error("No se encontró la imagen "+path);
   return readAsDataURL(await response.blob());
 }
-
 async function imageDataSafe(path) {
   try {
     return await fetchImageData(path);
-  } catch (error) {
-    console.warn(error.message);
+  }
+  catch(e) {
+    console.warn(e.message);
     return null;
   }
 }
-
 function getQuoteId(now) {
-  return "RC-" +
-    now.getFullYear() +
-    String(now.getMonth() + 1).padStart(2, "0") +
-    String(now.getDate()).padStart(2, "0") + "-" +
-    String(now.getHours()).padStart(2, "0") +
-    String(now.getMinutes()).padStart(2, "0");
+  return "RC-"+now.getFullYear()+String(now.getMonth()+1).padStart(2,"0")+String(now.getDate()).padStart(2,"0")+"-"+String(now.getHours()).padStart(2,"0")+String(now.getMinutes()).padStart(2,"0");
 }
-
-/*
- * Genera una cotización en una página A4 y adjunta después
- * el PDF de términos y condiciones.
- */
 async function downloadQuotePdf() {
-  const button = document.querySelector(".summary-actions .btn-primary");
-  const kit = kitNow();
-  const price = priceNow();
-  const abono = abonoNow();
-
-  if (!kit || !score || !months || price == null || !abono) {
+  const button=document.querySelector(".summary-actions .btn-primary"),kit=kitNow(),price=priceNow(),abono=abonoNow();
+  if(!kit||!score||!months||price==null||!abono) {
     alert("Completá kit, score y promoción con un precio disponible antes de descargar.");
     return;
   }
-
-  if (!window.jspdf || !window.PDFLib) {
+  if(!window.jspdf||!window.PDFLib) {
     alert("No se pudieron cargar las herramientas PDF. Revisá la conexión a internet.");
     return;
   }
-
-  button.disabled = true;
-  button.textContent = "Generando PDF...";
-
+  button.disabled=true;
+  button.textContent="Generando PDF...";
   try {
-    const { jsPDF } = window.jspdf;
-
-    const doc = new jsPDF({
-      orientation: "portrait",
-      unit: "mm",
-      format: "a4",
-      compress: true
-    });
-
-    const W = 210;
-    const margin = 12;
-    const right = W - margin;
-    const contentW = W - margin * 2;
-
-    const navy = [16, 43, 78];
-    const blue = [21, 93, 168];
-    const muted = [103, 122, 144];
-    const line = [220, 229, 239];
-    const pale = [240, 247, 255];
-    const orange = [242, 140, 40];
-
-    const now = new Date();
-    const date = now.toLocaleDateString("es-AR");
-    const id = getQuoteId(now);
-
-    const extras = selectedExtras();
-    const extrasTotal = extras.reduce((sum, a) => sum + a.subtotal, 0);
-    const total = price + extrasTotal;
-    const monthly = currentAbonoPrice(abono);
-
-    const regionName = data.regiones[regionKey()].nombre;
-
-    const scoreLabel = score === "verde"
-      ? "Verde (830–999 puntos)"
-      : "Amarillo (470–829 puntos)";
-
-    const promotionLabel = promoLabel();
-
-    // Encabezado corporativo.
-    doc.setFillColor(...navy);
-    doc.rect(0, 0, W, 31, "F");
-
-    doc.setFillColor(...orange);
-    doc.rect(0, 31, W, 1.3, "F");
-
-    const logo = await imageDataSafe("LOGO RC.png");
-
-    if (logo) {
-      doc.addImage(logo, "PNG", margin, 3, 25, 24);
+    const  {
+      jsPDF
     }
-
-    doc.setFont("helvetica", "bold");
+    =window.jspdf,doc=new jsPDF( {
+      orientation:"portrait",unit:"mm",format:"a4",compress:true
+    }
+    ),W=210,margin=12,right=W-margin,contentW=W-margin*2,navy=[16,43,78],blue=[21,93,168],muted=[103,122,144],line=[220,229,239],pale=[240,247,255],orange=[242,140,40],now=new Date(),date=now.toLocaleDateString("es-AR"),id=getQuoteId(now),extras=selectedExtras(),extrasTotal=extras.reduce((s,a)=>s+a.subtotal,0),total=price+extrasTotal,monthly=currentAbonoPrice(abono),regionName=data.regiones[regionKey()].nombre,scoreLabel=score==="verde"?"Verde (830–999 puntos)":"Amarillo (470–829 puntos)",promotionLabel=promoLabel();
+    // Encabezado corporativo
+    doc.setFillColor(...navy);
+    doc.rect(0,0,W,31,"F");
+    doc.setFillColor(...orange);
+    doc.rect(0,31,W,1.3,"F");
+    const logo=await imageDataSafe("LOGO RC.png");
+    if(logo)doc.addImage(logo,"PNG",margin,3,25,24);
+    doc.setFont("helvetica","bold");
     doc.setFontSize(8);
-    doc.setTextColor(213, 231, 249);
-    doc.text("RC RED DE SERVICIOS", 43, 9);
-
+    doc.setTextColor(213,231,249);
+    doc.text("RC RED DE SERVICIOS",43,9);
     doc.setFontSize(15);
-    doc.setTextColor(255, 255, 255);
-    doc.text("PRESUPUESTO ADT ALARMAS", 43, 18);
-
-    doc.setFont("helvetica", "normal");
+    doc.setTextColor(255,255,255);
+    doc.text("PRESUPUESTO ADT ALARMAS",43,18);
+    doc.setFont("helvetica","normal");
     doc.setFontSize(7);
-    doc.setTextColor(218, 234, 249);
-    doc.text("Cotización comercial de instalación y monitoreo", 43, 24);
-
+    doc.setTextColor(218,234,249);
+    doc.text("Cotización comercial de instalación y monitoreo",43,24);
     doc.setFontSize(6.8);
-    doc.setTextColor(255, 255, 255);
-    doc.text("N.º " + id, margin, 29);
-    doc.text("Fecha: " + date, right, 29, {
-      align: "right"
-    });
-
-    // Datos de la cotización.
-    let y = 36;
-    const metaH = 13;
-
-    doc.setFillColor(248, 251, 255);
+    doc.setTextColor(255,255,255);
+    doc.text("N.º "+id,margin,29);
+    doc.text("Fecha: "+date,right,29, {
+      align:"right"
+    }
+    );
+    let y=36;
+    const metaH=13;
+    doc.setFillColor(248,251,255);
     doc.setDrawColor(...line);
-    doc.roundedRect(margin, y, contentW, metaH, 2, 2, "FD");
-
-    const meta = [
-      {
-        x: margin + 4,
-        label: "REGIÓN",
-        value: regionName,
-        width: 49
-      },
-      {
-        x: margin + 66,
-        label: "SCORE",
-        value: scoreLabel,
-        width: 47
-      },
-      {
-        x: margin + 125,
-        label: "PROMOCIÓN",
-        value: promotionLabel,
-        width: 56
-      }
+    doc.roundedRect(margin,y,contentW,metaH,2,2,"FD");
+    const meta=[ {
+      x:margin+4,label:"REGIÓN",value:regionName,width:49
+    }
+    , {
+      x:margin+66,label:"SCORE",value:scoreLabel,width:47
+    }
+    , {
+      x:margin+125,label:"PROMOCIÓN",value:promotionLabel,width:56
+    }
     ];
-
-    meta.forEach(item => {
-      doc.setFont("helvetica", "bold");
+    meta.forEach(m=> {
+      doc.setFont("helvetica","bold");
       doc.setFontSize(5.8);
       doc.setTextColor(...muted);
-      doc.text(item.label, item.x, y + 4.5);
-
+      doc.text(m.label,m.x,y+4.5);
       doc.setFontSize(7);
       doc.setTextColor(...navy);
-      doc.text(
-        doc.splitTextToSize(item.value, item.width).slice(0, 2),
-        item.x,
-        y + 9.5
-      );
-    });
-
-    y += metaH + 3;
-
-    // Kit seleccionado.
-    const kitH = 17;
-
+      doc.text(doc.splitTextToSize(m.value,m.width).slice(0,2),m.x,y+9.5);
+    }
+    );
+    y+=metaH+3;
+    // Kit + precio
+    const kitH=17;
     doc.setFillColor(...pale);
-    doc.setDrawColor(211, 231, 250);
-    doc.roundedRect(margin, y, contentW, kitH, 2, 2, "FD");
-
-    doc.setFont("helvetica", "bold");
+    doc.setDrawColor(211,231,250);
+    doc.roundedRect(margin,y,contentW,kitH,2,2,"FD");
+    doc.setFont("helvetica","bold");
     doc.setFontSize(6);
     doc.setTextColor(...blue);
-    doc.text("KIT SELECCIONADO", margin + 4, y + 4.5);
-
+    doc.text("KIT SELECCIONADO",margin+4,y+4.5);
     doc.setFontSize(7.5);
     doc.setTextColor(...navy);
-    doc.text(
-      doc.splitTextToSize(kit.nombre, 130).slice(0, 2),
-      margin + 4,
-      y + 9.8
-    );
-
+    doc.text(doc.splitTextToSize(kit.nombre,130).slice(0,2),margin+4,y+9.8);
     doc.setFontSize(12);
-    doc.text(money(price), right - 4, y + 11, {
-      align: "right"
-    });
-
-    y += kitH + 3;
-
-    // Componentes del kit.
-    const components = kitComponents(kit, regionKey());
-    const slots = 6;
-    const gap = 2;
-    const boxW = (contentW - gap * (slots - 1)) / slots;
-    const boxH = 25;
-
-    doc.setFont("helvetica", "bold");
+    doc.text(money(price),right-4,y+11, {
+      align:"right"
+    }
+    );
+    y+=kitH+3;
+    // Componentes del kit: las imágenes se seleccionan según kit y región.
+    const components=kitComponents(kit,regionKey()),slots=6,gap=2,boxW=(contentW-gap*(slots-1))/slots,boxH=25;
+    doc.setFont("helvetica","bold");
     doc.setFontSize(7.2);
     doc.setTextColor(...navy);
-    doc.text("COMPONENTES INCLUIDOS", margin, y + 2.5);
-
-    y += 4;
-
-    for (let i = 0; i < components.length && i < slots; i++) {
-      const component = components[i];
-      const x = margin + i * (boxW + gap);
-
-      doc.setFillColor(251, 253, 255);
+    doc.text("COMPONENTES INCLUIDOS",margin,y+2.5);
+    y+=4;
+    for(let i=0;
+    i<components.length&&i<slots;
+    i++) {
+      const c=components[i],x=margin+i*(boxW+gap);
+      doc.setFillColor(251,253,255);
       doc.setDrawColor(...line);
-      doc.roundedRect(x, y, boxW, boxH, 1.5, 1.5, "FD");
-
-      const image = await imageDataSafe(component.path);
-
-      if (image) {
+      doc.roundedRect(x,y,boxW,boxH,1.5,1.5,"FD");
+      const im=await imageDataSafe(c.path);
+      if(im) {
         try {
-          doc.addImage(
-            image,
-            "PNG",
-            x + 5,
-            y + 1.5,
-            boxW - 10,
-            12,
-            "",
-            "FAST"
-          );
-        } catch (error) {
-          console.warn("No se pudo insertar", component.path, error);
+          doc.addImage(im,"PNG",x+5,y+1.5,boxW-10,12,"","FAST");
+        }
+        catch(e) {
+          console.warn("No se pudo insertar",c.path,e);
         }
       }
-
-      doc.setFont("helvetica", "bold");
+      doc.setFont("helvetica","bold");
       doc.setFontSize(5.2);
       doc.setTextColor(...navy);
-
-      const name = doc.splitTextToSize(
-        component.name,
-        boxW - 2
-      ).slice(0, 2);
-
-      doc.text(name, x + boxW / 2, y + 16, {
-        align: "center"
-      });
-
-      doc.setFont("helvetica", "normal");
+      const name=doc.splitTextToSize(c.name,boxW-2).slice(0,2);
+      doc.text(name,x+boxW/2,y+16, {
+        align:"center"
+      }
+      );
+      doc.setFont("helvetica","normal");
       doc.setFontSize(5.7);
       doc.setTextColor(...blue);
-      doc.text(component.qty, x + boxW / 2, y + 23, {
-        align: "center"
-      });
+      doc.text(c.qty,x+boxW/2,y+23, {
+        align:"center"
+      }
+      );
     }
-
-    y += boxH + 3;
-
-    // Adicionales.
-    doc.setFont("helvetica", "bold");
+    y+=boxH+3;
+    // Adicionales
+    doc.setFont("helvetica","bold");
     doc.setFontSize(7.2);
     doc.setTextColor(...navy);
-    doc.text("ADICIONALES", margin, y + 2.5);
-
-    doc.setFont("helvetica", "normal");
+    doc.text("ADICIONALES",margin,y+2.5);
+    doc.setFont("helvetica","normal");
     doc.setFontSize(5.8);
     doc.setTextColor(...muted);
-    doc.text("Cantidad e importe por producto", right, y + 2.5, {
-      align: "right"
-    });
-
-    y += 4;
-
-    if (!extras.length) {
-      doc.setFillColor(250, 252, 254);
-      doc.rect(margin, y, contentW, 4.2, "F");
-
-      doc.setFont("helvetica", "italic");
+    doc.text("Cantidad e importe por producto",right,y+2.5, {
+      align:"right"
+    }
+    );
+    y+=4;
+    if(!extras.length) {
+      doc.setFillColor(250,252,254);
+      doc.rect(margin,y,contentW,4.2,"F");
+      doc.setFont("helvetica","italic");
       doc.setFontSize(6.1);
       doc.setTextColor(...muted);
-      doc.text("No se agregaron adicionales.", margin + 3, y + 2.9);
-
-      y += 4.7;
-    } else {
-      extras.forEach((a, index) => {
-        const rowH = 3.65;
-
-        if (index % 2 === 0) {
-          doc.setFillColor(250, 252, 254);
-          doc.rect(margin, y, contentW, rowH, "F");
-        }
-
-        doc.setFont("helvetica", "normal");
-        doc.setFontSize(5.8);
-        doc.setTextColor(55, 72, 92);
-        doc.text(
-          doc.splitTextToSize(a.nombre + " × " + a.cantidad, 143).slice(0, 1),
-          margin + 3,
-          y + 2.5
-        );
-
-        doc.setFont("helvetica", "bold");
-        doc.setTextColor(...navy);
-        doc.text(money(a.subtotal), right - 3, y + 2.5, {
-          align: "right"
-        });
-
-        doc.setDrawColor(235, 240, 246);
-        doc.line(margin, y + rowH, right, y + rowH);
-
-        y += rowH;
-      });
+      doc.text("No se agregaron adicionales.",margin+3,y+2.9);
+      y+=4.7;
     }
-
+    else {
+      extras.forEach((a,index)=> {
+        const rowH=3.65;
+        if(index%2===0) {
+          doc.setFillColor(250,252,254);
+          doc.rect(margin,y,contentW,rowH,"F");
+        }
+        doc.setFont("helvetica","normal");
+        doc.setFontSize(5.8);
+        doc.setTextColor(55,72,92);
+        doc.text(doc.splitTextToSize(a.nombre+" × "+a.cantidad,143).slice(0,1),margin+3,y+2.5);
+        doc.setFont("helvetica","bold");
+        doc.setTextColor(...navy);
+        doc.text(money(a.subtotal),right-3,y+2.5, {
+          align:"right"
+        }
+        );
+        doc.setDrawColor(235,240,246);
+        doc.line(margin,y+rowH,right,y+rowH);
+        y+=rowH;
+      }
+      );
+    }
     doc.setDrawColor(...line);
-    doc.line(margin, y + 0.3, right, y + 0.3);
-    y += 3;
-
-    doc.setFont("helvetica", "bold");
+    doc.line(margin,y+.3,right,y+.3);
+    y+=3;
+    doc.setFont("helvetica","bold");
     doc.setFontSize(6.3);
     doc.setTextColor(...muted);
-    doc.text("SUBTOTAL ADICIONALES", margin + 3, y);
-
+    doc.text("SUBTOTAL ADICIONALES",margin+3,y);
     doc.setFontSize(7);
     doc.setTextColor(...navy);
-    doc.text(money(extrasTotal), right - 3, y, {
-      align: "right"
-    });
-
-    y += 4;
-
-    // Financiación y abono mensual.
-    const gap2 = 3;
-    const boxW2 = (contentW - gap2) / 2;
-    const boxH2 = 36;
-    const boxY = y;
-
-    doc.setFillColor(248, 251, 255);
-    doc.setDrawColor(...line);
-
-    doc.roundedRect(margin, boxY, boxW2, boxH2, 2, 2, "FD");
-    doc.roundedRect(
-      margin + boxW2 + gap2,
-      boxY,
-      boxW2,
-      boxH2,
-      2,
-      2,
-      "FD"
+    doc.text(money(extrasTotal),right-3,y, {
+      align:"right"
+    }
     );
-
-    doc.setFont("helvetica", "bold");
+    y+=4;
+    // Financiación y abono en dos columnas
+    const gap2=3,boxW2=(contentW-gap2)/2,boxH2=36,boxY=y;
+    doc.setFillColor(248,251,255);
+    doc.setDrawColor(...line);
+    doc.roundedRect(margin,boxY,boxW2,boxH2,2,2,"FD");
+    doc.roundedRect(margin+boxW2+gap2,boxY,boxW2,boxH2,2,2,"FD");
+    doc.setFont("helvetica","bold");
     doc.setFontSize(6.6);
     doc.setTextColor(...navy);
-    doc.text("FINANCIACIÓN DE LA INSTALACIÓN", margin + 3, boxY + 4.5);
-    doc.text("ABONO MENSUAL", margin + boxW2 + gap2 + 3, boxY + 4.5);
-
-    const financeRows = [
-      ["Tarjeta bancaria · 1 cuota", moneyMonthly(total)],
-      ["Tarjeta bancaria · 3 cuotas", moneyMonthly(total / 3)],
-      ["Tarjeta bancaria · 6 cuotas", moneyMonthly(total / 6)],
-      ["Tarjeta Naranja · 12 cuotas", moneyMonthly(total / 12)]
-    ];
-
-    let financeY = boxY + 9.5;
-
-    financeRows.forEach(item => {
-      doc.setFont("helvetica", "normal");
+    doc.text("FINANCIACIÓN DE LA INSTALACIÓN",margin+3,boxY+4.5);
+    doc.text("ABONO MENSUAL",margin+boxW2+gap2+3,boxY+4.5);
+    const fin=[["Tarjeta bancaria · 1 cuota",moneyMonthly(total)],["Tarjeta bancaria · 3 cuotas",moneyMonthly(total/3)],["Tarjeta bancaria · 6 cuotas",moneyMonthly(total/6)],["Tarjeta Naranja · 12 cuotas",moneyMonthly(total/12)]];
+    let fy=boxY+9.5;
+    fin.forEach(it=> {
+      doc.setFont("helvetica","normal");
       doc.setFontSize(5.7);
-      doc.setTextColor(70, 87, 106);
-      doc.text(item[0], margin + 3, financeY);
-
-      doc.setFont("helvetica", "bold");
+      doc.setTextColor(70,87,106);
+      doc.text(it[0],margin+3,fy);
+      doc.setFont("helvetica","bold");
       doc.setTextColor(...navy);
-      doc.text(item[1], margin + boxW2 - 3, financeY, {
-        align: "right"
-      });
-
-      financeY += 5.5;
-    });
-
-    const abonoX = margin + boxW2 + gap2 + 3;
-    const abonoW = boxW2 - 6;
-
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(5.8);
-    doc.setTextColor(70, 87, 106);
-    doc.text(
-      doc.splitTextToSize(abono.nombre, abonoW).slice(0, 2),
-      abonoX,
-      boxY + 10
+      doc.text(it[1],margin+boxW2-3,fy, {
+        align:"right"
+      }
+      );
+      fy+=5.5;
+    }
     );
-
-    const rateY = boxY + 17;
-
-    doc.setFont("helvetica", "bold");
+    const ax=margin+boxW2+gap2+3,aw=boxW2-6;
+    doc.setFont("helvetica","normal");
+    doc.setFontSize(5.8);
+    doc.setTextColor(70,87,106);
+    doc.text(doc.splitTextToSize(abono.nombre,aw).slice(0,2),ax,boxY+10);
+    const ry=boxY+17;
+    doc.setFont("helvetica","bold");
     doc.setFontSize(6.2);
     doc.setTextColor(...navy);
-
-    if (months === "sin") {
-      doc.text(
-        "Abono mensual: " + moneyMonthly(abono.pleno),
-        abonoX,
-        rateY
-      );
-    } else {
-      doc.text(
-        "Promocional: " + moneyMonthly(monthly) + "/mes",
-        abonoX,
-        rateY
-      );
-
-      doc.setFont("helvetica", "normal");
-      doc.setFontSize(5.8);
-      doc.setTextColor(70, 87, 106);
-      doc.text(
-        "Luego de " + months + " meses: " + moneyMonthly(abono.pleno) + "/mes",
-        abonoX,
-        rateY + 4.5
-      );
+    if(months==="sin") {
+      doc.text("Abono mensual: "+moneyMonthly(abono.pleno),ax,ry);
     }
-
-    doc.setFont("helvetica", "normal");
+    else {
+      doc.text("Promocional: "+moneyMonthly(monthly)+"/mes",ax,ry);
+      doc.setFont("helvetica","normal");
+      doc.setFontSize(5.8);
+      doc.setTextColor(70,87,106);
+      doc.text("Luego de "+months+" meses: "+moneyMonthly(abono.pleno)+"/mes",ax,ry+4.5);
+    }
+    doc.setFont("helvetica","normal");
     doc.setFontSize(5.4);
-    doc.setTextColor(70, 87, 106);
-    doc.text(
-      doc.splitTextToSize(
-        "Es obligatorio adherir una tarjeta de crédito al débito automático para cobrar el abono mensual.",
-        abonoW
-      ).slice(0, 2),
-      abonoX,
-      boxY + 29
-    );
-
-    y = boxY + boxH2 + 3;
-
-    // Total de la instalación.
-    const totalH = 14;
-
+    doc.setTextColor(70,87,106);
+    doc.text(doc.splitTextToSize("Es obligatorio adherir una tarjeta de crédito al débito automático para cobrar el abono mensual.",aw).slice(0,2),ax,boxY+29);
+    y=boxY+boxH2+3;
+    // Total y Pago Fácil
+    const totalH=14;
     doc.setFillColor(...navy);
-    doc.roundedRect(margin, y, contentW, totalH, 2, 2, "F");
-
-    doc.setFont("helvetica", "bold");
+    doc.roundedRect(margin,y,contentW,totalH,2,2,"F");
+    doc.setFont("helvetica","bold");
     doc.setFontSize(7.3);
-    doc.setTextColor(220, 235, 250);
-    doc.text("TOTAL KIT + ADICIONALES", margin + 4, y + 5.6);
-
-    doc.setFont("helvetica", "normal");
+    doc.setTextColor(220,235,250);
+    doc.text("TOTAL KIT + ADICIONALES",margin+4,y+5.6);
+    doc.setFont("helvetica","normal");
     doc.setFontSize(5.8);
-    doc.text(
-      "El abono mensual se cobra por separado.",
-      margin + 4,
-      y + 10.5
-    );
-
-    doc.setFont("helvetica", "bold");
+    doc.text("El abono mensual se cobra por separado.",margin+4,y+10.5);
+    doc.setFont("helvetica","bold");
     doc.setFontSize(12);
-    doc.setTextColor(255, 255, 255);
-    doc.text(money(total), right - 4, y + 9.5, {
-      align: "right"
-    });
-
-    y += totalH + 3;
-
-    // Pago Fácil.
-    const pagoText =
-      "PARA EL PAGO DE TU INSTALACIÓN SOLICITAR NUMERO DE CONTRATO AL ASESOR, ACERCATE AL PAGOFACIL Y DECIRLE AL CAJERO QUE VAS A ABONAR UNA INSTALACIÓN DE ADT ALARMAS.";
-
-    const pagoLines = doc.splitTextToSize(pagoText, contentW - 8);
-    const pagoH = 7 + pagoLines.length * 2.8;
-
-    doc.setFillColor(255, 248, 235);
-    doc.setDrawColor(242, 220, 177);
-    doc.roundedRect(margin, y, contentW, pagoH, 1.7, 1.7, "FD");
-
-    doc.setFont("helvetica", "bold");
+    doc.setTextColor(255,255,255);
+    doc.text(money(total),right-4,y+9.5, {
+      align:"right"
+    }
+    );
+    y+=totalH+3;
+    const pagoText="PARA EL PAGO DE TU INSTALACIÓN SOLICITAR NUMERO DE CONTRATO AL ASESOR, ACERCATE AL PAGOFACIL Y DECIRLE AL CAJERO QUE VAS A ABONAR UNA INSTALACIÓN DE ADT ALARMAS.",pagoLines=doc.splitTextToSize(pagoText,contentW-8),pagoH=7+pagoLines.length*2.8;
+    doc.setFillColor(255,248,235);
+    doc.setDrawColor(242,220,177);
+    doc.roundedRect(margin,y,contentW,pagoH,1.7,1.7,"FD");
+    doc.setFont("helvetica","bold");
     doc.setFontSize(6.2);
-    doc.setTextColor(121, 85, 28);
-    doc.text("PAGO EN EFECTIVO POR PAGOFÁCIL", margin + 4, y + 4);
-
-    doc.setFont("helvetica", "normal");
+    doc.setTextColor(121,85,28);
+    doc.text("PAGO EN EFECTIVO POR PAGOFÁCIL",margin+4,y+4);
+    doc.setFont("helvetica","normal");
     doc.setFontSize(5.8);
-    doc.text(pagoLines, margin + 4, y + 7);
-
-    // Pie del presupuesto.
+    doc.text(pagoLines,margin+4,y+7);
     doc.setDrawColor(...line);
-    doc.line(margin, 284, right, 284);
-
-    doc.setFont("helvetica", "normal");
+    doc.line(margin,284,right,284);
+    doc.setFont("helvetica","normal");
     doc.setFontSize(6);
     doc.setTextColor(...muted);
-    doc.text("RC Red de Servicios · ADT ALARMAS", margin, 289);
-    doc.text("Cotización " + id + " · Presupuesto 1 de 1", right, 289, {
-      align: "right"
-    });
-
-    // Añadir términos y condiciones después de la hoja de presupuesto.
-    const merged = await PDFLib.PDFDocument.load(doc.output("arraybuffer"));
-
-    const termsResponse = await fetch("./terminos-condiciones.pdf", {
-      cache: "no-store"
-    });
-
-    if (!termsResponse.ok) {
-      throw new Error(
-        "No se encontró terminos-condiciones.pdf en la raíz del repositorio."
-      );
+    doc.text("RC Red de Servicios · ADT ALARMAS",margin,289);
+    doc.text("Cotización "+id+" · Presupuesto 1 de 1",right,289, {
+      align:"right"
     }
-
-    const terms = await PDFLib.PDFDocument.load(
-      await termsResponse.arrayBuffer()
     );
-
-    const termsPages = await merged.copyPages(
-      terms,
-      terms.getPageIndices()
+    // Agregar términos y condiciones al PDF después de la hoja del presupuesto.
+    const merged=await PDFLib.PDFDocument.load(doc.output("arraybuffer")),termsResponse=await fetch("./terminos-condiciones.pdf", {
+      cache:"no-store"
+    }
     );
-
-    termsPages.forEach(page => merged.addPage(page));
-
-    const finalBytes = await merged.save();
-
-    const blob = new Blob([finalBytes], {
-      type: "application/pdf"
-    });
-
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-
-    link.href = url;
-    link.download = "Presupuesto_ADT_RC_" + id + ".pdf";
-
+    if(!termsResponse.ok)throw new Error("No se encontró terminos-condiciones.pdf en la raíz del repositorio.");
+    const terms=await PDFLib.PDFDocument.load(await termsResponse.arrayBuffer()),termsPages=await merged.copyPages(terms,terms.getPageIndices());
+    termsPages.forEach(p=>merged.addPage(p));
+    const finalBytes=await merged.save(),blob=new Blob([finalBytes], {
+      type:"application/pdf"
+    }
+    ),url=URL.createObjectURL(blob),link=document.createElement("a");
+    link.href=url;
+    link.download="Presupuesto_ADT_RC_"+id+".pdf";
     document.body.appendChild(link);
     link.click();
     link.remove();
-
-    setTimeout(() => URL.revokeObjectURL(url), 5000);
-
-  } catch (error) {
+    setTimeout(()=>URL.revokeObjectURL(url),5000);
+  }
+  catch(error) {
     console.error(error);
-
-    alert(
-      "No se pudo generar el PDF. " +
-      (error.message || "Revisá los archivos del repositorio.")
-    );
-  } finally {
-    button.disabled = false;
-    button.textContent = "Descargar presupuesto en PDF";
+    alert("No se pudo generar el PDF. "+(error.message||"Revisá los archivos del repositorio."));
+  }
+  finally {
+    button.disabled=false;
+    button.textContent="Descargar presupuesto en PDF";
   }
 }
-
-$("region").addEventListener("change", renderKits);
-
-$("kit").addEventListener("change", () => {
+$("region").addEventListener("change",renderKits);
+$("kit").addEventListener("change",()=> {
   updatePromoRules();
   refresh();
-});
-
-if (data && data.regiones && Array.isArray(data.adicionales)) {
+}
+);
+if(data&&data.regiones&&Array.isArray(data.adicionales)) {
   renderExtras();
   renderKits();
-} else {
+}
+else {
   showDataError();
 }
 </script>
