@@ -533,19 +533,23 @@ select:focus,input:focus{
   background:#fff;
 }
 
-/* Naranja tiene formato vertical. */
+/* Tarjeta Naranja: imagen vertical, conservando la proporción. */
 .payment-logos img.naranja-logo{
   height:58px;
   max-width:70px;
   padding:2px 4px;
 }
 
-/* Logo de Pago Fácil. */
+/* Logo de Pago Fácil alojado en el repositorio. */
 .payment-logos img.pagofacil-logo{
+  display:block;
+  width:auto;
   height:58px;
-  max-width:68px;
+  max-width:100px;
+  object-fit:contain;
   padding:2px;
   border:0;
+  border-radius:0;
   background:transparent;
 }
 
@@ -829,7 +833,7 @@ footer{
       <div class="payment-logos" aria-label="Logo de Pago Fácil">
         <img
           class="pagofacil-logo"
-          src="https://www.ecogas.com.ar/appweb/leo/pub/notas/1439/pagofacil.png"
+          src="./pagofacil.png"
           alt="Pago Fácil"
           loading="lazy"
         >
