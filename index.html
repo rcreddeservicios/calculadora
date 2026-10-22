@@ -1130,7 +1130,7 @@ function refresh() {
   else {
     html+='<div class="minor-title">Adicionales</div>'+row("Adicionales","Ninguno");
   }
-  html+='<div class="minor-title">Abono mensual</div>'+row("Servicio",abono.nombre)+(months==="sin"?row("Abono mensual pleno",moneyMonthly(monthly)+" / mes"):row("Abono mensual con descuento",moneyMonthly(monthly)+" / mes")+row("Luego de "+months+" meses",moneyMonthly(abono.pleno)+" / mes"))+'<div class="total-box"><div class="total-caption"><span>TOTAL KIT + ADICIONALES</span><span>ARS</span></div><div class="total-value">'+esc(money(total))+'</div><div class="total-note">El abono mensual se factura aparte.</div></div><div class="minor-title">Financiación de la instalación</div>'+row("Tarjeta bancaria — 1 cuota sin interés",moneyMonthly(total)+" por cuota")+row("Tarjeta bancaria — 3 cuotas sin interés",moneyMonthly(total/3)+" por cuota")+row("Tarjeta bancaria — 6 cuotas sin interés",moneyMonthly(total/6)+" por cuota")+row("Tarjeta Naranja — hasta 12 cuotas sin interés",moneyMonthly(total/12)+" por cuota en 12 cuotas")+'<p class="finance-inline-note"><strong>Pago en efectivo en Pago Fácil:</strong> PARA EL PAGO DE TU INSTALACIÓN SOLICITAR NUMERO DE CONTRATO AL ASESOR, ACERCATE AL PAGOFACIL Y DECIRLE AL CAJERO QUE VAS A ABONAR UNA INSTALACIÓN DE ADT ALARMAS.</p><p class="finance-inline-note">El abono mensual requiere adherir obligatoriamente una tarjeta de crédito al débito automático. Este importe se cobra por separado de la instalación.</p>';
+  html+='<div class="minor-title">Abono mensual</div>'+row("Servicio",abono.nombre)+(months==="sin"?row("Abono mensual pleno",moneyMonthly(monthly)+" / mes"):row("Abono mensual con descuento",moneyMonthly(monthly)+" / mes"))+'<div class="total-box"><div class="total-caption"><span>TOTAL KIT + ADICIONALES</span><span>ARS</span></div><div class="total-value">'+esc(money(total))+'</div><div class="total-note">El abono mensual se factura aparte.</div></div><div class="minor-title">Financiación de la instalación</div>'+row("Tarjeta bancaria — 1 cuota sin interés",moneyMonthly(total)+" por cuota")+row("Tarjeta bancaria — 3 cuotas sin interés",moneyMonthly(total/3)+" por cuota")+row("Tarjeta bancaria — 6 cuotas sin interés",moneyMonthly(total/6)+" por cuota")+row("Tarjeta Naranja — hasta 12 cuotas sin interés",moneyMonthly(total/12)+" por cuota en 12 cuotas")+'<p class="finance-inline-note"><strong>Pago en efectivo en Pago Fácil:</strong> PARA EL PAGO DE TU INSTALACIÓN SOLICITAR NUMERO DE CONTRATO AL ASESOR, ACERCATE AL PAGOFACIL Y DECIRLE AL CAJERO QUE VAS A ABONAR UNA INSTALACIÓN DE ADT ALARMAS.</p><p class="finance-inline-note">El abono mensual requiere adherir obligatoriamente una tarjeta de crédito al débito automático. Este importe se cobra por separado de la instalación.</p>';
   summary.innerHTML=html;
 }
 function clearExtras() {
@@ -1299,10 +1299,9 @@ async function downloadQuotePdf() {
   button.disabled=true;
   button.textContent="Generando PDF...";
   try {
-    const  {
+    const {
       jsPDF
-    }
-    =window.jspdf,doc=new jsPDF({
+    }=window.jspdf,doc=new jsPDF({
       orientation:"portrait",unit:"mm",format:"a4",compress:true
     }),W=210,margin=12,right=W-margin,contentW=W-margin*2,navy=[16,43,78],blue=[21,93,168],muted=[103,122,144],line=[220,229,239],pale=[240,247,255],orange=[242,140,40],now=new Date(),date=now.toLocaleDateString("es-AR"),id=getQuoteId(now),extras=selectedExtras(),extrasTotal=extras.reduce((s,a)=>s+a.subtotal,0),total=price+extrasTotal,monthly=currentAbonoPrice(abono),regionName=data.regiones[regionKey()].nombre,scoreLabel=score==="verde"?"Verde (830–999 puntos)":"Amarillo (470–829 puntos)",promotionLabel=promoLabel();
     // Encabezado corporativo
@@ -1336,13 +1335,11 @@ async function downloadQuotePdf() {
     doc.setFillColor(248,251,255);
     doc.setDrawColor(...line);
     doc.roundedRect(margin,y,contentW,metaH,2,2,"FD");
-    const meta=[{
-      x:margin+4,label:"REGIÓN",value:regionName,width:49
-    },{
-      x:margin+66,label:"SCORE",value:scoreLabel,width:47
-    },{
-      x:margin+125,label:"PROMOCIÓN",value:promotionLabel,width:56
-    }];
+    const meta=[
+      {x:margin+4,label:"REGIÓN",value:regionName,width:49},
+      {x:margin+66,label:"SCORE",value:scoreLabel,width:47},
+      {x:margin+125,label:"PROMOCIÓN",value:promotionLabel,width:56}
+    ];
     meta.forEach(m=>{
       doc.setFont("helvetica","bold");
       doc.setFontSize(5.8);
@@ -1520,10 +1517,6 @@ async function downloadQuotePdf() {
       doc.text("Abono mensual: "+moneyMonthly(abono.pleno),ax,ry);
     } else {
       doc.text("Promocional: "+moneyMonthly(monthly)+"/mes",ax,ry);
-      doc.setFont("helvetica","normal");
-      doc.setFontSize(5.8);
-      doc.setTextColor(70,87,106);
-      doc.text("Luego de "+months+" meses: "+moneyMonthly(abono.pleno)+"/mes",ax,ry+4.5);
     }
     doc.setFont("helvetica","normal");
     doc.setFontSize(5.4);
