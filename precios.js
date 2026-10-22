@@ -77,7 +77,7 @@ window.PRECIOS_ADT = {
           amarillo: { sin: null, 3: null, 6: 88999 }
         },
 
-        // NUEVOS KITS COMERCIO - CÓRDOBA
+        // NUEVO KIT COMERCIO CX 2.1
 
         {
           id: "comercio-cx-21",
@@ -88,14 +88,8 @@ window.PRECIOS_ADT = {
         {
           id: "comercio-cx-21-view-camara",
           nombre: "Kit Comercio CX 2.1 View con Cámara",
-          verde: { sin: null, 3: null, 6: null },
-          amarillo: { sin: 279900, 3: 319900, 6: 359900 }
-        },
-        {
-          id: "comercio-cx-21-view",
-          nombre: "Kit Comercio CX 2.1 View",
           verde: { sin: 40999, 3: 58999, 6: 72999 },
-          amarillo: { sin: null, 3: null, 6: null }
+          amarillo: { sin: 279900, 3: 319900, 6: 359900 }
         }
       ]
     },
@@ -177,7 +171,7 @@ window.PRECIOS_ADT = {
           amarillo: { sin: null, 3: null, 6: 88999 }
         },
 
-        // NUEVOS KITS COMERCIO - RESTO DEL PAÍS
+        // NUEVO KIT COMERCIO CX 2.1
 
         {
           id: "comercio-cx-21",
@@ -188,14 +182,8 @@ window.PRECIOS_ADT = {
         {
           id: "comercio-cx-21-view-camara",
           nombre: "Kit Comercio CX 2.1 View con Cámara",
-          verde: { sin: null, 3: null, 6: null },
-          amarillo: { sin: 279900, 3: 319900, 6: 359900 }
-        },
-        {
-          id: "comercio-cx-21-view",
-          nombre: "Kit Comercio CX 2.1 View",
           verde: { sin: 40999, 3: 58999, 6: 72999 },
-          amarillo: { sin: null, 3: null, 6: null }
+          amarillo: { sin: 279900, 3: 319900, 6: 359900 }
         }
       ]
     }
