@@ -75,6 +75,27 @@ window.PRECIOS_ADT = {
           nombre: "Kit Cámaras Inteligentes",
           verde: { sin: null, 3: null, 6: 53999 },
           amarillo: { sin: null, 3: null, 6: 88999 }
+        },
+
+        // NUEVOS KITS COMERCIO - CÓRDOBA
+
+        {
+          id: "comercio-cx-21",
+          nombre: "Kit Comercio CX 2.1",
+          verde: { sin: 35999, 3: 51999, 6: 61999 },
+          amarillo: { sin: 149900, 3: 179900, 6: 209900 }
+        },
+        {
+          id: "comercio-cx-21-view-camara",
+          nombre: "Kit Comercio CX 2.1 View con Cámara",
+          verde: { sin: null, 3: null, 6: null },
+          amarillo: { sin: 279900, 3: 319900, 6: 359900 }
+        },
+        {
+          id: "comercio-cx-21-view",
+          nombre: "Kit Comercio CX 2.1 View",
+          verde: { sin: 40999, 3: 58999, 6: 72999 },
+          amarillo: { sin: null, 3: null, 6: null }
         }
       ]
     },
@@ -154,6 +175,27 @@ window.PRECIOS_ADT = {
           nombre: "Kit Cámaras Inteligentes",
           verde: { sin: null, 3: null, 6: 53999 },
           amarillo: { sin: null, 3: null, 6: 88999 }
+        },
+
+        // NUEVOS KITS COMERCIO - RESTO DEL PAÍS
+
+        {
+          id: "comercio-cx-21",
+          nombre: "Kit Comercio CX 2.1",
+          verde: { sin: 35999, 3: 51999, 6: 61999 },
+          amarillo: { sin: 149900, 3: 179900, 6: 209900 }
+        },
+        {
+          id: "comercio-cx-21-view-camara",
+          nombre: "Kit Comercio CX 2.1 View con Cámara",
+          verde: { sin: null, 3: null, 6: null },
+          amarillo: { sin: 279900, 3: 319900, 6: 359900 }
+        },
+        {
+          id: "comercio-cx-21-view",
+          nombre: "Kit Comercio CX 2.1 View",
+          verde: { sin: 40999, 3: 58999, 6: 72999 },
+          amarillo: { sin: null, 3: null, 6: null }
         }
       ]
     }
