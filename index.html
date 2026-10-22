@@ -518,7 +518,7 @@ select:focus,input:focus{
   flex-wrap:wrap;
   gap:10px;
   margin:12px 0;
-  min-height:34px;
+  min-height:38px;
 }
 
 .payment-logos img{
@@ -533,6 +533,22 @@ select:focus,input:focus{
   background:#fff;
 }
 
+/* Tarjeta Naranja: formato vertical */
+.payment-logos img.naranja-logo{
+  height:58px;
+  max-width:70px;
+  padding:2px 4px;
+}
+
+/* Logo de Pago Fácil */
+.payment-logos img.pagofacil-logo{
+  height:58px;
+  max-width:68px;
+  padding:2px;
+  border:0;
+  background:transparent;
+}
+
 .payment-logos.compact{
   gap:7px;
   margin:10px 0 0;
@@ -542,6 +558,11 @@ select:focus,input:focus{
   max-width:74px;
   height:24px;
   padding:2px 4px;
+}
+
+.payment-logos.compact img.naranja-logo{
+  height:46px;
+  max-width:56px;
 }
 
 .finance-inline-note{
@@ -783,7 +804,7 @@ footer{
       <h3>Instalación — tarjeta Naranja</h3>
 
       <div class="payment-logos" aria-label="Logo de tarjeta Naranja">
-        <img src="./naranja.png" alt="Naranja">
+        <img class="naranja-logo" src="./narnaja.png" alt="Naranja">
       </div>
 
       <p>Financiación de hasta 12 cuotas sin interés.</p>
@@ -796,7 +817,7 @@ footer{
         <img src="./visa.png" alt="Visa">
         <img src="./mastercard.png" alt="Mastercard">
         <img src="./cabal.png" alt="Cabal">
-        <img src="./naranja.png" alt="Naranja">
+        <img class="naranja-logo" src="./narnaja.png" alt="Naranja">
       </div>
 
       <p>Es obligatorio adherir una tarjeta de crédito al débito automático para el cobro mensual del abono.</p>
@@ -804,6 +825,15 @@ footer{
 
     <div class="payment-option">
       <h3>Instalación — efectivo en Pago Fácil</h3>
+
+      <div class="payment-logos" aria-label="Logo de Pago Fácil">
+        <img
+          class="pagofacil-logo"
+          src="https://www.ecogas.com.ar/appweb/leo/pub/notas/1439/pagofacil.png"
+          alt="Pago Fácil"
+          loading="lazy"
+        >
+      </div>
 
       <p>
         Contactá previamente a tu asesor para que te envíe el número de
