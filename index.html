@@ -479,6 +479,49 @@ select:focus,input:focus{
   line-height:1.5;
 }
 
+.payment-info{
+  margin-top:18px;
+}
+
+.payment-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin-top:14px;
+}
+
+.payment-option{
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#f8fbff;
+}
+
+.payment-option h3{
+  margin:0 0 7px;
+  color:var(--navy);
+  font-size:13px;
+  line-height:1.4;
+}
+
+.payment-option p{
+  margin:0;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.5;
+}
+
+.finance-inline-note{
+  margin:12px 0 0;
+  padding:11px 12px;
+  background:#f0f7ff;
+  border:1px solid #d9eaff;
+  border-radius:10px;
+  color:var(--navy);
+  font-size:11px;
+  line-height:1.5;
+}
+
 .summary-actions{
   display:grid;
   gap:8px;
@@ -502,6 +545,7 @@ footer{
   .brand{gap:14px}
   .brand-logo{width:125px;height:95px}
   .pill{display:none}
+  .payment-grid{grid-template-columns:1fr}
 }
 
 @media(max-width:480px){
@@ -678,6 +722,37 @@ footer{
     </div>
   </aside>
 </div>
+
+<section class="panel payment-info">
+  <div class="section-head">
+    <div class="step">04</div>
+    <div>
+      <h2>Condiciones de pago</h2>
+      <p class="desc">Opciones de financiación de la instalación y forma de cobro del abono mensual.</p>
+    </div>
+  </div>
+
+  <div class="payment-grid">
+    <div class="payment-option">
+      <h3>Instalación — tarjetas de crédito bancarias</h3>
+      <p>Pagá el total de la instalación en 1, 3 o 6 cuotas sin interés.</p>
+    </div>
+
+    <div class="payment-option">
+      <h3>Instalación — tarjeta Naranja</h3>
+      <p>Financiación de hasta 12 cuotas sin interés.</p>
+    </div>
+
+    <div class="payment-option">
+      <h3>Abono mensual</h3>
+      <p>Es obligatorio adherir una tarjeta de crédito al débito automático para el cobro mensual del abono.</p>
+    </div>
+  </div>
+
+  <p class="finance-inline-note">
+    Los importes de las cuotas que aparecen en el presupuesto se calculan sobre el total de kit más adicionales. El abono mensual se cobra por separado.
+  </p>
+</section>
 
 <footer>RC Red de Servicios · Calculadora comercial ADT</footer>
 </main>
@@ -1066,6 +1141,13 @@ function refresh() {
       '<div class="total-note">El abono mensual se factura aparte.</div>' +
     '</div>';
 
+  html += '<div class="minor-title">Financiación de la instalación</div>' +
+    row("Tarjeta de crédito bancaria — 1 cuota sin interés", moneyMonthly(upfrontTotal) + " por cuota") +
+    row("Tarjeta de crédito bancaria — 3 cuotas sin interés", moneyMonthly(upfrontTotal / 3) + " por cuota") +
+    row("Tarjeta de crédito bancaria — 6 cuotas sin interés", moneyMonthly(upfrontTotal / 6) + " por cuota") +
+    row("Tarjeta Naranja — hasta 12 cuotas sin interés", moneyMonthly(upfrontTotal / 12) + " por cuota en 12 cuotas") +
+    '<p class="finance-inline-note">El abono mensual requiere adherir obligatoriamente una tarjeta de crédito al débito automático. Este importe se cobra por separado de la instalación.</p>';
+
   summary.innerHTML = html;
 }
 
@@ -1277,9 +1359,28 @@ async function downloadQuotePdf() {
     addRow("Subtotal adicionales",money(extrasTotal));
 
     const monthly = currentAbonoPrice(abono);
-    y += 5;
-    sectionTitle("ABONO MENSUAL");
+
+    if (y + 55 > 270) {
+      newContentPage("FINANCIACIÓN DE LA INSTALACIÓN");
+    } else {
+      y += 5;
+      sectionTitle("FINANCIACIÓN DE LA INSTALACIÓN");
+    }
+
+    addRow("Tarjeta de crédito bancaria — 1 cuota sin interés",moneyMonthly(total)+" por cuota");
+    addRow("Tarjeta de crédito bancaria — 3 cuotas sin interés",moneyMonthly(total/3)+" por cuota");
+    addRow("Tarjeta de crédito bancaria — 6 cuotas sin interés",moneyMonthly(total/6)+" por cuota");
+    addRow("Tarjeta Naranja — hasta 12 cuotas sin interés","En 12 cuotas: "+moneyMonthly(total/12)+" por cuota");
+
+    if (y + 45 > 270) {
+      newContentPage("ABONO MENSUAL");
+    } else {
+      y += 5;
+      sectionTitle("ABONO MENSUAL");
+    }
+
     addRow("Servicio",abono.nombre);
+    addRow("Medio de pago obligatorio","Adhesión de tarjeta de crédito al débito automático mensual.");
 
     if (months === "sin") {
       addRow("Abono mensual pleno",moneyMonthly(abono.pleno)+" por mes");
@@ -1316,8 +1417,16 @@ async function downloadQuotePdf() {
     doc.setFontSize(8);
     doc.setTextColor(...muted);
 
-    const note = "El abono mensual se factura aparte. Cotización comercial de referencia. Los términos y condiciones del servicio ADT se adjuntan al final.";
-    doc.text(doc.splitTextToSize(note,W-margin*2),margin,y);
+    const note = "El total de kit más adicionales corresponde al importe de instalación y puede financiarse sin interés con tarjetas de crédito bancarias en 1, 3 o 6 cuotas, o con tarjeta Naranja hasta en 12 cuotas. El abono mensual se cobra por separado y requiere adhesión obligatoria de una tarjeta de crédito al débito automático. Cotización comercial de referencia. Los términos y condiciones del servicio ADT se adjuntan al final.";
+
+    const noteLines = doc.splitTextToSize(note,W-margin*2);
+    const noteHeight = noteLines.length * 4;
+
+    if (y + noteHeight > 277) {
+      newContentPage("CONDICIONES DE PAGO");
+    }
+
+    doc.text(noteLines,margin,y);
 
     const quotePages = doc.getNumberOfPages();
 
