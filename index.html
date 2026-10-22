@@ -533,14 +533,14 @@ select:focus,input:focus{
   background:#fff;
 }
 
-/* Tarjeta Naranja: formato vertical */
+/* Naranja tiene formato vertical. */
 .payment-logos img.naranja-logo{
   height:58px;
   max-width:70px;
   padding:2px 4px;
 }
 
-/* Logo de Pago Fácil */
+/* Logo de Pago Fácil. */
 .payment-logos img.pagofacil-logo{
   height:58px;
   max-width:68px;
@@ -729,7 +729,7 @@ footer{
       </div>
 
       <div class="stock-notice">
-        ⚠️ CONSULTAR PREVIAMENTE STOCK DE ADICIONALES QUE NO SEAN CÁMARAS, MICRO SD O CAJAS ESTANCAS. Recordar que el precio será adicional y se agregará al valor de la instalación. Por mas cámaras que se pongan, o sensores que se agreguen, el valor del abono se mantendrá igual.
+        ⚠️ CONSULTAR PREVIAMENTE STOCK DE ADICIONALES QUE NO SEAN CÁMARAS, MICRO SD O CAJAS ESTANCAS. Recordar que el precio será adicional y se agregará al valor de la instalación. Por más cámaras que se pongan, o sensores que se agreguen, el valor del abono se mantendrá igual.
       </div>
 
       <div class="buttons">
@@ -836,7 +836,7 @@ footer{
       </div>
 
       <p>
-        PARA EL PAGO DE TU INSTALACIÓN SOLICITAR NUMERO DE CONTRATO AL ASESOR, ACERCATE AL PAGOFACIL Y DECIRLE AL CAJERO QUE VAS A ABONAR UNA INSTALACIÓN DE ADT ALARMAS
+        PARA EL PAGO DE TU INSTALACIÓN SOLICITAR NUMERO DE CONTRATO AL ASESOR, ACERCATE AL PAGOFACIL Y DECIRLE AL CAJERO QUE VAS A ABONAR UNA INSTALACIÓN DE ADT ALARMAS.
       </p>
     </div>
 
@@ -1252,7 +1252,7 @@ function refresh() {
       "Tarjeta Naranja — hasta 12 cuotas sin interés",
       moneyMonthly(upfrontTotal / 12) + " por cuota en 12 cuotas"
     ) +
-    '<p class="finance-inline-note"><strong>Pago en efectivo en Pago Fácil:</strong> contactá previamente a tu asesor para recibir el número de contrato y las instrucciones de pago. En el local, indicá que vas a pagar una instalación de DirecTV y presentá el número de contrato. No disponible en Rapipago ni en otros locales.</p>' +
+    '<p class="finance-inline-note"><strong>Pago en efectivo en Pago Fácil:</strong> PARA EL PAGO DE TU INSTALACIÓN SOLICITAR NUMERO DE CONTRATO AL ASESOR, ACERCATE AL PAGOFACIL Y DECIRLE AL CAJERO QUE VAS A ABONAR UNA INSTALACIÓN DE ADT ALARMAS.</p>' +
     '<p class="finance-inline-note">El abono mensual requiere adherir obligatoriamente una tarjeta de crédito al débito automático. Este importe se cobra por separado de la instalación.</p>';
 
   summary.innerHTML = html;
@@ -1389,7 +1389,7 @@ async function downloadQuotePdf() {
     doc.setFont("helvetica","normal");
     doc.setFontSize(9);
     doc.setTextColor(218,234,249);
-    doc.text("Solución de seguridad electrónica ADT",57,32);
+    doc.text("Solución de seguridad electrónica ADT ALARMAS",57,32);
 
     doc.setFontSize(8);
     doc.text("N.º "+id,margin,42);
@@ -1496,7 +1496,7 @@ async function downloadQuotePdf() {
 
     addRow(
       "Pago en efectivo en Pago Fácil",
-      "Contactá previamente a tu asesor para recibir el número de contrato y las instrucciones de pago. En el local, indicá que vas a pagar una instalación de DirecTV y presentá el número de contrato. No disponible en Rapipago ni en otros locales."
+      "PARA EL PAGO DE TU INSTALACIÓN SOLICITAR NUMERO DE CONTRATO AL ASESOR, ACERCATE AL PAGOFACIL Y DECIRLE AL CAJERO QUE VAS A ABONAR UNA INSTALACIÓN DE ADT ALARMAS."
     );
 
     if (y + 45 > 270) {
@@ -1548,7 +1548,7 @@ async function downloadQuotePdf() {
     doc.setFontSize(8);
     doc.setTextColor(...muted);
 
-    const note = "El total de kit más adicionales corresponde al importe de instalación y puede financiarse sin interés con tarjetas de crédito bancarias en 1, 3 o 6 cuotas, con tarjeta Naranja hasta en 12 cuotas, o en efectivo en Pago Fácil siguiendo las instrucciones del asesor. Para pagar en Pago Fácil, el cliente debe contactar previamente a su asesor, recibir el número de contrato y presentarlo en el local indicando que pagará una instalación de DirecTV. Esta modalidad no está disponible en Rapipago ni en otros locales. El abono mensual se cobra por separado y requiere adhesión obligatoria de una tarjeta de crédito al débito automático. Cotización comercial de referencia. Los términos y condiciones del servicio ADT se adjuntan al final.";
+    const note = "El total de kit más adicionales corresponde al importe de instalación y puede financiarse sin interés con tarjetas de crédito bancarias en 1, 3 o 6 cuotas, con tarjeta Naranja hasta en 12 cuotas, o en efectivo en Pago Fácil. PARA EL PAGO DE TU INSTALACIÓN SOLICITAR NUMERO DE CONTRATO AL ASESOR, ACERCATE AL PAGOFACIL Y DECIRLE AL CAJERO QUE VAS A ABONAR UNA INSTALACIÓN DE ADT ALARMAS. El abono mensual se cobra por separado y requiere adhesión obligatoria de una tarjeta de crédito al débito automático. Cotización comercial de referencia. Los términos y condiciones del servicio ADT ALARMAS se adjuntan al final.";
 
     const noteLines = doc.splitTextToSize(note,W-margin*2);
     const noteHeight = noteLines.length * 4;
@@ -1569,7 +1569,7 @@ async function downloadQuotePdf() {
       doc.setFont("helvetica","normal");
       doc.setFontSize(7);
       doc.setTextColor(...muted);
-      doc.text("RC Red de Servicios · Calculadora comercial ADT",margin,289);
+      doc.text("RC Red de Servicios · Calculadora comercial ADT ALARMAS",margin,289);
       doc.text("Cotización "+id+" · Página "+page+" de "+quotePages,W-margin,289,{align:"right"});
     }
 
