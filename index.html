@@ -485,16 +485,17 @@ select:focus,input:focus{
 
 .payment-grid{
   display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
+  grid-template-columns:repeat(2,minmax(0,1fr));
   gap:12px;
   margin-top:14px;
 }
 
 .payment-option{
-  padding:14px;
+  padding:16px;
   border:1px solid var(--line);
   border-radius:12px;
   background:#f8fbff;
+  min-width:0;
 }
 
 .payment-option h3{
@@ -509,6 +510,38 @@ select:focus,input:focus{
   color:var(--muted);
   font-size:12px;
   line-height:1.5;
+}
+
+.payment-logos{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:12px 0;
+  min-height:34px;
+}
+
+.payment-logos img{
+  display:block;
+  width:auto;
+  max-width:92px;
+  height:30px;
+  object-fit:contain;
+  padding:3px 5px;
+  border:1px solid #e3e9f1;
+  border-radius:6px;
+  background:#fff;
+}
+
+.payment-logos.compact{
+  gap:7px;
+  margin:10px 0 0;
+}
+
+.payment-logos.compact img{
+  max-width:74px;
+  height:24px;
+  padding:2px 4px;
 }
 
 .finance-inline-note{
@@ -733,29 +766,58 @@ footer{
   </div>
 
   <div class="payment-grid">
+
     <div class="payment-option">
       <h3>Instalación — tarjetas de crédito bancarias</h3>
+
+      <div class="payment-logos" aria-label="Logos de tarjetas bancarias">
+        <img src="./visa.png" alt="Visa">
+        <img src="./mastercard.png" alt="Mastercard">
+        <img src="./cabal.png" alt="Cabal">
+      </div>
+
       <p>Pagá el total de la instalación en 1, 3 o 6 cuotas sin interés.</p>
     </div>
 
     <div class="payment-option">
       <h3>Instalación — tarjeta Naranja</h3>
+
+      <div class="payment-logos" aria-label="Logo de tarjeta Naranja">
+        <img src="./naranja.png" alt="Naranja">
+      </div>
+
       <p>Financiación de hasta 12 cuotas sin interés.</p>
     </div>
 
     <div class="payment-option">
       <h3>Abono mensual</h3>
+
+      <div class="payment-logos compact" aria-label="Imágenes de tarjetas de crédito">
+        <img src="./visa.png" alt="Visa">
+        <img src="./mastercard.png" alt="Mastercard">
+        <img src="./cabal.png" alt="Cabal">
+        <img src="./naranja.png" alt="Naranja">
+      </div>
+
       <p>Es obligatorio adherir una tarjeta de crédito al débito automático para el cobro mensual del abono.</p>
     </div>
 
     <div class="payment-option">
       <h3>Instalación — efectivo en Pago Fácil</h3>
-      <p>Contactá previamente a tu asesor para que te envíe el número de contrato y te indique cómo pagar. En el local, solicitá pagar una instalación de ADT ALARMAS y brindá ese número. Esta modalidad no está disponible en Rapipago ni en otros locales.</p>
+
+      <p>
+        Contactá previamente a tu asesor para que te envíe el número de
+        contrato y te indique cómo pagar. En el local, solicitá pagar
+        una instalación de DirecTV y brindá ese número. Esta modalidad
+        no está disponible en Rapipago ni en otros locales.
+      </p>
     </div>
+
   </div>
 
   <p class="finance-inline-note">
-    Los importes de las cuotas que aparecen en el presupuesto se calculan sobre el total de kit más adicionales. El abono mensual se cobra por separado.
+    Los importes de las cuotas se calculan sobre el total de kit más
+    adicionales. El abono mensual se cobra por separado.
   </p>
 </section>
 
