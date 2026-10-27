@@ -175,10 +175,10 @@ footer{text-align:center;color:#8290a1;font-size:11px;padding:18px 0 0}
       </div>
     </div>
 
-    <p class="voice-intro">Presioná el micrófono y hablá en español. También podés escribir o corregir la transcripción manualmente.</p>
+    <p class="voice-intro">Presioná “Iniciar dictado” y hablá con las pausas que necesites. La escucha seguirá activa y se reanudará si el navegador la interrumpe. Cuando termines, presioná “Finalizar dictado” para conservar todo el texto reconocido.</p>
     <div class="voice-buttons">
       <button class="btn btn-primary" id="voiceStartBtn" type="button">🎙️ Iniciar dictado</button>
-      <button class="btn btn-secondary" id="voiceStopBtn" type="button" disabled>Detener</button>
+      <button class="btn btn-secondary" id="voiceStopBtn" type="button" disabled>Finalizar dictado</button>
       <button class="btn btn-secondary" id="voiceInterpretBtn" type="button">Interpretar y completar</button>
     </div>
     <div id="voiceStatus" class="voice-status" role="status" aria-live="polite">Listo para escuchar. El reconocimiento de voz requiere un navegador compatible y permiso para usar el micrófono.</div>
@@ -1152,6 +1152,7 @@ async function downloadQuotePdf() {
 
     doc.setFont("helvetica", "normal");
     doc.setFontSize(7);
+
     doc.setTextColor(218, 234, 249);
     doc.text("Cotización comercial de instalación y monitoreo", 43, 24);
 
@@ -1563,6 +1564,9 @@ $("contactPhone").addEventListener("input", () => {
 
 let voiceRecognition = null;
 let voiceIsListening = false;
+let voiceDictationRequested = false;
+let voiceTranscriptBase = "";
+let voiceRestartTimeout = null;
 
 function normalizeVoiceText(value) {
   let text = String(value || "")
@@ -1601,7 +1605,7 @@ function voiceRecognitionConstructor() {
   return window.SpeechRecognition || window.webkitSpeechRecognition || null;
 }
 
-function startVoiceDictation() {
+function startVoiceDictation(isRestart = false) {
   const Recognition = voiceRecognitionConstructor();
 
   if (!Recognition) {
@@ -1612,6 +1616,13 @@ function startVoiceDictation() {
     return;
   }
 
+  if (!isRestart && voiceDictationRequested) return;
+  if (!isRestart) {
+    voiceTranscriptBase = "";
+    $("voiceTranscript").value = "";
+    voiceDictationRequested = true;
+  }
+
   try {
     if (voiceRecognition && voiceIsListening) {
       voiceRecognition.stop();
@@ -1619,7 +1630,7 @@ function startVoiceDictation() {
 
     voiceRecognition = new Recognition();
     voiceRecognition.lang = "es-AR";
-    voiceRecognition.continuous = false;
+    voiceRecognition.continuous = true;
     voiceRecognition.interimResults = true;
     voiceRecognition.maxAlternatives = 3;
 
@@ -1638,11 +1649,12 @@ function startVoiceDictation() {
         if (result && result[0]) text += result[0].transcript + " ";
       }
 
-      $("voiceTranscript").value = text.trim();
+      $("voiceTranscript").value = [voiceTranscriptBase, text.trim()].filter(Boolean).join(" ").replace(/\s+/g, " ").trim();
       $("voicePreview").textContent = "Transcripción obtenida. Leela o corregila y presioná “Interpretar y completar”.";
     };
 
     voiceRecognition.onerror = event => {
+      if (["not-allowed", "service-not-allowed", "audio-capture"].includes(event.error)) voiceDictationRequested = false;
       const messages = {
         "not-allowed": "No se autorizó el micrófono. Permití su uso desde los permisos del navegador.",
         "service-not-allowed": "El navegador no permitió el servicio de reconocimiento de voz.",
@@ -1660,6 +1672,14 @@ function startVoiceDictation() {
 
     voiceRecognition.onend = () => {
       voiceIsListening = false;
+      if (voiceDictationRequested) {
+        voiceTranscriptBase = $("voiceTranscript").value.trim();
+        voiceRecognition = null;
+        if (voiceRestartTimeout) clearTimeout(voiceRestartTimeout);
+        voiceRestartTimeout = setTimeout(() => { voiceRestartTimeout = null; if (voiceDictationRequested) startVoiceDictation(true); }, 300);
+        setVoiceStatus("La escucha se interrumpió por el navegador. Reanudando automáticamente; podés seguir hablando.", "listening");
+        return;
+      }
       $("voiceStartBtn").disabled = false;
       $("voiceStopBtn").disabled = true;
 
@@ -1682,6 +1702,8 @@ function startVoiceDictation() {
 }
 
 function stopVoiceDictation() {
+  voiceDictationRequested = false;
+  if (voiceRestartTimeout) { clearTimeout(voiceRestartTimeout); voiceRestartTimeout = null; }
   if (voiceRecognition && voiceIsListening) {
     voiceRecognition.stop();
   }
@@ -2281,6 +2303,7 @@ function interpretVoiceQuote() {
     });
 
     if (extraMentions.length) {
+
       applied.push("Adicionales: " + extraMentions.join(", "));
     }
   }
@@ -2345,6 +2368,7 @@ function interpretVoiceQuote() {
 }
 
 function clearVoiceTranscript() {
+  voiceTranscriptBase = "";
   $("voiceTranscript").value = "";
   $("voicePreview").textContent = "Todavía no se interpretó ninguna instrucción.";
   setVoiceStatus("Transcripción borrada. Podés iniciar otro dictado.");
