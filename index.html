@@ -171,7 +171,7 @@ footer{text-align:center;color:#8290a1;font-size:11px;padding:18px 0 0}
       <div class="step">VOZ</div>
       <div>
         <h2>Cotizar por voz</h2>
-        <p class="desc">Describí el kit, la región, el score, la promoción y los adicionales. Después revisá los datos antes de generar el presupuesto.</p>
+        <p class="desc">Podés hablar con el nombre completo o usar abreviaturas como “2.2 para casa en Córdoba”. El sistema elegirá la variante según la región y revisará los datos antes de generar el presupuesto.</p>
       </div>
     </div>
 
@@ -183,11 +183,11 @@ footer{text-align:center;color:#8290a1;font-size:11px;padding:18px 0 0}
     </div>
     <div id="voiceStatus" class="voice-status" role="status" aria-live="polite">Listo para escuchar. El reconocimiento de voz requiere un navegador compatible y permiso para usar el micrófono.</div>
     <label class="field-label" for="voiceTranscript">Transcripción de voz</label>
-    <textarea id="voiceTranscript" class="voice-transcript" rows="4" placeholder="Ej.: Cotizame para Córdoba el Kit Interactive Security 2.2, score verde, promoción de seis meses y agregá dos cámaras exteriores."></textarea>
+    <textarea id="voiceTranscript" class="voice-transcript" rows="4" placeholder="Ej.: Un 2.2 para casa en Córdoba, score verde, promoción de seis meses y agregá dos cámaras exteriores."></textarea>
     <div class="voice-buttons">
       <button class="btn btn-secondary" id="voiceClearBtn" type="button">Borrar transcripción</button>
     </div>
-    <div class="voice-example"><strong>Ejemplo:</strong> “Para Córdoba, Kit Interactive Security 2.2, score verde, promoción de seis meses y dos cámaras exteriores”. Si el nombre del kit es ambiguo, el sistema te avisará para que lo selecciones manualmente.</div>
+    <div class="voice-example"><strong>Ejemplo:</strong> “Un 2.2 para casa en Córdoba, score verde, promoción de seis meses y agregá dos cámaras exteriores”. Para Córdoba elegirá la variante de panel inteligente; para el resto del país, la variante CX. Si pedís explícitamente View o galpón, elegirá la versión correspondiente.</div>
     <div id="voicePreview" class="voice-status voice-summary" aria-live="polite">Todavía no se interpretó ninguna instrucción.</div>
   </section>
 
@@ -1577,13 +1577,18 @@ function normalizeVoiceText(value) {
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase();
 
-  // Algunas transcripciones dictan los modelos como "dos punto dos".
+  // Acepta varias transcripciones habladas del modelo: dos punto dos, dos coma dos, 2 2, etc.
   text = text
-    .replace(/\bdos\s+punto\s+dos\b/g, "2.2")
-    .replace(/\bdos\s+punto\s+uno\b/g, "2.1")
-    .replace(/\buno\s+punto\s+uno\b/g, "1.1")
-    .replace(/\btres\s+punto\s+dos\b/g, "3.2")
+    .replace(/\b(?:dos|2)\s+(?:punto|coma)\s+(?:dos|2)\b/g, "2.2")
+    .replace(/\b(?:dos|2)\s+(?:punto|coma)\s+(?:uno|1)\b/g, "2.1")
+    .replace(/\b(?:uno|1)\s+(?:punto|coma)\s+(?:uno|1)\b/g, "1.1")
+    .replace(/\b(?:tres|3)\s+(?:punto|coma)\s+(?:dos|2)\b/g, "3.2")
+    .replace(/\b2\s+2\b/g, "2.2")
+    .replace(/\b2\s+1\b/g, "2.1")
+    .replace(/\b1\s+1\b/g, "1.1")
+    .replace(/\b3\s+2\b/g, "3.2")
     .replace(/\bdos\s+dos\b/g, "2.2")
+    .replace(/\bdos\s+uno\b/g, "2.1")
     .replace(/\buno\s+uno\b/g, "1.1")
     .replace(/\btres\s+dos\b/g, "3.2");
 
@@ -1712,6 +1717,160 @@ function kitPhraseFromVoice(text) {
   return match ? match[1].trim() : "";
 }
 
+function findKitByIdOrName(targetRegion, preferredIds, namePredicate) {
+  const list = (data && data.regiones && data.regiones[targetRegion] && data.regiones[targetRegion].kits) || [];
+  for (const id of preferredIds) {
+    const found = list.find(kit => String(kit.id || "").toLowerCase() === id.toLowerCase());
+    if (found) return { kit: found, region: targetRegion };
+  }
+  if (typeof namePredicate === "function") {
+    const found = list.find(namePredicate);
+    if (found) return { kit: found, region: targetRegion };
+  }
+  return null;
+}
+
+function voiceModelCode(text) {
+  const t = normalizeVoiceText(text);
+  const match = t.match(/\b(1\.1|2\.1|2\.2|3\.2)\b/);
+  if (match) return match[1];
+  return "";
+}
+
+function voiceHasViewKitIntent(text) {
+  const t = normalizeVoiceText(text);
+  if (/\bview\b/.test(t)) return true;
+
+  // No confundir cámaras solicitadas como adicionales con cámaras incluidas en el kit.
+  const addOnCamera = /\b(agrega|agregar|agregale|agrega|sumar|suma|sumale|adicional|adicionales|extra|extras|aparte|mas)\b(?:\s+\w+){0,4}\s+\bcamaras?\b/.test(t);
+  if (addOnCamera) return false;
+
+  return /\bcamara incluida\b|\bcamaras incluidas\b|\bincluye camara\b|\bincluye camaras\b|\bcon camara incluida\b|\bcon camaras incluidas\b/.test(t) ||
+    /\bcamara interior y exterior\b/.test(t) ||
+    /\bambas camaras\b/.test(t) ||
+    (/\bcam int\b/.test(t) && /\bcam ext\b/.test(t));
+}
+
+function resolveVoiceKitShortcut(text, targetRegion) {
+  const t = normalizeVoiceText(text);
+  const model = voiceModelCode(t);
+  const hasGalpon = /\b(galpon|deposito)\b/.test(t);
+  const hasCommerce = /\b(comercio|comercial|negocio|local comercial|tienda)\b/.test(t);
+  const hasCameraKit = /\bcamaras inteligentes\b/.test(t);
+  const viewIntent = voiceHasViewKitIntent(t);
+  const hasBothCameraNames = /\bcamara interior\b/.test(t) && /\bcamara exterior\b/.test(t);
+
+  if (hasCameraKit) {
+    const cameraKit = findKitByIdOrName(
+      targetRegion,
+      ["cam-inteligentes"],
+      kit => /camaras inteligentes/.test(normalizeVoiceText(kit.nombre))
+    );
+    if (cameraKit) return cameraKit;
+  }
+
+  if (hasCommerce) {
+    // El catálogo comercial disponible es 2.1. No reinterpretar 2.2 como comercio.
+    if (model && model !== "2.1") return null;
+    return findKitByIdOrName(
+      targetRegion,
+      ["comercio-cx-21", "comercio-21", "cx-comercio-21"],
+      kit => /comercio|comercial/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) && /2\.1|21/.test(normalizeVoiceText(kit.nombre + " " + kit.id))
+    );
+  }
+
+  if (hasGalpon) {
+    if (model && model !== "2.2") return null;
+    const ids = viewIntent
+      ? ["galpon-22-view", "galpon-view-22", "galpon-22"]
+      : ["galpon-22", "galpon-22-view", "galpon-view-22"];
+    return findKitByIdOrName(
+      targetRegion,
+      ids,
+      kit => /galpon/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) && /2\.2|22/.test(normalizeVoiceText(kit.nombre + " " + kit.id))
+    );
+  }
+
+  if (!model) return null;
+
+  if (model === "2.1") {
+    return findKitByIdOrName(
+      targetRegion,
+      ["comercio-cx-21", "comercio-21", "cx-comercio-21"],
+      kit => /comercio|comercial/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) && /2\.1|21/.test(normalizeVoiceText(kit.nombre + " " + kit.id))
+    );
+  }
+
+  if (model === "3.2") {
+    return findKitByIdOrName(
+      targetRegion,
+      ["cx-view-32", "view-32"],
+      kit => /3\.2|32/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) && /view|cam/.test(normalizeVoiceText(kit.nombre + " " + kit.id))
+    );
+  }
+
+  if (model === "1.1") {
+    return viewIntent
+      ? findKitByIdOrName(targetRegion, ["view-11", "cx-view-11"], kit => /1\.1|11/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) && /view/.test(normalizeVoiceText(kit.nombre)))
+      : findKitByIdOrName(targetRegion, ["security-11", "cx-security-11"], kit => /1\.1|11/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) && /security/.test(normalizeVoiceText(kit.nombre)));
+  }
+
+  if (model === "2.2") {
+    if (hasBothCameraNames) {
+      const pair = findKitByIdOrName(targetRegion, ["cx-view-22"], kit => /cam int/.test(normalizeVoiceText(kit.nombre)) && /cam ext/.test(normalizeVoiceText(kit.nombre)));
+      if (pair) return pair;
+    }
+
+    if (viewIntent) {
+      return findKitByIdOrName(
+        targetRegion,
+        ["view-22", "cx-view-22"],
+        kit => /2\.2|22/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) && /view/.test(normalizeVoiceText(kit.nombre))
+      );
+    }
+
+    // Por defecto, 2.2 residencial: Córdoba usa el panel inteligente; el resto del país, CX.
+    // El mismo ID puede tener nombres distintos según la región, por lo que se busca dentro
+    // de la lista de la región detectada/seleccionada.
+    return findKitByIdOrName(
+      targetRegion,
+      ["security-22", "cx-security-22"],
+      kit => /2\.2|22/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) && /security/.test(normalizeVoiceText(kit.nombre)) && !/view|galpon|comercio/.test(normalizeVoiceText(kit.nombre + " " + kit.id))
+    );
+  }
+
+  return null;
+}
+
+function detectVoiceRegion(text, currentRegion) {
+  const t = normalizeVoiceText(text);
+  const cordobaTerms = [
+    "cordoba", "rio cuarto", "villa maria", "villa carlos paz", "alta gracia",
+    "rio tercero", "san francisco cordoba", "bell ville", "jesus maria", "cosquin",
+    "la falda", "marcos juarez", "laboulaye", "villa dolores", "morteros"
+  ];
+  const restoTerms = [
+    "resto del pais", "resto del territorio", "fuera de cordoba", "otra provincia",
+    "resto del interior", "buenos aires", "capital federal", "caba", "ciudad autonoma",
+    "la plata", "mar del plata", "bahia blanca", "rosario", "santa fe", "parana",
+    "entre rios", "corrientes", "misiones", "posadas", "chaco", "resistencia", "formosa",
+    "la pampa", "santa rosa", "mendoza", "san juan", "san luis", "la rioja",
+    "catamarca", "tucuman", "salta", "jujuy", "santiago del estero", "neuquen",
+    "rio negro", "bariloche", "general roca", "viedma", "chubut", "comodoro rivadavia",
+    "santa cruz", "rio gallegos", "tierra del fuego", "ushuaia", "trelew", "rawson",
+    "san martin de los andes", "esquel", "concordia", "gualeguaychu", "villa mercedes",
+    "merlo san luis", "godoy cruz", "san rafael", "pinamar", "tandil", "zarate",
+    "campana", "cipolletti", "plottier", "pergamino", "san nicolas", "olavarria",
+    "villa gesell", "necochea", "rio grande", "caleta olivia", "eldorado", "rafaela",
+    "venado tuerto", "reconquista", "junin", "chivilcoy", "san pedro"
+  ];
+  const restoMatch = restoTerms.find(term => t.includes(term));
+  if (restoMatch) return { region: "resto", detected: true, place: restoMatch };
+  const cordobaMatch = cordobaTerms.find(term => t.includes(term));
+  if (cordobaMatch) return { region: "cordoba", detected: true, place: cordobaMatch };
+  return { region: currentRegion, detected: false, place: "" };
+}
+
 function findKitFromVoice(text, targetRegion) {
   const candidates = allKitCandidates().filter(item => item.region === targetRegion);
   const all = candidates.length ? candidates : allKitCandidates();
@@ -1730,6 +1889,10 @@ function findKitFromVoice(text, targetRegion) {
     const distinct = new Map(preferred.map(item => [item.kit.id, item]));
     if (distinct.size === 1) return { kit: [...distinct.values()][0].kit, region: targetRegion };
   }
+
+  // Resolver abreviaturas comerciales antes de recurrir a coincidencias difusas.
+  const shortcut = resolveVoiceKitShortcut(normalizedText, targetRegion);
+  if (shortcut && shortcut.kit) return shortcut;
 
   // Después, identificar el nombre abreviado. Nunca elegir entre dos kits empatados.
   const phrase = kitPhrase || normalizedText;
@@ -1861,21 +2024,19 @@ function interpretVoiceQuote() {
   let changed = false;
   let targetRegion = regionKey();
   const originalRegion = regionKey();
+  const regionDetection = detectVoiceRegion(text, originalRegion);
+  const regionWasDetected = regionDetection.detected;
+  targetRegion = regionDetection.region;
 
-  if (/\bcordoba\b/.test(text)) {
-    targetRegion = "cordoba";
+  if (regionWasDetected) {
     if ($("region").value !== targetRegion) {
       $("region").value = targetRegion;
       changed = true;
     }
-    applied.push("Región: Córdoba");
-  } else if (/\b(resto del pais|resto del territorio|fuera de cordoba|otra provincia|resto del interior)\b/.test(text)) {
-    targetRegion = "resto";
-    if ($("region").value !== targetRegion) {
-      $("region").value = targetRegion;
-      changed = true;
-    }
-    applied.push("Región: Resto del país");
+    applied.push("Región: " + data.regiones[targetRegion].nombre);
+  } else {
+    // Si no menciona una zona, respetar la que está seleccionada en el formulario.
+    applied.push("Región usada: " + data.regiones[targetRegion].nombre + " (selector actual)");
   }
 
   if (targetRegion !== originalRegion) renderKits();
@@ -1908,7 +2069,7 @@ function interpretVoiceQuote() {
       warnings.push("No pude ubicar ese kit en la región elegida; seleccioná el kit manualmente.");
     }
   } else {
-    const mentionedKit = /\bkit\b/.test(text) || /\b(security|interactive|galpon|view|cx)\b/.test(text);
+    const mentionedKit = /\bkit\b/.test(text) || /\b(security|interactive|galpon|view|cx|casa|hogar|residencial)\b/.test(text) || Boolean(voiceModelCode(text));
     if (mentionedKit) {
       warnings.push(kitResult.ambiguous
         ? "El nombre coincide con más de un kit. Elegí el nombre completo en la lista para evitar una cotización incorrecta."
@@ -1916,21 +2077,36 @@ function interpretVoiceQuote() {
     }
   }
 
-  if (/\b(score\s*)?(verde|ochocientos treinta|830|nueve cientos|novecientos)\b/.test(text) && !/amarillo/.test(text)) {
+  const numericScoreMatch = text.match(/\bscore\s*(?:de|es|punto)?\s*(\d{3})\b|\b(\d{3})\s*puntos?\b/);
+  const numericScore = numericScoreMatch
+    ? Number(numericScoreMatch[1] || numericScoreMatch[2])
+    : null;
+
+  if (
+    (numericScore !== null && numericScore >= 830 && numericScore <= 999) ||
+    /\b(score\s*)?(verde|ochocientos treinta|830|novecientos|nueve cientos)\b/.test(text)
+  ) {
     setScore("verde");
     applied.push("Score: Verde");
     changed = true;
-  } else if (/\b(score\s*)?(amarillo|amarilla|cuatrocientos setenta|470)\b/.test(text)) {
+  } else if (
+    (numericScore !== null && numericScore >= 470 && numericScore <= 829) ||
+    /\b(score\s*)?(amarillo|amarilla|cuatrocientos setenta|470)\b/.test(text)
+  ) {
     setScore("amarillo");
     applied.push("Score: Amarillo");
     changed = true;
   }
 
   if (/\b(sin promo|sin promocion|sin descuento|sin bonificacion|abono pleno)\b/.test(text)) {
-    setPromo("sin");
-    applied.push("Promoción: Sin promoción");
-    changed = true;
-  } else if (/\b(3|tres) meses\b/.test(text)) {
+    if (isCameraKit()) {
+      warnings.push("El Kit Cámaras Inteligentes requiere la promoción de 6 meses; no se aplicó “sin promoción”.");
+    } else {
+      setPromo("sin");
+      applied.push("Promoción: Sin promoción");
+      changed = true;
+    }
+  } else if (/\b(3|tres)\s+(mes|meses)\b/.test(text) || /\bpromo(?:cion)?\s+(?:de\s+)?(3|tres)\b/.test(text)) {
     if (isCameraKit()) {
       warnings.push("El Kit Cámaras Inteligentes usa la promoción de 6 meses; se conserva esa condición.");
     } else {
@@ -1938,7 +2114,7 @@ function interpretVoiceQuote() {
       applied.push("Promoción: 3 meses al 30% de descuento");
       changed = true;
     }
-  } else if (/\b(6|seis) meses\b/.test(text)) {
+  } else if (/\b(6|seis)\s+(mes|meses)\b/.test(text) || /\bpromo(?:cion)?\s+(?:de\s+)?(6|seis)\b/.test(text)) {
     setPromo(6);
     applied.push("Promoción: 6 meses al 30% de descuento");
     changed = true;
@@ -1975,16 +2151,13 @@ function interpretVoiceQuote() {
   syncQtyButtons();
   refresh();
 
-  if (!/\bcordoba\b/.test(text) && !/\b(resto del pais|resto del territorio|fuera de cordoba|otra provincia|resto del interior)\b/.test(text)) {
-    warnings.push("No detecté la región en la instrucción; se conserva la región que ya estaba seleccionada.");
-  }
   if (!kitResult.kit) {
-    warnings.push("Verificá el kit manualmente si el resumen no muestra el modelo correcto.");
+    warnings.push("No pude asociar el modelo con un kit del catálogo. Revisá la lista; para un kit residencial podés decir simplemente “2.2”.");
   }
-  if (!/\b(verde|amarillo|amarilla|830|470)\b/.test(text)) {
+  if (!/\b(verde|amarillo|amarilla)\b/.test(text) && numericScore === null && !/\b(ochocientos treinta|novecientos|cuatrocientos setenta)\b/.test(text)) {
     warnings.push("No detecté el score; se conserva el valor que ya estaba seleccionado.");
   }
-  if (!/\b(sin promo|sin promocion|sin descuento|sin bonificacion|abono pleno)\b/.test(text) && !/\b(3|tres|6|seis) meses\b/.test(text)) {
+  if (!/\b(sin promo|sin promocion|sin descuento|sin bonificacion|abono pleno)\b/.test(text) && !(/\b(3|tres|6|seis)\s+(mes|meses)\b/.test(text) || /\bpromo(?:cion)?\s+(?:de\s+)?(3|tres|6|seis)\b/.test(text))) {
     warnings.push("No detecté la promoción; se conserva el valor que ya estaba seleccionado.");
   }
   if (!applied.length) {
