@@ -764,7 +764,7 @@ function componentHtml(k = kitNow()) {
   return '<div class="minor-title">Componentes del kit</div><div class="component-grid">' +
     list.map(c =>
       '<div class="component-item">' +
-      '<img src="./' + esc(c.path) + '" alt="' + esc(c.name) + '" onerror="this.style.display=\\'none\\'">' +
+      '<img src="./' + esc(c.path) + '" alt="' + esc(c.name) + '">' +
       '<span>' + esc(c.name) +
       '<span class="quantity">' + esc(c.qty) + '</span></span>' +
       '</div>'
@@ -783,7 +783,7 @@ function extraSummaryHtml(additional) {
   }
 
   return '<div class="selected-extra">' +
-    '<img src="./' + esc(imagePath) + '" alt="' + esc(additional.nombre) + '" onerror="this.style.display=\\'none\\'">' +
+    '<img src="./' + esc(imagePath) + '" alt="' + esc(additional.nombre) + '">' +
     '<div class="selected-extra-info"><strong>' + esc(additional.nombre) + '</strong>' +
     '<small>Cantidad: ' + esc(additional.cantidad) + '</small></div>' +
     '<div class="selected-extra-price">' + esc(money(additional.subtotal)) + '</div>' +
