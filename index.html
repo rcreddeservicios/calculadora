@@ -426,7 +426,7 @@ function renderKits() {
 
 function showDataError() {
   $("kit").innerHTML = '<option value="">No se pudieron cargar los kits</option>';
-  $("extras").innerHTML = '<p class="bad">No se pudo leer precios.js. Verificá que esté en la raíz del repositorio.</p>';
+  $("extras").innerHTML = '<p class="bad">No se encontraron adicionales en precios.js.</p>';
   $("kitPrice").innerHTML = '<span class="bad">Error al cargar los datos. Revisá precios.js.</span>';
 }
 
@@ -527,6 +527,10 @@ function extraImagePath(additional) {
 
   if (["movimiento-cx", "doble-tecnologia-cx"].includes(additional.id)) {
     return "sensordemovimientocx.png";
+  }
+
+  if (additional.id === "placa-repetidora-cx") {
+    return "placa-repetidora-cx.png";
   }
 
   return null;
@@ -760,7 +764,7 @@ function componentHtml(k = kitNow()) {
   return '<div class="minor-title">Componentes del kit</div><div class="component-grid">' +
     list.map(c =>
       '<div class="component-item">' +
-      '<img src="./' + esc(c.path) + '" alt="' + esc(c.name) + '" onerror="this.style.display=\'none\'">' +
+      '<img src="./' + esc(c.path) + '" alt="' + esc(c.name) + '" onerror="this.style.display=\\'none\\'">' +
       '<span>' + esc(c.name) +
       '<span class="quantity">' + esc(c.qty) + '</span></span>' +
       '</div>'
@@ -779,7 +783,7 @@ function extraSummaryHtml(additional) {
   }
 
   return '<div class="selected-extra">' +
-    '<img src="./' + esc(imagePath) + '" alt="' + esc(additional.nombre) + '" onerror="this.style.display=\'none\'">' +
+    '<img src="./' + esc(imagePath) + '" alt="' + esc(additional.nombre) + '" onerror="this.style.display=\\'none\\'">' +
     '<div class="selected-extra-info"><strong>' + esc(additional.nombre) + '</strong>' +
     '<small>Cantidad: ' + esc(additional.cantidad) + '</small></div>' +
     '<div class="selected-extra-price">' + esc(money(additional.subtotal)) + '</div>' +
@@ -954,7 +958,6 @@ async function registerQuote(source) {
   const seller = requireSeller();
   if (!seller) return false;
 
-  // No duplica el registro al descargar y copiar la misma versión.
   if (lastLoggedRevision === quoteRevision) return true;
 
   if (!REGISTRO_URL || REGISTRO_URL.includes("PEGAR_URL_WEB_APP_AQUI")) {
@@ -1129,7 +1132,6 @@ async function downloadQuotePdf() {
 
     const promotionLabel = promoLabel();
 
-    // Encabezado corporativo.
     doc.setFillColor(...navy);
     doc.rect(0, 0, W, 34, "F");
 
@@ -1192,7 +1194,6 @@ async function downloadQuotePdf() {
 
     y += metaH + 3;
 
-    // Kit y precio.
     const kitH = 17;
 
     doc.setFillColor(...pale);
@@ -1217,7 +1218,6 @@ async function downloadQuotePdf() {
 
     y += kitH + 3;
 
-    // Componentes del kit.
     const components = kitComponents(kit, regionKey());
     const slots = 6;
     const gap = 2;
@@ -1265,7 +1265,6 @@ async function downloadQuotePdf() {
 
     y += boxH + 3;
 
-    // Adicionales.
     doc.setFont("helvetica", "bold");
     doc.setFontSize(7.2);
     doc.setTextColor(...navy);
@@ -1362,7 +1361,6 @@ async function downloadQuotePdf() {
 
     y += 4;
 
-    // Financiación y abono en dos columnas.
     const gap2 = 3;
     const boxW2 = (contentW - gap2) / 2;
     const boxH2 = 36;
@@ -1422,7 +1420,6 @@ async function downloadQuotePdf() {
     if (months === "sin") {
       doc.text("Abono mensual: " + moneyMonthly(abono.pleno), ax, ry);
     } else {
-      // En promociones de 3 o 6 meses se muestra únicamente el precio promocional.
       doc.text("Promocional: " + moneyMonthly(monthly) + "/mes", ax, ry);
     }
 
@@ -1440,7 +1437,6 @@ async function downloadQuotePdf() {
 
     y = boxY + boxH2 + 3;
 
-    // Total de instalación.
     const totalH = 14;
 
     doc.setFillColor(...navy);
@@ -1462,7 +1458,6 @@ async function downloadQuotePdf() {
 
     y += totalH + 3;
 
-    // Instrucciones de Pago Fácil.
     const pagoText = "PARA EL PAGO DE TU INSTALACIÓN SOLICITAR NUMERO DE CONTRATO AL ASESOR, ACERCATE AL PAGOFACIL Y DECIRLE AL CAJERO QUE VAS A ABONAR UNA INSTALACIÓN DE ADT ALARMAS.";
     const pagoLines = doc.splitTextToSize(pagoText, contentW - 8);
     const pagoH = 7 + pagoLines.length * 2.8;
@@ -1491,7 +1486,6 @@ async function downloadQuotePdf() {
       align: "right"
     });
 
-    // Agrega los términos y condiciones al final del PDF.
     const merged = await PDFLib.PDFDocument.load(doc.output("arraybuffer"));
 
     const termsResponse = await fetch("./terminos-condiciones.pdf", {
@@ -1563,11 +1557,10 @@ $("contactPhone").addEventListener("input", () => {
 });
 
 
-
 /* ==========================
    ASISTENTE DE COTIZACIÓN POR VOZ
-   Utiliza reconocimiento de voz del navegador; no requiere una API de IA.
    ========================== */
+
 let voiceRecognition = null;
 let voiceIsListening = false;
 
@@ -1577,7 +1570,6 @@ function normalizeVoiceText(value) {
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase();
 
-  // Acepta varias transcripciones habladas del modelo: dos punto dos, dos coma dos, 2 2, etc.
   text = text
     .replace(/\b(?:dos|2)\s+(?:punto|coma)\s+(?:dos|2)\b/g, "2.2")
     .replace(/\b(?:dos|2)\s+(?:punto|coma)\s+(?:uno|1)\b/g, "2.1")
@@ -1640,10 +1632,12 @@ function startVoiceDictation() {
 
     voiceRecognition.onresult = event => {
       let text = "";
+
       for (let i = 0; i < event.results.length; i++) {
         const result = event.results[i];
         if (result && result[0]) text += result[0].transcript + " ";
       }
+
       $("voiceTranscript").value = text.trim();
       $("voicePreview").textContent = "Transcripción obtenida. Leela o corregila y presioná “Interpretar y completar”.";
     };
@@ -1656,13 +1650,19 @@ function startVoiceDictation() {
         "audio-capture": "No se encontró un micrófono disponible.",
         "network": "El servicio de reconocimiento de voz tuvo un problema de conexión. Podés escribir la instrucción manualmente."
       };
-      setVoiceStatus(messages[event.error] || ("No se pudo reconocer la voz: " + event.error + ". Podés escribir la instrucción manualmente."), "error");
+
+      setVoiceStatus(
+        messages[event.error] ||
+          ("No se pudo reconocer la voz: " + event.error + ". Podés escribir la instrucción manualmente."),
+        "error"
+      );
     };
 
     voiceRecognition.onend = () => {
       voiceIsListening = false;
       $("voiceStartBtn").disabled = false;
       $("voiceStopBtn").disabled = true;
+
       if ($("voiceTranscript").value.trim()) {
         setVoiceStatus("Dictado finalizado. Revisá la transcripción antes de aplicarla.", "success");
       } else if (!$("voiceStatus").dataset.state || $("voiceStatus").dataset.state === "listening") {
@@ -1671,6 +1671,7 @@ function startVoiceDictation() {
     };
 
     voiceRecognition.start();
+
   } catch (error) {
     voiceIsListening = false;
     $("voiceStartBtn").disabled = false;
@@ -1695,6 +1696,7 @@ const VOICE_NUMBER_WORDS = {
 
 function voiceNumberFromWord(word) {
   if (/^\d+$/.test(word || "")) return Number(word);
+
   return Object.prototype.hasOwnProperty.call(VOICE_NUMBER_WORDS, word)
     ? VOICE_NUMBER_WORDS[word]
     : null;
@@ -1702,13 +1704,17 @@ function voiceNumberFromWord(word) {
 
 function allKitCandidates() {
   if (!data || !data.regiones) return [];
+
   const out = [];
+
   ["cordoba", "resto"].forEach(region => {
     const list = data.regiones[region] && data.regiones[region].kits;
+
     (list || []).forEach(kit => {
       out.push({ region, kit });
     });
   });
+
   return out;
 }
 
@@ -1718,31 +1724,43 @@ function kitPhraseFromVoice(text) {
 }
 
 function findKitByIdOrName(targetRegion, preferredIds, namePredicate) {
-  const list = (data && data.regiones && data.regiones[targetRegion] && data.regiones[targetRegion].kits) || [];
+  const list =
+    (data && data.regiones && data.regiones[targetRegion] &&
+      data.regiones[targetRegion].kits) || [];
+
   for (const id of preferredIds) {
-    const found = list.find(kit => String(kit.id || "").toLowerCase() === id.toLowerCase());
+    const found = list.find(
+      kit => String(kit.id || "").toLowerCase() === id.toLowerCase()
+    );
+
     if (found) return { kit: found, region: targetRegion };
   }
+
   if (typeof namePredicate === "function") {
     const found = list.find(namePredicate);
     if (found) return { kit: found, region: targetRegion };
   }
+
   return null;
 }
 
 function voiceModelCode(text) {
   const t = normalizeVoiceText(text);
   const match = t.match(/\b(1\.1|2\.1|2\.2|3\.2)\b/);
+
   if (match) return match[1];
+
   return "";
 }
 
 function voiceHasViewKitIntent(text) {
   const t = normalizeVoiceText(text);
+
   if (/\bview\b/.test(t)) return true;
 
-  // No confundir cámaras solicitadas como adicionales con cámaras incluidas en el kit.
-  const addOnCamera = /\b(agrega|agregar|agregale|agrega|sumar|suma|sumale|adicional|adicionales|extra|extras|aparte|mas)\b(?:\s+\w+){0,4}\s+\bcamaras?\b/.test(t);
+  const addOnCamera =
+    /\b(agrega|agregar|agregale|sumar|suma|sumale|adicional|adicionales|extra|extras|aparte|mas)\b(?:\s+\w+){0,4}\s+\bcamaras?\b/.test(t);
+
   if (addOnCamera) return false;
 
   return /\bcamara incluida\b|\bcamaras incluidas\b|\bincluye camara\b|\bincluye camaras\b|\bcon camara incluida\b|\bcon camaras incluidas\b/.test(t) ||
@@ -1758,7 +1776,8 @@ function resolveVoiceKitShortcut(text, targetRegion) {
   const hasCommerce = /\b(comercio|comercial|negocio|local comercial|tienda)\b/.test(t);
   const hasCameraKit = /\bcamaras inteligentes\b/.test(t);
   const viewIntent = voiceHasViewKitIntent(t);
-  const hasBothCameraNames = /\bcamara interior\b/.test(t) && /\bcamara exterior\b/.test(t);
+  const hasBothCameraNames =
+    /\bcamara interior\b/.test(t) && /\bcamara exterior\b/.test(t);
 
   if (hasCameraKit) {
     const cameraKit = findKitByIdOrName(
@@ -1766,28 +1785,33 @@ function resolveVoiceKitShortcut(text, targetRegion) {
       ["cam-inteligentes"],
       kit => /camaras inteligentes/.test(normalizeVoiceText(kit.nombre))
     );
+
     if (cameraKit) return cameraKit;
   }
 
   if (hasCommerce) {
-    // El catálogo comercial disponible es 2.1. No reinterpretar 2.2 como comercio.
     if (model && model !== "2.1") return null;
+
     return findKitByIdOrName(
       targetRegion,
       ["comercio-cx-21", "comercio-21", "cx-comercio-21"],
-      kit => /comercio|comercial/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) && /2\.1|21/.test(normalizeVoiceText(kit.nombre + " " + kit.id))
+      kit => /comercio|comercial/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) &&
+        /2\.1|21/.test(normalizeVoiceText(kit.nombre + " " + kit.id))
     );
   }
 
   if (hasGalpon) {
     if (model && model !== "2.2") return null;
+
     const ids = viewIntent
       ? ["galpon-22-view", "galpon-view-22", "galpon-22"]
       : ["galpon-22", "galpon-22-view", "galpon-view-22"];
+
     return findKitByIdOrName(
       targetRegion,
       ids,
-      kit => /galpon/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) && /2\.2|22/.test(normalizeVoiceText(kit.nombre + " " + kit.id))
+      kit => /galpon/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) &&
+        /2\.2|22/.test(normalizeVoiceText(kit.nombre + " " + kit.id))
     );
   }
 
@@ -1797,7 +1821,8 @@ function resolveVoiceKitShortcut(text, targetRegion) {
     return findKitByIdOrName(
       targetRegion,
       ["comercio-cx-21", "comercio-21", "cx-comercio-21"],
-      kit => /comercio|comercial/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) && /2\.1|21/.test(normalizeVoiceText(kit.nombre + " " + kit.id))
+      kit => /comercio|comercial/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) &&
+        /2\.1|21/.test(normalizeVoiceText(kit.nombre + " " + kit.id))
     );
   }
 
@@ -1805,19 +1830,36 @@ function resolveVoiceKitShortcut(text, targetRegion) {
     return findKitByIdOrName(
       targetRegion,
       ["cx-view-32", "view-32"],
-      kit => /3\.2|32/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) && /view|cam/.test(normalizeVoiceText(kit.nombre + " " + kit.id))
+      kit => /3\.2|32/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) &&
+        /view|cam/.test(normalizeVoiceText(kit.nombre + " " + kit.id))
     );
   }
 
   if (model === "1.1") {
     return viewIntent
-      ? findKitByIdOrName(targetRegion, ["view-11", "cx-view-11"], kit => /1\.1|11/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) && /view/.test(normalizeVoiceText(kit.nombre)))
-      : findKitByIdOrName(targetRegion, ["security-11", "cx-security-11"], kit => /1\.1|11/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) && /security/.test(normalizeVoiceText(kit.nombre)));
+      ? findKitByIdOrName(
+          targetRegion,
+          ["view-11", "cx-view-11"],
+          kit => /1\.1|11/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) &&
+            /view/.test(normalizeVoiceText(kit.nombre))
+        )
+      : findKitByIdOrName(
+          targetRegion,
+          ["security-11", "cx-security-11"],
+          kit => /1\.1|11/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) &&
+            /security/.test(normalizeVoiceText(kit.nombre))
+        );
   }
 
   if (model === "2.2") {
     if (hasBothCameraNames) {
-      const pair = findKitByIdOrName(targetRegion, ["cx-view-22"], kit => /cam int/.test(normalizeVoiceText(kit.nombre)) && /cam ext/.test(normalizeVoiceText(kit.nombre)));
+      const pair = findKitByIdOrName(
+        targetRegion,
+        ["cx-view-22"],
+        kit => /cam int/.test(normalizeVoiceText(kit.nombre)) &&
+          /cam ext/.test(normalizeVoiceText(kit.nombre))
+      );
+
       if (pair) return pair;
     }
 
@@ -1825,17 +1867,18 @@ function resolveVoiceKitShortcut(text, targetRegion) {
       return findKitByIdOrName(
         targetRegion,
         ["view-22", "cx-view-22"],
-        kit => /2\.2|22/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) && /view/.test(normalizeVoiceText(kit.nombre))
+        kit => /2\.2|22/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) &&
+          /view/.test(normalizeVoiceText(kit.nombre))
       );
     }
 
-    // Por defecto, 2.2 residencial: Córdoba usa el panel inteligente; el resto del país, CX.
-    // El mismo ID puede tener nombres distintos según la región, por lo que se busca dentro
-    // de la lista de la región detectada/seleccionada.
+    // Por defecto, 2.2 residencial: Córdoba usa panel inteligente; resto del país, CX.
     return findKitByIdOrName(
       targetRegion,
       ["security-22", "cx-security-22"],
-      kit => /2\.2|22/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) && /security/.test(normalizeVoiceText(kit.nombre)) && !/view|galpon|comercio/.test(normalizeVoiceText(kit.nombre + " " + kit.id))
+      kit => /2\.2|22/.test(normalizeVoiceText(kit.nombre + " " + kit.id)) &&
+        /security/.test(normalizeVoiceText(kit.nombre)) &&
+        !/view|galpon|comercio/.test(normalizeVoiceText(kit.nombre + " " + kit.id))
     );
   }
 
@@ -1844,11 +1887,13 @@ function resolveVoiceKitShortcut(text, targetRegion) {
 
 function detectVoiceRegion(text, currentRegion) {
   const t = normalizeVoiceText(text);
+
   const cordobaTerms = [
     "cordoba", "rio cuarto", "villa maria", "villa carlos paz", "alta gracia",
     "rio tercero", "san francisco cordoba", "bell ville", "jesus maria", "cosquin",
     "la falda", "marcos juarez", "laboulaye", "villa dolores", "morteros"
   ];
+
   const restoTerms = [
     "resto del pais", "resto del territorio", "fuera de cordoba", "otra provincia",
     "resto del interior", "buenos aires", "capital federal", "caba", "ciudad autonoma",
@@ -1864,10 +1909,13 @@ function detectVoiceRegion(text, currentRegion) {
     "villa gesell", "necochea", "rio grande", "caleta olivia", "eldorado", "rafaela",
     "venado tuerto", "reconquista", "junin", "chivilcoy", "san pedro"
   ];
+
   const restoMatch = restoTerms.find(term => t.includes(term));
   if (restoMatch) return { region: "resto", detected: true, place: restoMatch };
+
   const cordobaMatch = cordobaTerms.find(term => t.includes(term));
   if (cordobaMatch) return { region: "cordoba", detected: true, place: cordobaMatch };
+
   return { region: currentRegion, detected: false, place: "" };
 }
 
@@ -1877,34 +1925,42 @@ function findKitFromVoice(text, targetRegion) {
   const normalizedText = normalizeVoiceText(text);
   const kitPhrase = kitPhraseFromVoice(normalizedText);
 
-  // Primero, buscar un nombre completo del catálogo dentro de lo dicho.
   const exactFullName = all.filter(item => {
     const name = normalizeVoiceText(item.kit.nombre);
     return name && normalizedText.includes(name);
   });
 
-  if (exactFullName.length === 1) return { kit: exactFullName[0].kit, region: exactFullName[0].region };
+  if (exactFullName.length === 1) {
+    return { kit: exactFullName[0].kit, region: exactFullName[0].region };
+  }
+
   if (exactFullName.length > 1) {
     const preferred = exactFullName.filter(item => item.region === targetRegion);
     const distinct = new Map(preferred.map(item => [item.kit.id, item]));
-    if (distinct.size === 1) return { kit: [...distinct.values()][0].kit, region: targetRegion };
+
+    if (distinct.size === 1) {
+      return { kit: [...distinct.values()][0].kit, region: targetRegion };
+    }
   }
 
-  // Resolver abreviaturas comerciales antes de recurrir a coincidencias difusas.
   const shortcut = resolveVoiceKitShortcut(normalizedText, targetRegion);
   if (shortcut && shortcut.kit) return shortcut;
 
-  // Después, identificar el nombre abreviado. Nunca elegir entre dos kits empatados.
   const phrase = kitPhrase || normalizedText;
   const phraseTokens = [...new Set(phrase.split(/\s+/).filter(Boolean))];
-  const stop = new Set(["kit","adt","el","la","los","las","de","del","un","una","para","en","con","por","favor","quiero","cotizame","cotizar","necesito","presupuesto","alarma","alarmas"]);
+
+  const stop = new Set([
+    "kit","adt","el","la","los","las","de","del","un","una","para","en","con",
+    "por","favor","quiero","cotizame","cotizar","necesito","presupuesto","alarma","alarmas"
+  ]);
+
   const queryTokens = phraseTokens.filter(t => !stop.has(t) && t.length > 1);
+
   const scored = all.map(item => {
     const name = normalizeVoiceText(item.kit.nombre);
     const id = normalizeVoiceText(item.kit.id);
     const nameTokens = [...new Set(name.split(/\s+/).filter(Boolean))];
 
-    // Eliminar candidatos que contradicen una característica dicha de forma explícita.
     if (/\bcx\b/.test(phrase) && !/\bcx\b/.test(name) && !/\bcx\b/.test(id)) return null;
     if (/\bsecurity\b/.test(phrase) && !name.includes("security")) return null;
     if (/\bview\b/.test(phrase) && !name.includes("view")) return null;
@@ -1912,46 +1968,68 @@ function findKitFromVoice(text, targetRegion) {
     if (phrase.includes("panel inteligente") && !name.includes("panel inteligente")) return null;
     if (phrase.includes("camaras inteligentes") && !name.includes("camaras inteligentes")) return null;
 
-    const hits = queryTokens.filter(token => nameTokens.includes(token) || id.includes(token));
+    const hits = queryTokens.filter(token =>
+      nameTokens.includes(token) || id.includes(token)
+    );
+
     const ratio = queryTokens.length ? hits.length / queryTokens.length : 0;
-    let score = ratio;
+    let candidateScore = ratio;
 
-    // Priorizar coincidencias textuales en nombres abreviados del catálogo.
-    if (kitPhrase && name.includes(kitPhrase)) score += 0.2;
-    if (/\bcx\b/.test(phrase) && /\bcx\b/.test(name)) score += 0.08;
-    if (phrase.includes("panel inteligente") && name.includes("panel inteligente")) score += 0.12;
-    if (phrase.includes("cam int") && name.includes("cam int")) score += 0.12;
-    if (phrase.includes("cam ext") && name.includes("cam ext")) score += 0.12;
-    if (phrase.includes("camara interior") && name.includes("cam int")) score += 0.1;
-    if (phrase.includes("camara exterior") && name.includes("cam ext")) score += 0.1;
+    if (kitPhrase && name.includes(kitPhrase)) candidateScore += 0.2;
+    if (/\bcx\b/.test(phrase) && /\bcx\b/.test(name)) candidateScore += 0.08;
+    if (phrase.includes("panel inteligente") && name.includes("panel inteligente")) candidateScore += 0.12;
+    if (phrase.includes("cam int") && name.includes("cam int")) candidateScore += 0.12;
+    if (phrase.includes("cam ext") && name.includes("cam ext")) candidateScore += 0.12;
+    if (phrase.includes("camara interior") && name.includes("cam int")) candidateScore += 0.1;
+    if (phrase.includes("camara exterior") && name.includes("cam ext")) candidateScore += 0.1;
 
-    return { ...item, score, hits: hits.length, tokenCount: queryTokens.length };
+    return {
+      ...item,
+      score: candidateScore,
+      hits: hits.length,
+      tokenCount: queryTokens.length
+    };
   }).filter(item => item && item.hits >= 2 && item.score >= 0.68);
 
   scored.sort((a, b) => b.score - a.score);
-  if (!scored.length) return { kit: null, region: targetRegion, ambiguous: false };
+
+  if (!scored.length) {
+    return { kit: null, region: targetRegion, ambiguous: false };
+  }
 
   const topScore = scored[0].score;
   const tied = scored.filter(item => Math.abs(item.score - topScore) < 0.06);
-  const uniqueById = new Map(tied.map(item => [item.kit.id + "||" + item.region, item]));
+  const uniqueById = new Map(
+    tied.map(item => [item.kit.id + "||" + item.region, item])
+  );
 
   if (uniqueById.size === 1) {
     return { kit: scored[0].kit, region: scored[0].region };
   }
 
-  // Si hay variantes CX View, las menciones explícitas de ambas cámaras distinguen el kit.
-  const mentionsBothCameras = (normalizedText.includes("cam int") && normalizedText.includes("cam ext")) ||
+  const mentionsBothCameras =
+    (normalizedText.includes("cam int") && normalizedText.includes("cam ext")) ||
     (normalizedText.includes("camara interior") && normalizedText.includes("camara exterior")) ||
     normalizedText.includes("ambas camaras");
+
   let narrowed = tied;
+
   if (mentionsBothCameras) {
     const withCameraPair = tied.filter(item => {
       const name = normalizeVoiceText(item.kit.nombre);
-      return name.includes("cam int") && name.includes("cam ext") || item.kit.id === "cx-view-22";
+      return (
+        name.includes("cam int") &&
+        name.includes("cam ext")
+      ) || item.kit.id === "cx-view-22";
     });
+
     if (withCameraPair.length) narrowed = withCameraPair;
   }
-  const narrowedMap = new Map(narrowed.map(item => [item.kit.id + "||" + item.region, item]));
+
+  const narrowedMap = new Map(
+    narrowed.map(item => [item.kit.id + "||" + item.region, item])
+  );
+
   if (narrowedMap.size === 1) {
     const result = [...narrowedMap.values()][0];
     return { kit: result.kit, region: result.region };
@@ -1965,15 +2043,27 @@ function phraseVariantsForExtra(extra) {
   const aliases = [extra.nombre];
 
   if (id === "interior") aliases.push(
-    "camara inteligente interior","camara interior","camara interna",
-    "camara de interior","camaras interiores","camaras de interior"
+    "camara inteligente interior", "camara interior", "camara interna",
+    "camara de interior", "camaras interiores", "camaras de interior"
   );
+
   if (id === "exterior") aliases.push(
-    "camara exterior","camara externa","camara de exterior",
-    "camaras exteriores","camaras externas","camaras de exterior"
+    "camara exterior", "camara externa", "camara de exterior",
+    "camaras exteriores", "camaras externas", "camaras de exterior"
   );
-  if (id === "caja") aliases.push("caja estanca","cajas estancas");
-  if (id === "microsd") aliases.push("micro sd","microsd","tarjeta microsd","tarjeta de memoria");
+
+  if (id === "caja") aliases.push("caja estanca", "cajas estancas");
+  if (id === "microsd") aliases.push("micro sd", "microsd", "tarjeta microsd", "tarjeta de memoria");
+
+  if (id === "placa-repetidora-cx") aliases.push(
+    "placa repetidora de kit cx",
+    "placa repetidora cx",
+    "placa repetidora",
+    "repetidora cx",
+    "repetidor de senal cx",
+    "repetidora de senal cx",
+    "placa repetidora de alarma cx"
+  );
 
   return [...new Set(aliases.map(normalizeVoiceText).filter(Boolean))]
     .sort((a, b) => b.length - a.length);
@@ -1985,6 +2075,7 @@ function findExtraMention(text, extra) {
 
   aliases.forEach(alias => {
     const index = text.indexOf(alias);
+
     if (index >= 0 && (!best || alias.length > best.alias.length)) {
       best = { alias, index };
     }
@@ -1994,11 +2085,10 @@ function findExtraMention(text, extra) {
 }
 
 function quantityBeforeMention(text, index) {
-  // La cantidad debe estar inmediatamente antes del nombre del adicional.
-  // Así, "promoción de seis meses y cámara exterior" no se interpreta como seis cámaras.
   const before = text.slice(0, index).trim().split(/\s+/);
   const previousWord = before.length ? before[before.length - 1] : "";
   const n = voiceNumberFromWord(previousWord);
+
   return n !== null && Number.isFinite(n)
     ? Math.min(50, Math.max(0, n))
     : 1;
@@ -2007,12 +2097,14 @@ function quantityBeforeMention(text, index) {
 function setExtraQuantity(id, quantity) {
   const input = document.querySelector('#extras input[data-id="' + id + '"]');
   if (!input) return false;
+
   input.value = clampQty(quantity);
   return true;
 }
 
 function interpretVoiceQuote() {
   const raw = ($("voiceTranscript").value || "").trim();
+
   if (!raw) {
     setVoiceStatus("Primero dictá o escribí una instrucción.", "error");
     return;
@@ -2022,10 +2114,12 @@ function interpretVoiceQuote() {
   const applied = [];
   const warnings = [];
   let changed = false;
+
   let targetRegion = regionKey();
   const originalRegion = regionKey();
   const regionDetection = detectVoiceRegion(text, originalRegion);
   const regionWasDetected = regionDetection.detected;
+
   targetRegion = regionDetection.region;
 
   if (regionWasDetected) {
@@ -2033,51 +2127,72 @@ function interpretVoiceQuote() {
       $("region").value = targetRegion;
       changed = true;
     }
+
     applied.push("Región: " + data.regiones[targetRegion].nombre);
   } else {
-    // Si no menciona una zona, respetar la que está seleccionada en el formulario.
-    applied.push("Región usada: " + data.regiones[targetRegion].nombre + " (selector actual)");
+    applied.push(
+      "Región usada: " + data.regiones[targetRegion].nombre +
+      " (selector actual)"
+    );
   }
 
   if (targetRegion !== originalRegion) renderKits();
 
-  // La voz parte de una cotización nueva: se limpian los adicionales anteriores
-  // para no arrastrarlos por accidente de una cotización previa.
+  // Limpiar los adicionales de la cotización previa antes de interpretar la nueva.
   (data.adicionales || []).forEach(extra => {
-    const input = document.querySelector('#extras input[data-id="' + extra.id + '"]');
+    const input = document.querySelector(
+      '#extras input[data-id="' + extra.id + '"]'
+    );
+
     if (input && clampQty(input.value) !== 0) changed = true;
+
     setExtraQuantity(extra.id, 0);
   });
 
-  let kitResult = findKitFromVoice(text, targetRegion);
+  const kitResult = findKitFromVoice(text, targetRegion);
+
   if (kitResult.kit) {
     if (kitResult.region && kitResult.region !== targetRegion) {
       targetRegion = kitResult.region;
       $("region").value = targetRegion;
       changed = true;
     }
+
     renderKits();
+
     const targetKit = (data.regiones[targetRegion].kits || [])
       .find(k => k.id === kitResult.kit.id);
 
     if (targetKit) {
       if ($("kit").value !== targetKit.id) changed = true;
+
       $("kit").value = targetKit.id;
       updatePromoRules();
       applied.push("Kit: " + targetKit.nombre);
     } else {
-      warnings.push("No pude ubicar ese kit en la región elegida; seleccioná el kit manualmente.");
+      warnings.push(
+        "No pude ubicar ese kit en la región elegida; seleccioná el kit manualmente."
+      );
     }
   } else {
-    const mentionedKit = /\bkit\b/.test(text) || /\b(security|interactive|galpon|view|cx|casa|hogar|residencial)\b/.test(text) || Boolean(voiceModelCode(text));
+    const mentionedKit =
+      /\bkit\b/.test(text) ||
+      /\b(security|interactive|galpon|view|cx|casa|hogar|residencial)\b/.test(text) ||
+      Boolean(voiceModelCode(text));
+
     if (mentionedKit) {
-      warnings.push(kitResult.ambiguous
-        ? "El nombre coincide con más de un kit. Elegí el nombre completo en la lista para evitar una cotización incorrecta."
-        : "No identifiqué un kit con suficiente certeza. Seleccionalo manualmente en la lista.");
+      warnings.push(
+        kitResult.ambiguous
+          ? "El nombre coincide con más de un kit. Elegí el nombre completo en la lista para evitar una cotización incorrecta."
+          : "No identifiqué un kit con suficiente certeza. Seleccionalo manualmente en la lista."
+      );
     }
   }
 
-  const numericScoreMatch = text.match(/\bscore\s*(?:de|es|punto)?\s*(\d{3})\b|\b(\d{3})\s*puntos?\b/);
+  const numericScoreMatch = text.match(
+    /\bscore\s*(?:de|es|punto)?\s*(\d{3})\b|\b(\d{3})\s*puntos?\b/
+  );
+
   const numericScore = numericScoreMatch
     ? Number(numericScoreMatch[1] || numericScoreMatch[2])
     : null;
@@ -2089,6 +2204,7 @@ function interpretVoiceQuote() {
     setScore("verde");
     applied.push("Score: Verde");
     changed = true;
+
   } else if (
     (numericScore !== null && numericScore >= 470 && numericScore <= 829) ||
     /\b(score\s*)?(amarillo|amarilla|cuatrocientos setenta|470)\b/.test(text)
@@ -2100,42 +2216,64 @@ function interpretVoiceQuote() {
 
   if (/\b(sin promo|sin promocion|sin descuento|sin bonificacion|abono pleno)\b/.test(text)) {
     if (isCameraKit()) {
-      warnings.push("El Kit Cámaras Inteligentes requiere la promoción de 6 meses; no se aplicó “sin promoción”.");
+      warnings.push(
+        "El Kit Cámaras Inteligentes requiere la promoción de 6 meses; no se aplicó “sin promoción”."
+      );
     } else {
       setPromo("sin");
       applied.push("Promoción: Sin promoción");
       changed = true;
     }
-  } else if (/\b(3|tres)\s+(mes|meses)\b/.test(text) || /\bpromo(?:cion)?\s+(?:de\s+)?(3|tres)\b/.test(text)) {
+
+  } else if (
+    /\b(3|tres)\s+(mes|meses)\b/.test(text) ||
+    /\bpromo(?:cion)?\s+(?:de\s+)?(3|tres)\b/.test(text)
+  ) {
     if (isCameraKit()) {
-      warnings.push("El Kit Cámaras Inteligentes usa la promoción de 6 meses; se conserva esa condición.");
+      warnings.push(
+        "El Kit Cámaras Inteligentes usa la promoción de 6 meses; se conserva esa condición."
+      );
     } else {
       setPromo(3);
       applied.push("Promoción: 3 meses al 30% de descuento");
       changed = true;
     }
-  } else if (/\b(6|seis)\s+(mes|meses)\b/.test(text) || /\bpromo(?:cion)?\s+(?:de\s+)?(6|seis)\b/.test(text)) {
+
+  } else if (
+    /\b(6|seis)\s+(mes|meses)\b/.test(text) ||
+    /\bpromo(?:cion)?\s+(?:de\s+)?(6|seis)\b/.test(text)
+  ) {
     setPromo(6);
     applied.push("Promoción: 6 meses al 30% de descuento");
     changed = true;
   }
 
-  const noExtras = /\b(sin adicionales|ningun adicional|ninguna camara|sin camaras|no agregues adicionales|no agregar adicionales)\b/.test(text);
+  const noExtras =
+    /\b(sin adicionales|ningun adicional|ninguna camara|sin camaras|no agregues adicionales|no agregar adicionales)\b/.test(text);
+
   if (noExtras) {
     (data.adicionales || []).forEach(extra => setExtraQuantity(extra.id, 0));
     applied.push("Adicionales: ninguno");
     changed = true;
+
   } else {
     const extraMentions = [];
+
     (data.adicionales || []).forEach(extra => {
       const mention = findExtraMention(text, extra);
       if (!mention) return;
 
-      // Si aparece un plural negado, no convertirlo en una cantidad positiva.
-      const preceding = text.slice(Math.max(0, mention.index - 18), mention.index);
-      if (/\b(sin|no quiero|no agregar|no agregues|sin agregar)\s*$/.test(preceding)) return;
+      const preceding = text.slice(
+        Math.max(0, mention.index - 18),
+        mention.index
+      );
+
+      if (/\b(sin|no quiero|no agregar|no agregues|sin agregar)\s*$/.test(preceding)) {
+        return;
+      }
 
       const quantity = quantityBeforeMention(text, mention.index);
+
       if (setExtraQuantity(extra.id, quantity)) {
         extraMentions.push(quantity + " × " + extra.nombre);
         changed = true;
@@ -2148,28 +2286,56 @@ function interpretVoiceQuote() {
   }
 
   if (changed) markQuoteEdited();
+
   syncQtyButtons();
   refresh();
 
   if (!kitResult.kit) {
-    warnings.push("No pude asociar el modelo con un kit del catálogo. Revisá la lista; para un kit residencial podés decir simplemente “2.2”.");
+    warnings.push(
+      "No pude asociar el modelo con un kit del catálogo. Revisá la lista; para un kit residencial podés decir simplemente “2.2”."
+    );
   }
-  if (!/\b(verde|amarillo|amarilla)\b/.test(text) && numericScore === null && !/\b(ochocientos treinta|novecientos|cuatrocientos setenta)\b/.test(text)) {
+
+  if (
+    !/\b(verde|amarillo|amarilla)\b/.test(text) &&
+    numericScore === null &&
+    !/\b(ochocientos treinta|novecientos|cuatrocientos setenta)\b/.test(text)
+  ) {
     warnings.push("No detecté el score; se conserva el valor que ya estaba seleccionado.");
   }
-  if (!/\b(sin promo|sin promocion|sin descuento|sin bonificacion|abono pleno)\b/.test(text) && !(/\b(3|tres|6|seis)\s+(mes|meses)\b/.test(text) || /\bpromo(?:cion)?\s+(?:de\s+)?(3|tres|6|seis)\b/.test(text))) {
+
+  if (
+    !/\b(sin promo|sin promocion|sin descuento|sin bonificacion|abono pleno)\b/.test(text) &&
+    !(
+      /\b(3|tres|6|seis)\s+(mes|meses)\b/.test(text) ||
+      /\bpromo(?:cion)?\s+(?:de\s+)?(3|tres|6|seis)\b/.test(text)
+    )
+  ) {
     warnings.push("No detecté la promoción; se conserva el valor que ya estaba seleccionado.");
   }
+
   if (!applied.length) {
-    warnings.push("No pude identificar datos suficientes para completar el presupuesto. Probá nombrar región, nombre completo del kit, score, promoción y adicionales.");
+    warnings.push(
+      "No pude identificar datos suficientes para completar el presupuesto. Probá nombrar región, nombre completo del kit, score, promoción y adicionales."
+    );
   }
 
   const report = [];
-  if (applied.length) report.push("DATOS INTERPRETADOS\n• " + applied.join("\n• "));
-  if (warnings.length) report.push("REVISAR\n• " + warnings.join("\n• "));
-  report.push("Revisá el resumen de la cotización antes de descargar el PDF.");
+
+  if (applied.length) {
+    report.push("DATOS INTERPRETADOS\n• " + applied.join("\n• "));
+  }
+
+  if (warnings.length) {
+    report.push("REVISAR\n• " + warnings.join("\n• "));
+  }
+
+  report.push(
+    "Revisá el resumen de la cotización antes de descargar el PDF."
+  );
 
   $("voicePreview").textContent = report.join("\n\n");
+
   setVoiceStatus(
     warnings.length
       ? "Interpretación realizada con datos pendientes de revisión. No generé el PDF automáticamente."
@@ -2188,10 +2354,11 @@ $("voiceStartBtn").addEventListener("click", startVoiceDictation);
 $("voiceStopBtn").addEventListener("click", stopVoiceDictation);
 $("voiceInterpretBtn").addEventListener("click", interpretVoiceQuote);
 $("voiceClearBtn").addEventListener("click", clearVoiceTranscript);
-$("voiceTranscript").addEventListener("input", () => {
-  $("voicePreview").textContent = "Transcripción editada. Presioná “Interpretar y completar” para aplicar los datos.";
-});
 
+$("voiceTranscript").addEventListener("input", () => {
+  $("voicePreview").textContent =
+    "Transcripción editada. Presioná “Interpretar y completar” para aplicar los datos.";
+});
 
 if (data && data.regiones && Array.isArray(data.adicionales)) {
   renderExtras();
