@@ -76,9 +76,6 @@ window.PRECIOS_ADT = {
           verde: { sin: null, 3: null, 6: 53999 },
           amarillo: { sin: null, 3: null, 6: 88999 }
         },
-
-        // NUEVO KIT COMERCIO CX 2.1
-
         {
           id: "comercio-cx-21",
           nombre: "Kit Comercio CX 2.1",
@@ -170,9 +167,6 @@ window.PRECIOS_ADT = {
           verde: { sin: null, 3: null, 6: 53999 },
           amarillo: { sin: null, 3: null, 6: 88999 }
         },
-
-        // NUEVO KIT COMERCIO CX 2.1
-
         {
           id: "comercio-cx-21",
           nombre: "Kit Comercio CX 2.1",
@@ -259,6 +253,11 @@ window.PRECIOS_ADT = {
       id: "segundo-tecnico",
       nombre: "Asistencia de segundo técnico — Tecnico Ayudante p/instalacion",
       precio: 41685
+    },
+    {
+      id: "placa-repetidora-cx",
+      nombre: "Placa repetidora de kit CX",
+      precio: 170560
     }
   ]
 };
