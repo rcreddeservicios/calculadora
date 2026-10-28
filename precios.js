@@ -186,8 +186,8 @@ window.PRECIOS_ADT = {
   adicionales: [
     {
       id: "interior",
-      nombre: "Cámara interior — Cam INT 515 c/aud c/grab local 2.4G",
-      precio: 143245
+      nombre: "Cámara interior — Cam INT 516 c/aud c/grab local 2.4/5G +Tarjeta SD de 64GB incluída",
+      precio: 144240
     },
     {
       id: "exterior",
