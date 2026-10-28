@@ -750,6 +750,14 @@ function kitComponents(k = kitNow(), region = regionKey()) {
     });
   }
 
+  if (isCommerce) {
+    out.push({
+      name: "Sirena exterior",
+      qty: "× 1",
+      path: "sirenaexterior.png"
+    });
+  }
+
   if (!isCordoba) {
     out.push({
       name: "Teclado de control",
