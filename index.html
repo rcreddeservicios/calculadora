@@ -841,10 +841,6 @@ function refresh() {
     el.textContent = money(extra ? extra.subtotal : 0);
   });
 
-    const extra = extras.find(a => a.id === el.dataset.totalId);
-    el.textContent = money(extra ? extra.subtotal : 0);
-  });
-
   const summary = $("summary");
 
   if (!kit || !score || !months || price == null || !abono) {
