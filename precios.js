@@ -77,6 +77,12 @@ window.PRECIOS_ADT = {
           amarillo: { sin: null, 3: null, 6: 88999 }
         },
         {
+          id: "cam-inteligente-interior",
+          nombre: "Kit Cámara Inteligente (1 cámara interior)",
+          verde: { sin: null, 3: null, 6: 36999 },
+          amarillo: { sin: null, 3: null, 6: 59999 }
+        },
+        {
           id: "comercio-cx-21",
           nombre: "Kit Comercio CX 2.1",
           verde: { sin: 35999, 3: 51999, 6: 61999 },
@@ -166,6 +172,12 @@ window.PRECIOS_ADT = {
           nombre: "Kit Cámaras Inteligentes",
           verde: { sin: null, 3: null, 6: 53999 },
           amarillo: { sin: null, 3: null, 6: 88999 }
+        },
+        {
+          id: "cam-inteligente-interior",
+          nombre: "Kit Cámara Inteligente (1 cámara interior)",
+          verde: { sin: null, 3: null, 6: 36999 },
+          amarillo: { sin: null, 3: null, 6: 59999 }
         },
         {
           id: "comercio-cx-21",
