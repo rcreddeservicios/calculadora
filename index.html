@@ -411,7 +411,7 @@ function kitNow() {
 }
 
 function isCameraKit(k = kitNow()) {
-  return Boolean(k && k.id === "cam-inteligentes");
+  return Boolean(k && ["cam-inteligentes", "cam-inteligente-interior"].includes(k.id));
 }
 
 function renderKits() {
@@ -468,7 +468,7 @@ function updatePromoRules() {
   mark("p6", months === 6);
 
   $("promoHelp").textContent = cam
-    ? "El Kit Cámaras Inteligentes solo permite 6 meses al 30%."
+    ? "Los kits de cámara inteligente solo permiten 6 meses al 30%."
     : "Sin promo aplica el abono pleno. Con 3 o 6 meses se aplica el descuento del 30% durante ese período.";
 }
 
@@ -519,7 +519,7 @@ function abonoNow() {
   const region = data.regiones[regionKey()];
   if (!region || !region.abonos) return null;
 
-  const type = k.id === "cam-inteligentes"
+  const type = ["cam-inteligentes", "cam-inteligente-interior"].includes(k.id)
     ? "camara"
     : (/view/i.test(k.nombre) ? "view" : "security");
 
@@ -703,6 +703,12 @@ function kitComponents(k = kitNow(), region = regionKey()) {
 
   const id = k.id || "";
   const isCordoba = region === "cordoba";
+
+  if (id === "cam-inteligente-interior") {
+    return [
+      {name:"Cámara interior",qty:"× 1",path:"camarainterior.png"}
+    ];
+  }
 
   if (id === "cam-inteligentes") {
     return [
