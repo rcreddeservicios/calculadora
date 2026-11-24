@@ -29,6 +29,12 @@ window.PRECIOS_ADT = {
           amarillo: { sin: 99900, 3: 129900, 6: 159900 }
         },
         {
+          id: "security-32",
+          nombre: "Kit Interactive Security 3.2 PANEL INTELIGENTE",
+          verde: { sin: 30999, 3: 43999, 6: 52999 },
+          amarillo: { sin: null, 3: null, 6: null }
+        },
+        {
           id: "view-22",
           nombre: "Kit Interactive View 2.2 PANEL INTELIGENTE",
           verde: { sin: 35999, 3: 50999, 6: 60999 },
@@ -42,8 +48,8 @@ window.PRECIOS_ADT = {
         },
         {
           id: "cx-view-32",
-          nombre: "Kit Interactive View 3.2 PANEL INTELIGENTE (3 sensores de movimiento)",
-          verde: { sin: 30999, 3: 43999, 6: 52999 },
+          nombre: "Kit Interactive Security View 3.2 PANEL INTELIGENTE (3 sensores de movimiento + cámara)",
+          verde: { sin: 35999, 3: 50999, 6: 60999 },
           amarillo: { sin: null, 3: null, 6: null }
         },
         {
@@ -139,8 +145,8 @@ window.PRECIOS_ADT = {
         },
         {
           id: "cx-view-32",
-          nombre: "Kit CX Interactive View 3.2 (3 sensores de movimiento)",
-          verde: { sin: 30999, 3: 43999, 6: 52999 },
+          nombre: "Kit CX Interactive Security View 3.2 (3 sensores de movimiento + cámara)",
+          verde: { sin: 35999, 3: 50999, 6: 60999 },
           amarillo: { sin: null, 3: null, 6: null }
         },
         {
